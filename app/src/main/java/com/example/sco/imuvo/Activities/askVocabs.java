@@ -53,6 +53,7 @@ public class askVocabs extends AppCompatActivity {
     //Test Simon
     TextView bubbleTextView, questionTextView, headlineText, subHeadlineText;
     EditText answerEditText;
+    //PULL ME!&%§"/$()=!
     ImageView vocabPictureImageView;
     private long currentDirection;
     private AskingSingleton askingSingleton;
