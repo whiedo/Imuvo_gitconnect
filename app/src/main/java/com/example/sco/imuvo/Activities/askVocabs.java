@@ -50,6 +50,7 @@ public class askVocabs extends AppCompatActivity {
 
     //FTE Test
     //TEST 222
+    //Test Simon
     TextView bubbleTextView, questionTextView, headlineText, subHeadlineText;
     EditText answerEditText;
     ImageView vocabPictureImageView;
