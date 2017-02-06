@@ -11,15 +11,6 @@ import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.Model.Vocab;
 import com.example.sco.imuvo.R;
-import com.voicerss.tts.AudioCodec;
-import com.voicerss.tts.AudioFormat;
-import com.voicerss.tts.Languages;
-import com.voicerss.tts.SpeechDataEvent;
-import com.voicerss.tts.SpeechDataEventListener;
-import com.voicerss.tts.SpeechErrorEvent;
-import com.voicerss.tts.SpeechErrorEventListener;
-import com.voicerss.tts.VoiceParameters;
-import com.voicerss.tts.VoiceProvider;
 
 import java.io.File;
 import java.io.FileInputStream;
