@@ -57,6 +57,7 @@ public class askVocabs extends AppCompatActivity {
     private AskingSingleton askingSingleton;
     private boolean doNotCheckAnswer = false;
 
+    //Test324234
     private void vocabIsFalse() {
         if (getIntent().getExtras().getBoolean("isMultipleLection")){
             final Dialog dialog = new Dialog(this);
