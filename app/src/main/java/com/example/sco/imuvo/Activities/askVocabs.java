@@ -49,6 +49,7 @@ public class askVocabs extends AppCompatActivity {
     Button nextButton, skipButton;
 
     //FTE Test
+    //TEST 222
     TextView bubbleTextView, questionTextView, headlineText, subHeadlineText;
     EditText answerEditText;
     ImageView vocabPictureImageView;
