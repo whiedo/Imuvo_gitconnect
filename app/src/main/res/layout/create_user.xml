@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_user"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.sco.imuvo.Activities.CreateUserActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp">
+
+        <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="20dp"
+            android:id="@+id/speechbubble"
+            android:textSize="15sp"
+            android:textColor="@color/textcolorinbubble"
+
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/speechbubbletop"
+            android:layout_weight="3"
+            tools:text="Hier kannst du einen neuen Benutzer anlegen. Bitte lege einen Benutzernamen und ein Passwort fest." />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <com.example.sco.imuvo.CustomViews.EditTextITCKRIST
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:inputType="text"
+            android:hint="Name"
+            android:ems="10"
+
+            android:layout_centerHorizontal="true"
+
+            android:id="@+id/name"
+            android:textAlignment="center"
+            android:layout_weight="1"/>
+
+        <com.example.sco.imuvo.CustomViews.EditTextITCKRIST
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:inputType="textVisiblePassword"
+            android:hint="Passwort"
+            android:ems="10"
+
+            android:id="@+id/password"
+            android:textAlignment="center"
+
+            android:layout_weight="1
+           "/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:text="Registrieren"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/password"
+
+            android:id="@+id/start"
+
+            android:onClick="onClickCreateUser"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <com.example.sco.imuvo.CustomViews.TextViewJokerman
+        android:text="Nutzer anlegen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/headline"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="25sp" />
+    <ImageView
+        android:layout_height="50dp"
+        android:src="@drawable/animal"
+        android:id="@+id/imageView2"
+        android:layout_width="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/text1"
+        android:layout_toEndOf="@+id/text1" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/burgermenuselector"
+        android:id="@+id/BurgerMenu"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onClickBurgerMenu"/>
+
+</RelativeLayout>
