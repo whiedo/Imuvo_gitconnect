@@ -38,6 +38,8 @@ public class askVocabs extends AppCompatActivity {
 
     public static final String ASKWRONGVOCABSAGAIN = "askWrongVocabsAgain" ;
     public static final String ISRANDOM = "isRandom";
+    //Test
+    //test2
     VocabDatabaseHelper vocabDatabaseHelper;
     LectionDatabaseHelper lectionDatabaseHelper;
     ArrayList<Vocab> vocabList;
