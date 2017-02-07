@@ -21,7 +21,6 @@ public class CreateUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_user);
-        userDatabaseHelper = UserDatabaseHelper.getInstance(this);
         nameEditText = (EditText) findViewById(R.id.name);
         passwordEditText = (EditText) findViewById(R.id.password);
         bubbleText = (TextView) findViewById(R.id.speechbubble);

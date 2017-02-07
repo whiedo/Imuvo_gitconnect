@@ -1,14 +1,5 @@
 package com.example.sco.imuvo.Model;
 
-import android.util.Log;
-
-import com.example.sco.imuvo.HelperClasses.WebServiceHelper;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
-
 /**
  * Created by sco on 05.12.2016.
  */
@@ -22,7 +13,7 @@ public class Vocab {
     private byte[] picture;
 
 
-    public Vocab(long sqlID, String german, String foreign, int lection, byte[] speech, byte[] picture) {
+    public Vocab(long sqlID, String german, String foreign, byte[] speech, int lection, byte[] picture) {
         this.sqlID = sqlID;
         this.german = german;
         this.foreign = foreign;

@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,13 +17,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.InitData;
 import com.example.sco.imuvo.HelperClasses.TypefaceUtil;
 import com.example.sco.imuvo.HelperClasses.UserDatabaseHelper;
-import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.Model.SingletonUser;
-import com.example.sco.imuvo.R;
 import com.example.sco.imuvo.Model.User;
+import com.example.sco.imuvo.R;
 
 public class LogIn extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class LogIn extends AppCompatActivity {
     TextView welcomeTextView, bubbleTextView;
     Button startButton;
     EditText nameEditText, passwordEditText;
-    public UserDatabaseHelper userDatabaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -95,7 +95,6 @@ public class LogIn extends AppCompatActivity {
         nameEditText = (EditText) findViewById(R.id.name);
         passwordEditText = (EditText) findViewById(R.id.password);
         bubbleTextView = (TextView) findViewById(R.id.bubbleTextLogIn);
-        userDatabaseHelper = UserDatabaseHelper.getInstance(this);
     }
 
     public void onClickStart(View v){
@@ -114,7 +113,7 @@ public class LogIn extends AppCompatActivity {
 
     private boolean checkUserCorrect(){
         User user = null;
-        user = userDatabaseHelper.get(nameEditText.getText().toString());
+        user = UserDatabaseHelper.get(nameEditText.getText().toString());
         try{
             if (user.getPassword().contentEquals(passwordEditText.getText())){
                 return true;
@@ -154,9 +153,6 @@ public class LogIn extends AppCompatActivity {
 
     private void newUser() {
         final Intent menuIntent = new Intent(this,CreateUserActivity.class);
-        //Bundle bundle = new Bundle();
-        //bundle.putString("username",nameEditText.getText().toString());
-        //menuIntent.putExtras(bundle);
         String username = nameEditText.getText().toString();
         SingletonUser.data = username;
         startActivity(menuIntent);

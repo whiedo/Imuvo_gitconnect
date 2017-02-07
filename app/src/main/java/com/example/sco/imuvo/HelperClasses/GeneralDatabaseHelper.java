@@ -6,20 +6,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class GeneralDatabaseHelper extends SQLiteOpenHelper {
-    public static final String DB_NAME = "vocabulary_traniner";
+    public static final String DB_NAME = "vocabulary_trainer";
     public static final int DB_VERSION = 1;
-
-    private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS user_imuvo" + " " +
-            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT, password TEXT)";
-
-    public static final String VOCAB_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo" + " " +
-            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, speech BLOB, lection INTEGER, picture BLOB)";
-
-    private static final String LECTION_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS lection_imuvo" + " " +
-            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, number INTEGER, language TEXT)";
-    private static final String USER_DROP_Table = "DROP TABLE IF EXISTS user_imuvo";
-    private static final String VOCAB_DROP_TABLE = "DROP TABLE IF EXISTS vocabs_imuvo";
-    private static final String LECTION_DROP_TABLE = "DROP TABLE IF EXISTS lection_imuvo";
 
     private String DB_PATH = null;
     private static GeneralDatabaseHelper instance;
@@ -40,17 +28,17 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(VOCAB_DROP_TABLE);
-        db.execSQL(USER_CREATE_TABLE);
-        db.execSQL(VOCAB_CREATE_TABLE);
-        db.execSQL(LECTION_CREATE_TABLE);
+        db.execSQL(VocabDatabaseHelper.DROP_TABLE);
+        db.execSQL(UserDatabaseHelper.CREATE_TABLE);
+        db.execSQL(VocabDatabaseHelper.CREATE_TABLE);
+        db.execSQL(LectionDatabaseHelper.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(USER_DROP_Table);
-        db.execSQL(LECTION_DROP_TABLE);
-        db.execSQL(VOCAB_DROP_TABLE);
+        db.execSQL(UserDatabaseHelper.DROP_TABLE);
+        db.execSQL(VocabDatabaseHelper.DROP_TABLE);
+        db.execSQL(LectionDatabaseHelper.DROP_TABLE);
         onCreate(db);
     }
 

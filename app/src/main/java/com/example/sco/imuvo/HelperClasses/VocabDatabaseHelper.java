@@ -11,44 +11,43 @@ import com.example.sco.imuvo.Model.Vocab;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper.DB_NAME;
-import static com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper.DB_VERSION;
-
-/**
- * Created by sco on 05.12.2016.
- */
-
 public class VocabDatabaseHelper extends SQLiteOpenHelper {
-    public static final String TABLE_NAME = "vocabs_imuvo";
-    public static final String[] USER_COLUMNS = { "_id", "german", "translation", "lection", "speech", "picture" };
-
-    private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo "
-            + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, lection INTEGER, speech BLOB, picture BLOB, FOREIGN KEY(lection) REFERENCES lection_imuvo(_id))";
-    private static final String USER_DROP_Table = "DROP TABLE IF EXISTS vocabs_imuvo";
+    public static final String TABLE_NAME = "vocabulary";
+    public static final String[] COLUMNS = {"_id", "german", "translation", "speech", "lection", "picture"};
+    public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+            "(" +
+            COLUMNS[0] + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            COLUMNS[1] + " TEXT, " +
+            COLUMNS[2] + " TEXT, " +
+            COLUMNS[3] + " BLOB, " +
+            COLUMNS[4] + " INTEGER, " +
+            COLUMNS[5] + " BLOB" +
+            ")";
+    public static final String DROP_TABLE = "DROP TABLE IF EXISTS "+ TABLE_NAME;
 
     private VocabDatabaseHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
+        super(context, GeneralDatabaseHelper.DB_NAME, null, GeneralDatabaseHelper.DB_VERSION);
         String DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-            db.execSQL(USER_CREATE_TABLE);
+        db.execSQL(CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(USER_DROP_Table);
+        db.execSQL(DROP_TABLE);
         onCreate(db);
     }
 
     public Vocab get(long id) {
         Vocab vocab = null;
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, "_id = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, "_id = ?",
                 new String[] { String.valueOf(id) }, null, null, null);
 
         if (cursor.moveToFirst()) {
-            vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4),cursor.getBlob(5));
+            vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),cursor.getInt(4),cursor.getBlob(5));
         }
 
         cursor.close();
@@ -58,14 +57,14 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
     public static ArrayList<Vocab> getFromLection(Integer lectionNo) {
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, "lection=?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, "lection=?",
                 new String[] { Integer.toString(lectionNo)}, null, null, null);
 
 
         if (cursor.moveToFirst()) {
             do {
                 byte[] test = cursor.getBlob(5);
-                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4),test);
+                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),cursor.getInt(4),test);
                 vocabs.add(vocab);
             } while (cursor.moveToNext());
 
@@ -75,19 +74,19 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public static Cursor getAll() {
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, null,
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, null,
                null, null, null, null);
         return cursor;
     }
 
     public static Cursor getAll(int lectionNo) {
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, "lection=?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, "lection=?",
                 new String[] { Integer.toString(lectionNo)}, null, null, null);
         return cursor;
     }
 
     public static long insert(Vocab vocab) {
-        GeneralDatabaseHelper.getSQLDatabase().execSQL(USER_CREATE_TABLE);
+        GeneralDatabaseHelper.getSQLDatabase().execSQL(CREATE_TABLE);
         ContentValues values = new ContentValues();
         values.put("german",vocab.getGerman());
         values.put("translation",vocab.getForeign());
@@ -141,12 +140,12 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
 
         selectionStatement = selectionStatement.substring(0,selectionStatement.length()-1);
         selectionStatement += ")";
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, selectionStatement,
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, selectionStatement,
                 null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
-                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4),cursor.getBlob(5));
+                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),cursor.getInt(4),cursor.getBlob(5));
                 vocabs.add(vocab);
             } while (cursor.moveToNext());
 

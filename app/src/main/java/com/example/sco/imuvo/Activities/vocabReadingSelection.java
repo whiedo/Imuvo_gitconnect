@@ -97,15 +97,12 @@ public class vocabReadingSelection extends AppCompatActivity {
     }
 
     private void loadLectionSpinnerData() {
-        LectionDatabaseHelper db = LectionDatabaseHelper.getInstance(this);
-        db.Create();
-        LectionDatabaseHelper lectionDatabaseHelper = LectionDatabaseHelper.getInstance(this);
-        Cursor cursor = db.getAll();
+        Cursor cursor = LectionDatabaseHelper.getAll();
         String[] from = {"number"};
         int[] to = {R.id.lectionSpinner};
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,R.layout.support_simple_spinner_dropdown_item,cursor,from,to,0);
         lectionSpinner.setAdapter(cursorAdapter);
-        List<String> lables = db.getAllLabels();
+        List<String> lables = LectionDatabaseHelper.getAllLabels();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.customspinner, lables);
         dataAdapter.setDropDownViewResource(R.layout.customspinner);
         lectionSpinner.setAdapter(dataAdapter);

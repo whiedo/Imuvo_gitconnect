@@ -112,9 +112,7 @@ public class readVocabs extends AppCompatActivity {
 
     private void getCurrentLection() {
         Bundle bundle = getIntent().getExtras();
-        lectionDatabaseHelper = lectionDatabaseHelper.getInstance(this);
-        currentLection = lectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
-        //vocabDatabaseHelper = vocabDatabaseHelper.getInstance(this);
+        currentLection = LectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
         vocabList = VocabDatabaseHelper.getFromLection(currentLection.getNumber());
         if(bundle.getBoolean("isRandom")){
             Collections.shuffle(vocabList);

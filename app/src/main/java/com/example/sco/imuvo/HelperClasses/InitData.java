@@ -17,30 +17,29 @@ public class InitData {
     static Context glbContext;
 
     private static void insertLection(Context context){
-        LectionDatabaseHelper db = LectionDatabaseHelper.getInstance(context);
-        if(!db.getAll().moveToFirst()){
-            insertLection(1,"Englisch",db);
-            insertLection(2,"Englisch",db);
-            insertLection(3,"Englisch",db);
-            insertLection(4,"Englisch",db);
-            insertLection(5,"Englisch",db);
-            insertLection(6,"Englisch",db);
+        if(!LectionDatabaseHelper.getAll().moveToFirst()){
+            insertLection(1,"Englisch");
+            insertLection(2,"Englisch");
+            insertLection(3,"Englisch");
+            insertLection(4,"Englisch");
+            insertLection(5,"Englisch");
+            insertLection(6,"Englisch");
         }
     }
 
-    private static void insertLection(int i, String englisch, LectionDatabaseHelper db) {
-        db.insert(new Lection(i,englisch));
+    private static void insertLection(int i, String englisch) {
+        LectionDatabaseHelper.insert(new Lection(i,englisch));
     }
 
-    private static void insertUser(String nutzer, String passwort,UserDatabaseHelper db) {
-        db.insert(new User(nutzer,passwort));
+    private static void insertUser(String username, String password) {
+        UserDatabaseHelper.insert(new User(username,password));
     }
 
     private static void insertUser(Context context){
-        UserDatabaseHelper db = UserDatabaseHelper.getInstance(context);
-        if(!db.getAll().moveToFirst()){
-            insertUser("Simon","Simon",db);
-            insertUser("User","Passwort",db);
+
+        if(!UserDatabaseHelper.getAll().moveToFirst()){
+            insertUser("Simon","Simon");
+            insertUser("User","Passwort");
         }
     }
 

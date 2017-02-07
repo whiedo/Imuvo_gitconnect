@@ -169,9 +169,8 @@ public class askVocabs extends AppCompatActivity {
 
     private void getCurrentLection() {
         Bundle bundle = getIntent().getExtras();
-        lectionDatabaseHelper = lectionDatabaseHelper.getInstance(this);
 
-        currentLection = lectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
+        currentLection = LectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
         //vocabDatabaseHelper = VocabDatabaseHelper.getInstance(this);
         if(bundle.getBoolean(ASKWRONGVOCABSAGAIN)){
             vocabList = AskingSingleton.wrongVocabs;
@@ -189,16 +188,15 @@ public class askVocabs extends AppCompatActivity {
                 vocabList = vocabDatabaseHelper.getFromLection(currentLection.getNumber());
                 headlineText.setText(FormatHelper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
             }
-
         }
 
         vocabIterator = vocabList.listIterator(0);
+
         if(bundle.getBoolean(ISRANDOM)){
             Collections.shuffle(vocabList);
         }
+
         currentDirection = bundle.getLong("selectedDirection");
-
-
     }
 
     public void onClickButtonNext(View v) {

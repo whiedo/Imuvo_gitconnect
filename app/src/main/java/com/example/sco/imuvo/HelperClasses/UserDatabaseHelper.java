@@ -8,43 +8,36 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.sco.imuvo.Model.User;
 
-import static com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper.DB_VERSION;
-
 public class UserDatabaseHelper extends SQLiteOpenHelper {
-    private static final String[] USER_COLUMNS = { "_id", "username", "password" };
-    private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS user_imuvo "
-            + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT, password TEXT)";
-    private static final String USER_DROP_TABLE = "DROP TABLE IF EXISTS user_imuvo";
-
-    private String DB_PATH = null;
-    private static UserDatabaseHelper instance;
+    public static final String TABLE_NAME = "user";
+    public static final String[] COLUMNS = {"_id", "username", "password"};
+    public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+            "(" +
+            COLUMNS[0] + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+            COLUMNS[1] + " TEXT, " +
+            COLUMNS[2] + " TEXT" +
+            ")";
+    public static final String DROP_TABLE = "DROP TABLE IF EXISTS user_imuvo";
 
     private UserDatabaseHelper(Context context) {
-        super(context, GeneralDatabaseHelper.DB_NAME, null, DB_VERSION);
-        DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
-    }
-
-    public static UserDatabaseHelper getInstance(Context context) {
-        if (instance == null) {
-            instance = new UserDatabaseHelper(context);
-        }
-        return instance;
+        super(context, GeneralDatabaseHelper.DB_NAME, null, GeneralDatabaseHelper.DB_VERSION);
+        String DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-            db.execSQL(USER_CREATE_TABLE);
+            db.execSQL(CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(USER_DROP_TABLE);
+        db.execSQL(DROP_TABLE);
         onCreate(db);
     }
 
     public User get(long id) {
         User user = null;
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query("user_imuvo", USER_COLUMNS, "_id = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query("user_imuvo", COLUMNS, "_id = ?",
                 new String[] { String.valueOf(id) }, null, null, null);
         if (cursor.moveToFirst()) {
             user = new User(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
@@ -53,9 +46,9 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    public User get(String name) {
+    public static User get(String name) {
         User user = null;
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query("user_imuvo", USER_COLUMNS, "username = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query("user_imuvo", COLUMNS, "username = ?",
                 new String[] { name }, null, null, null);
         if (cursor.moveToFirst()) {
             user = new User(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
@@ -64,12 +57,12 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    public Cursor getAll() {
-        return GeneralDatabaseHelper.getSQLDatabase().query("user_imuvo", USER_COLUMNS, null, null, null, null, "username");
+    public static Cursor getAll() {
+        return GeneralDatabaseHelper.getSQLDatabase().query("user_imuvo", COLUMNS, null, null, null, null, "username");
     }
 
-    public long insert(User user) {
-        GeneralDatabaseHelper.getSQLDatabase().execSQL(USER_CREATE_TABLE);
+    public static long insert(User user) {
+        GeneralDatabaseHelper.getSQLDatabase().execSQL(CREATE_TABLE);
         ContentValues values = new ContentValues();
         values.put("username", user.getUserName());
         values.put("password", user.getPassword());
