@@ -14,6 +14,7 @@ import java.util.List;
 public class VocabDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "vocabulary";
     public static final String[] COLUMNS = {"_id", "german", "translation", "speech", "lection", "picture"};
+
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
             "(" +
             COLUMNS[0] + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +

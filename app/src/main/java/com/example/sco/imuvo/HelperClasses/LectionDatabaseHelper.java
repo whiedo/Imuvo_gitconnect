@@ -87,7 +87,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public int delete(long id) {
-        return GeneralDatabaseHelper.getSQLDatabase().delete("Lection", "_id = ?", new String[]{String.valueOf(id)});
+        return GeneralDatabaseHelper.getSQLDatabase().delete(TABLE_NAME, "_id = ?", new String[]{String.valueOf(id)});
     }
 
     public void Create() {
