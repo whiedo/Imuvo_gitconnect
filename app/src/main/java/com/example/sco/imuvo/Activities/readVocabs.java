@@ -147,63 +147,41 @@ public class readVocabs extends AppCompatActivity {
     }
 
     public void speakAloud(View v) {
-        if (currVocab.getSpeech() != null){
-            try {
-                String fileName = getCacheDir() + "/voice.mp3";
-                File file = new File(fileName);
-                FileOutputStream fos = new FileOutputStream(file);
-                fos.write(currVocab.getSpeech());
-                fos.close();
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                FileInputStream MyFile = new FileInputStream(file);
-                mediaPlayer.setDataSource(MyFile.getFD());
-                mediaPlayer.prepare();
-                mediaPlayer.start();
-
-            } catch (Exception e) {
-            }
+        if (currVocab.getSpeech() == null){
+            playSound(currVocab.getSpeech());
         }
         else{
             WebServiceHelper webServiceHelper = new WebServiceHelper();
             webServiceHelper.setWebServiceHelperListener(new WebServiceHelperListener() {
                 @Override
                 public void onWebServiceReturnResult(byte[] result) {
-                    try {
-                        String fileName = getCacheDir() + "/voice.mp3";
+                    currVocab.setSpeech(result);
+                    VocabDatabaseHelper.update(currVocab);
+                    playSound(result);
 
-                        File file = new File(fileName);
-                        FileOutputStream fos = new FileOutputStream(file);
-                        fos.write(result);
-                        fos.close();
-
-                        AudioManager audioManager = (AudioManager)getSystemService(AppCompatActivity.AUDIO_SERVICE);
-                        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), 0);
-
-                        if (mp != null)
-                            mp.release();
-
-                        FileInputStream fis = new FileInputStream(fileName);
-
-                        mp = new MediaPlayer();
-                        mp.setAudioStreamType(AudioManager.STREAM_SYSTEM);
-                        mp.setDataSource(fis.getFD());
-                        mp.setOnErrorListener(onErrorListener);
-                        mp.setOnCompletionListener(onCompletionListener);
-                        mp.setOnPreparedListener(onPreparedListener);
-                        mp.prepareAsync();
-
-                        fis.close();
-
-                        currVocab.setSpeech(result);
-                        VocabDatabaseHelper.update(currVocab);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
                 }
             });
+            webServiceHelper.getSpeechAsync(currVocab);
         }
     }
 
+    private void playSound(byte[] result) {
+        try{
+            String fileName = getCacheDir() + "/voice.mp3";
+            File file = new File(fileName);
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(result);
+            fos.close();
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            FileInputStream MyFile = new FileInputStream(file);
+            mediaPlayer.setDataSource(MyFile.getFD());
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e){
+
+        }
+
+    }
 
 
     public void onClickBurgerMenu(View v){

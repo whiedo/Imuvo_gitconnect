@@ -16,7 +16,7 @@ import java.io.InputStream;
 public class InitData {
     static Context glbContext;
 
-    private static void insertLection(Context context){
+    private static void insertLection(){
         if(!LectionDatabaseHelper.getAll().moveToFirst()){
             insertLection(1,"Englisch");
             insertLection(2,"Englisch");
@@ -35,7 +35,7 @@ public class InitData {
         UserDatabaseHelper.insert(new User(username,password));
     }
 
-    private static void insertUser(Context context){
+    private static void insertUser(){
 
         if(!UserDatabaseHelper.getAll().moveToFirst()){
             insertUser("Simon","Simon");
@@ -43,145 +43,142 @@ public class InitData {
         }
     }
 
-    private static void insertVocabs(Context context) {
-        //final VocabDatabaseHelper db = VocabDatabaseHelper.getInstance(context);
+    private static void insertVocabs() {
 
         if(!VocabDatabaseHelper.getAll().moveToFirst()) {
 
             insertVocab("Hallo", "Hello", 1);
-            /**
             insertVocab("guten Morgen", "good morning", 1);
             insertVocab("Wie heißt du", "What is your name", 1);
-            insertVocab("Ich heiße", "My name is", 1, db);
-            insertVocab("Name", "name", 1, db);
-            insertVocab("wie geht es dir", "How are you", 1, db);
-            insertVocab("Mir geht es gut", "I am fine", 1, db);
-            insertVocab("Dankeschön", "thank you", 1, db);
-            insertVocab("Bitte", "please", 1, db);
-            insertVocab("Auf wiedersehen", "Good bye", 1, db);
-            insertVocab("Bis bald", "See you soon", 1, db);
-            insertVocab("Ich wohne in", "I live in", 1, db);
-            insertVocab("schön dich kennen zu lernen", "Nice to meet you", 1, db);
-            insertVocab("Ich bin", "I am", 1, db);
-            insertVocab("Du bist", "you are", 1, db);
-            insertVocab("Wir sind", "we are", 1, db);
-            insertVocab("ihr seit", "you are", 1, db);
-            insertVocab("er ist", "he is", 1, db);
-            insertVocab("sie ist", "she is", 1, db);
-            insertVocab("es ist", "it is", 1, db);
-            insertVocab("Sie sind", "they are", 1, db);
-            insertVocab("und", "and", 1, db);
+            insertVocab("Ich heiße", "My name is", 1);
+            insertVocab("Name", "name", 1);
+            insertVocab("wie geht es dir", "How are you", 1);
+            insertVocab("Mir geht es gut", "I am fine", 1);
+            insertVocab("Dankeschön", "thank you", 1);
+            insertVocab("Bitte", "please", 1);
+            insertVocab("Auf wiedersehen", "Good bye", 1);
+            insertVocab("Bis bald", "See you soon", 1);
+            insertVocab("Ich wohne in", "I live in", 1);
+            insertVocab("schön dich kennen zu lernen", "Nice to meet you", 1);
+            insertVocab("Ich bin", "I am", 1);
+            insertVocab("Du bist", "you are", 1);
+            insertVocab("Wir sind", "we are", 1);
+            insertVocab("ihr seit", "you are", 1);
+            insertVocab("er ist", "he is", 1);
+            insertVocab("sie ist", "she is", 1);
+            insertVocab("es ist", "it is", 1);
+            insertVocab("Sie sind", "they are", 1);
+            insertVocab("und", "and", 1);
 
-            insertVocab("Mutter", "mother", 2, db);
-            insertVocab("Vater", "father", 2, db);
-            insertVocab("Bruder", "brother", 2, db);
-            insertVocab("Schwester", "sister", 2, db);
-            insertVocab("Oma", "Grandma", 2, db);
-            insertVocab("Opa", "Grandpa", 2, db);
-            insertVocab("Cousine /Cousin", "cousine", 2, db);
-            insertVocab("Tante", "aunt", 2, db);
-            insertVocab("Onkel", "uncle", 2, db);
-            insertVocab("Das ist mein /meine", "This is my", 2, db);
-            insertVocab("Ich habe", "I have", 2, db);
-            insertVocab("ein", "a", 2, db);
-            insertVocab("Baby", "baby", 2, db);
-            insertVocab("Familie", "family", 2, db);
-            insertVocab("Verwandte", "relatives", 2, db);
+            insertVocab("Mutter", "mother", 2);
+            insertVocab("Vater", "father", 2);
+            insertVocab("Bruder", "brother", 2);
+            insertVocab("Schwester", "sister", 2);
+            insertVocab("Oma", "Grandma", 2);
+            insertVocab("Opa", "Grandpa", 2);
+            insertVocab("Cousine /Cousin", "cousine", 2);
+            insertVocab("Tante", "aunt", 2);
+            insertVocab("Onkel", "uncle", 2);
+            insertVocab("Das ist mein /meine", "This is my", 2);
+            insertVocab("Ich habe", "I have", 2);
+            insertVocab("ein", "a", 2);
+            insertVocab("Baby", "baby", 2);
+            insertVocab("Familie", "family", 2);
+            insertVocab("Verwandte", "relatives", 2);
 
-            insertVocab("1", "one", 3, db);
-            insertVocab("2", "two", 3, db);
-            insertVocab("3", "three", 3, db);
-            insertVocab("4", "four", 3, db);
-            insertVocab("5", "five", 3, db);
-            insertVocab("6", "six", 3, db);
-            insertVocab("7", "seven", 3, db);
-            insertVocab("8", "eight", 3, db);
-            insertVocab("9", "nine", 3, db);
-            insertVocab("10", "ten", 3, db);
-            insertVocab("rot", "red", 3, db);
-            insertVocab("grün", "green", 3, db);
-            insertVocab("gelb", "yellow", 3, db);
-            insertVocab("blau", "blue", 3, db);
-            insertVocab("schwarz", "black", 3, db);
-            insertVocab("weiß", "white", 3, db);
-            insertVocab("braun", "brown", 3, db);
-            insertVocab("orange", "orange", 3, db);
-            insertVocab("grau", "grey", 3, db);
-            insertVocab("lila", "purple", 3, db);
-            insertVocab("rosa", "pink", 3, db);
+            insertVocab("1", "one", 3);
+            insertVocab("2", "two", 3);
+            insertVocab("3", "three", 3);
+            insertVocab("4", "four", 3);
+            insertVocab("5", "five", 3);
+            insertVocab("6", "six", 3);
+            insertVocab("7", "seven", 3);
+            insertVocab("8", "eight", 3);
+            insertVocab("9", "nine", 3);
+            insertVocab("10", "ten", 3);
+            insertVocab("rot", "red", 3);
+            insertVocab("grün", "green", 3);
+            insertVocab("gelb", "yellow", 3);
+            insertVocab("blau", "blue", 3);
+            insertVocab("schwarz", "black", 3);
+            insertVocab("weiß", "white", 3);
+            insertVocab("braun", "brown", 3);
+            insertVocab("orange", "orange", 3);
+            insertVocab("grau", "grey", 3);
+            insertVocab("lila", "purple", 3);
+            insertVocab("rosa", "pink", 3);
 
-            insertVocab("Hund", "dog", 4, db);
-            insertVocab("Katze", "cat", 4, db);
-            insertVocab("Maus", "mouse", 4, db);
-            insertVocab("Vogel", "bird", 4, db);
-            insertVocab("Ente", "duck", 4, db);
-            insertVocab("Schmetterling", "butterfly", 4, db);
-            insertVocab("Schildkröte", "turtle", 4, db);
-            insertVocab("Kuh", "cow", 4, db);
-            insertVocab("Pferd", "horse", 4, db);
-            insertVocab("Huhn", "chicken", 4, db);
-            insertVocab("Schwein", "pig", 4, db);
-            insertVocab("Schaf", "sheep", 4, db);
-            insertVocab("Ameisenbär", "anteater", 4, db);
-            insertVocab("Antilope", "antelope", 4, db);
-            insertVocab("Bär", "bear", 4, db);
-            insertVocab("Biber", "beaver", 4, db);
-            insertVocab("Dachs", "badger", 4, db);
-            insertVocab("Dackel", "dachshund", 4, db);
-            insertVocab("Delfin", "dolphin", 4, db);
-            insertVocab("Eichhörnchen", "squirrel", 4, db);
-            insertVocab("Eisbär", "polar bear", 4, db);
-            insertVocab("Elefant", "elephant", 4, db);
-            insertVocab("Elch", "moose", 4, db);
-            insertVocab("Faultier", "sloth", 4, db);
-            insertVocab("Feldhase", "hare", 4, db);
-            insertVocab("Fischotter", "otter", 4, db);
-            insertVocab("Fledermaus", "bat", 4, db);
-            insertVocab("Fuchs", "fox", 4, db);
+            insertVocab("Hund", "dog", 4);
+            insertVocab("Katze", "cat", 4);
+            insertVocab("Maus", "mouse", 4);
+            insertVocab("Vogel", "bird", 4);
+            insertVocab("Ente", "duck", 4);
+            insertVocab("Schmetterling", "butterfly", 4);
+            insertVocab("Schildkröte", "turtle", 4);
+            insertVocab("Kuh", "cow", 4);
+            insertVocab("Pferd", "horse", 4);
+            insertVocab("Huhn", "chicken", 4);
+            insertVocab("Schwein", "pig", 4);
+            insertVocab("Schaf", "sheep", 4);
+            insertVocab("Ameisenbär", "anteater", 4);
+            insertVocab("Antilope", "antelope", 4);
+            insertVocab("Bär", "bear", 4);
+            insertVocab("Biber", "beaver", 4);
+            insertVocab("Dachs", "badger", 4);
+            insertVocab("Dackel", "dachshund", 4);
+            insertVocab("Delfin", "dolphin", 4);
+            insertVocab("Eichhörnchen", "squirrel", 4);
+            insertVocab("Eisbär", "polar bear", 4);
+            insertVocab("Elefant", "elephant", 4);
+            insertVocab("Elch", "moose", 4);
+            insertVocab("Faultier", "sloth", 4);
+            insertVocab("Feldhase", "hare", 4);
+            insertVocab("Fischotter", "otter", 4);
+            insertVocab("Fledermaus", "bat", 4);
+            insertVocab("Fuchs", "fox", 4);
 
-            insertVocab("Lehrer", "teacher", 5, db);
-            insertVocab("Schüler", "pupil", 5, db);
-            insertVocab("Schreibtisch", "desk", 5, db);
-            insertVocab("Stuhl", "chair", 5, db);
-            insertVocab("Stift", "pencil", 5, db);
-            insertVocab("Radiergummi", "rubber", 5, db);
-            insertVocab("Buch", "book", 5, db);
-            insertVocab("Blatt", "paper", 5, db);
-            insertVocab("Mülleimer", "bin", 5, db);
-            insertVocab("Schere", "scissors", 5, db);
-            insertVocab("Klassenraum", "classroom", 5, db);
-            insertVocab("Tafel", "blackboard", 5, db);
-            insertVocab("Schwamm", "sponge", 5, db);
-            insertVocab("Kreide", "chalk", 5, db);
-            insertVocab("Klassenarbeit", "classtest", 5, db);
-            insertVocab("Kleber", "glue", 5, db);
-            insertVocab("Fenster", "window", 5, db);
-            insertVocab("Schulstunde", "lesson", 5, db);
-            insertVocab("Schule", "school", 5, db);
-            insertVocab("Stundenplan", "schedule", 5, db);
-            insertVocab("Pause", "break", 5, db);
+            insertVocab("Lehrer", "teacher", 5);
+            insertVocab("Schüler", "pupil", 5);
+            insertVocab("Schreibtisch", "desk", 5);
+            insertVocab("Stuhl", "chair", 5);
+            insertVocab("Stift", "pencil", 5);
+            insertVocab("Radiergummi", "rubber", 5);
+            insertVocab("Buch", "book", 5);
+            insertVocab("Blatt", "paper", 5);
+            insertVocab("Mülleimer", "bin", 5);
+            insertVocab("Schere", "scissors", 5);
+            insertVocab("Klassenraum", "classroom", 5);
+            insertVocab("Tafel", "blackboard", 5);
+            insertVocab("Schwamm", "sponge", 5);
+            insertVocab("Kreide", "chalk", 5);
+            insertVocab("Klassenarbeit", "classtest", 5);
+            insertVocab("Kleber", "glue", 5);
+            insertVocab("Fenster", "window", 5);
+            insertVocab("Schulstunde", "lesson", 5);
+            insertVocab("Schule", "school", 5);
+            insertVocab("Stundenplan", "schedule", 5);
+            insertVocab("Pause", "break", 5);
 
-            insertVocab("Frühstück", "breakfast", 6, db);
-            insertVocab("Mittagessen", "lunch", 6, db);
-            insertVocab("Abendessen", "dinner", 6, db);
-            insertVocab("Eis", "icecream", 6, db);
-            insertVocab("Schokolade", "chocolate", 6, db);
-            insertVocab("Suppe", "soup", 6, db);
-            insertVocab("Spaghetti", "spaghetti", 6, db);
-            insertVocab("Pommes frites", "chips", 6, db);
-            insertVocab("Apfel", "apple", 6, db);
-            insertVocab("Banane", "banana", 6, db);
-            insertVocab("Birne", "pear", 6, db);
-            insertVocab("Trauben", "grape", 6, db);
-            insertVocab("Nachtisch", "desert", 6, db);
-            insertVocab("Brot", "bread", 6, db);
-            insertVocab("Butter", "butter", 6, db);
-            insertVocab("Käse", "cheese", 6, db);
-            insertVocab("Marmelade", "jelly", 6, db);
-            insertVocab("essen", "eat", 6, db);
-            insertVocab("kochen", "cook", 6, db);
-            insertVocab("Küche", "kitchen", 6, db);
-            **/
+            insertVocab("Frühstück", "breakfast", 6);
+            insertVocab("Mittagessen", "lunch", 6);
+            insertVocab("Abendessen", "dinner", 6);
+            insertVocab("Eis", "icecream", 6);
+            insertVocab("Schokolade", "chocolate", 6);
+            insertVocab("Suppe", "soup", 6);
+            insertVocab("Spaghetti", "spaghetti", 6);
+            insertVocab("Pommes frites", "chips", 6);
+            insertVocab("Apfel", "apple", 6);
+            insertVocab("Banane", "banana", 6);
+            insertVocab("Birne", "pear", 6);
+            insertVocab("Trauben", "grape", 6);
+            insertVocab("Nachtisch", "desert", 6);
+            insertVocab("Brot", "bread", 6);
+            insertVocab("Butter", "butter", 6);
+            insertVocab("Käse", "cheese", 6);
+            insertVocab("Marmelade", "jelly", 6);
+            insertVocab("essen", "eat", 6);
+            insertVocab("kochen", "cook", 6);
+            insertVocab("Küche", "kitchen", 6);
         }
 
     }
@@ -194,7 +191,7 @@ public class InitData {
             byte[] buffer2 = new byte[size2];
             is2.read(buffer2);
             is2.close();
-            currVocab.setPicture((byte[]) buffer2);
+            currVocab.setPicture(buffer2);
             VocabDatabaseHelper.update(currVocab);
         } catch (IOException e) {
             e.printStackTrace();
@@ -209,14 +206,12 @@ public class InitData {
 
     public static void initSQLData(Context context) {
         GeneralDatabaseHelper generalDatabaseHelper = GeneralDatabaseHelper.getInstance(context);
-
-        //generalDatabaseHelper.dropDatabase(context);
         generalDatabaseHelper.Create();
         glbContext =context;
        if(generalDatabaseHelper.checkDatabase()){
-            insertLection(context);
-            insertUser(context);
-            insertVocabs(context);
+            insertLection();
+            insertUser();
+            insertVocabs();
        }
 
     }

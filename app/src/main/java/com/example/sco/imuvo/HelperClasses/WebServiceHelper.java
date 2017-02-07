@@ -20,9 +20,11 @@ import com.voicerss.tts.VoiceProvider;
 public class WebServiceHelper {
 
     private final static String APIKEY = "9c51e2ccdb01408e8f0caf7e90e60f7f";
-    private static WebServiceHelperListener webServiceHelperListener;
+    private WebServiceHelperListener webServiceHelperListener;
 
+    public WebServiceHelper(){
 
+    }
     public static byte[] getSpeechSync(String text) {
         VoiceProvider tts = new VoiceProvider(APIKEY);
         VoiceParameters params = new VoiceParameters(text, Languages.English_UnitedStates);
