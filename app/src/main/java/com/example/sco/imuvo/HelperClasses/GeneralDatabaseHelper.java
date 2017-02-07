@@ -34,15 +34,16 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
         if (instance == null) {
             instance = new GeneralDatabaseHelper(context);
         }
+
         return instance;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-            db.execSQL(VOCAB_DROP_TABLE);
-            db.execSQL(USER_CREATE_TABLE);
-            db.execSQL(VOCAB_CREATE_TABLE);
-            db.execSQL(LECTION_CREATE_TABLE);
+        db.execSQL(VOCAB_DROP_TABLE);
+        db.execSQL(USER_CREATE_TABLE);
+        db.execSQL(VOCAB_CREATE_TABLE);
+        db.execSQL(LECTION_CREATE_TABLE);
     }
 
     @Override

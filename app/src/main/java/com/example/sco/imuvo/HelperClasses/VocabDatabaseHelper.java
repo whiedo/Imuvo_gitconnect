@@ -22,7 +22,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_NAME = "vocabs_imuvo";
     private static final String[] USER_COLUMNS = { "_id", "german", "translation", "lection", "speech", "picture" };
     private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo "
-            + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, lection INTEGER, speech BLOB, picture BLOB)";
+            + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, lection INTEGER, speech BLOB, picture BLOB, FOREIGN KEY(lection) REFERENCES lection_imuvo(_id))";
     private static final String USER_DROP_Table = "DROP TABLE IF EXISTS vocabs_imuvo";
 
     private String DB_PATH = null;
