@@ -28,7 +28,6 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(VocabDatabaseHelper.DROP_TABLE);
         db.execSQL(UserDatabaseHelper.CREATE_TABLE);
         db.execSQL(VocabDatabaseHelper.CREATE_TABLE);
         db.execSQL(LectionDatabaseHelper.CREATE_TABLE);
@@ -36,6 +35,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //TODO delete content of this fct. after development
         db.execSQL(UserDatabaseHelper.DROP_TABLE);
         db.execSQL(VocabDatabaseHelper.DROP_TABLE);
         db.execSQL(LectionDatabaseHelper.DROP_TABLE);
