@@ -5,6 +5,7 @@ package com.example.sco.imuvo.HelperClasses;
  */
 import android.util.Log;
 
+import com.example.sco.imuvo.Activities.readVocabs;
 import com.example.sco.imuvo.Model.Vocab;
 import com.voicerss.tts.AudioCodec;
 import com.voicerss.tts.AudioFormat;
@@ -17,8 +18,13 @@ import com.voicerss.tts.VoiceParameters;
 import com.voicerss.tts.VoiceProvider;
 
 public class WebServiceHelper {
+
+    private final static String APIKEY = "9c51e2ccdb01408e8f0caf7e90e60f7f";
+    private static WebServiceHelperListener webServiceHelperListener;
+
+
     public static byte[] getSpeechSync(String text) {
-        VoiceProvider tts = new VoiceProvider("36911397cac94f028c2848220fa07eef");
+        VoiceProvider tts = new VoiceProvider(APIKEY);
         VoiceParameters params = new VoiceParameters(text, Languages.English_UnitedStates);
         params.setCodec(AudioCodec.WAV);
         params.setFormat(AudioFormat.Format_44KHZ.AF_44khz_16bit_stereo);
@@ -36,9 +42,9 @@ public class WebServiceHelper {
 
     }
 
-    public static void getSpeechAsync(final Vocab vocab){
+    public void getSpeechAsync(final Vocab vocab){
         try {
-            VoiceProvider tts = new VoiceProvider("9c51e2ccdb01408e8f0caf7e90e60f7f");
+            VoiceProvider tts = new VoiceProvider(APIKEY);
             VoiceParameters params = new VoiceParameters(vocab.getForeign(), Languages.English_UnitedStates);
             params.setCodec(AudioCodec.WAV);
             params.setFormat(AudioFormat.Format_44KHZ.AF_44khz_16bit_stereo);
@@ -54,9 +60,8 @@ public class WebServiceHelper {
                 @Override
                 public void handleSpeechDataEvent(SpeechDataEvent<?> e) {
                     try {
-                        vocab.setSpeech((byte[]) e.getData());
-                        VocabDatabaseHelper.update(vocab);
-                    } catch (Exception ex) {
+                        webServiceHelperListener.onWebServiceReturnResult((byte[]) e.getData());
+                    } catch (Exception ex) {;
                     }
                 }
             });
@@ -64,6 +69,10 @@ public class WebServiceHelper {
 
         } catch (Exception ex) {
         }
+    }
+
+    public void setWebServiceHelperListener(WebServiceHelperListener webServiceHelperListener) {
+        this.webServiceHelperListener = webServiceHelperListener;
     }
 }
 

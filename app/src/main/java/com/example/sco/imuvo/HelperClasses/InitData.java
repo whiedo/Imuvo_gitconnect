@@ -190,23 +190,17 @@ public class InitData {
     public static void insertVocabWithSpeech(final Vocab currVocab){
         currVocab.setSqlID(VocabDatabaseHelper.insert(currVocab));
         try {
-                WebServiceHelper.getSpeechAsync(currVocab);
-
-        } catch (Exception e) {
-        }
-
-        InputStream is2 = null;
-        try {
-            is2 = glbContext.getAssets().open("picture/" + currVocab.getForeign() + ".png");
+            InputStream is2 = glbContext.getAssets().open("picture/" + currVocab.getForeign() + ".png");
             int size2 = is2.available();
             byte[] buffer2 = new byte[size2];
             is2.read(buffer2);
             is2.close();
             currVocab.setPicture((byte[]) buffer2);
+            VocabDatabaseHelper.update(currVocab);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //VocabDatabaseHelper.update(currVocab);
+
 
     }
 

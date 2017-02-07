@@ -3,6 +3,7 @@ package com.example.sco.imuvo.Activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.VocabDatabaseHelper;
+import com.example.sco.imuvo.HelperClasses.WebServiceHelper;
+import com.example.sco.imuvo.HelperClasses.WebServiceHelperListener;
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.Vocab;
 import com.example.sco.imuvo.R;
@@ -146,28 +149,61 @@ public class readVocabs extends AppCompatActivity {
     }
 
     public void speakAloud(View v) {
+        if (currVocab.getSpeech() != null){
             try {
                 String fileName = getCacheDir() + "/voice.mp3";
-
                 File file = new File(fileName);
                 FileOutputStream fos = new FileOutputStream(file);
                 fos.write(currVocab.getSpeech());
                 fos.close();
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                FileInputStream MyFile = new FileInputStream(file);
+                mediaPlayer.setDataSource(MyFile.getFD());
+                mediaPlayer.prepare();
+                mediaPlayer.start();
 
-                try {
-                   MediaPlayer mediaPlayer = new MediaPlayer();
-
-                    FileInputStream MyFile = new FileInputStream(file);
-                    mediaPlayer.setDataSource(MyFile.getFD());
-
-                    mediaPlayer.prepare();
-                    mediaPlayer.start();
-                } catch (IOException ex) {
-                    String s = ex.toString();
-                    ex.printStackTrace();
-                }
             } catch (Exception e) {
             }
+        }
+        else{
+            WebServiceHelper webServiceHelper = new WebServiceHelper();
+            webServiceHelper.setWebServiceHelperListener(new WebServiceHelperListener() {
+                @Override
+                public void onWebServiceReturnResult(byte[] result) {
+                    try {
+                        String fileName = getCacheDir() + "/voice.mp3";
+
+                        File file = new File(fileName);
+                        FileOutputStream fos = new FileOutputStream(file);
+                        fos.write(result);
+                        fos.close();
+
+                        AudioManager audioManager = (AudioManager)getSystemService(AppCompatActivity.AUDIO_SERVICE);
+                        audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), 0);
+
+                        if (mp != null)
+                            mp.release();
+
+                        FileInputStream fis = new FileInputStream(fileName);
+
+                        mp = new MediaPlayer();
+                        mp.setAudioStreamType(AudioManager.STREAM_SYSTEM);
+                        mp.setDataSource(fis.getFD());
+                        mp.setOnErrorListener(onErrorListener);
+                        mp.setOnCompletionListener(onCompletionListener);
+                        mp.setOnPreparedListener(onPreparedListener);
+                        mp.prepareAsync();
+
+                        fis.close();
+
+                        currVocab.setSpeech(result);
+                        VocabDatabaseHelper.update(currVocab);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+        }
     }
 
 
@@ -179,6 +215,26 @@ public class readVocabs extends AppCompatActivity {
         finish();
     }
 
+    final MediaPlayer.OnPreparedListener onPreparedListener = new MediaPlayer.OnPreparedListener() {
+        @Override
+        public void onPrepared(MediaPlayer mp) {
+            mp.setVolume(1, 1);
+            mp.start();
+        }
+    };
 
+    final MediaPlayer.OnErrorListener onErrorListener = new MediaPlayer.OnErrorListener() {
+        @Override
+        public boolean onError(MediaPlayer mp, int what, int extra) {
+            return false;
+        }
+    };
 
+    final MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            mp.release();
+            mp = null;
+        }
+    };
 }
