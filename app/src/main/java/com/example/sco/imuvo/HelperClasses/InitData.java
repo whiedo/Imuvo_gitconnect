@@ -206,8 +206,11 @@ public class InitData {
 
     public static void initSQLData(Context context) {
         GeneralDatabaseHelper generalDatabaseHelper = GeneralDatabaseHelper.getInstance(context);
+
+        //TODO delete drop database
+        //generalDatabaseHelper.dropDatabase(context);
         generalDatabaseHelper.Create();
-        glbContext =context;
+        glbContext = context;
        if(generalDatabaseHelper.checkDatabase()){
             insertLection();
             insertUser();

@@ -13,6 +13,7 @@ import java.util.List;
 
 public class LectionDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "lection";
+
     public static final String[] COLUMNS = {"_id", "number", "language"};
     public static final int ID_COLUMN_INDEX = 0;
     public static final int NUMBER_COLUMN_INDEX = 1;
@@ -55,7 +56,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
     public Lection get(Integer number) {
         Lection Lection = null;
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query("Lection_imuvo", COLUMNS, "number = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[NUMBER_COLUMN_INDEX] + "=?",
                 new String[]{number.toString()}, null, null, null);
         if (cursor.moveToFirst()) {
             Lection = new Lection(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
@@ -79,9 +80,10 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
     public int update(Lection Lection) {
         ContentValues values = new ContentValues();
-        values.put("number", Lection.getNumber());
-        values.put("language", Lection.getLanguage());
-        int rows = GeneralDatabaseHelper.getSQLDatabase().update("lection_imuvo", values, "_id = ?", new String[]{String.valueOf(Lection.getSqlID())});
+        values.put(COLUMNS[NUMBER_COLUMN_INDEX], Lection.getNumber());
+        values.put(COLUMNS[LANGUAGE_COLUMN_INDEX], Lection.getLanguage());
+        int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
+                new String[]{String.valueOf(Lection.getSqlID())});
         return rows;
     }
 
@@ -108,5 +110,4 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
         return labels;
     }
-
 }

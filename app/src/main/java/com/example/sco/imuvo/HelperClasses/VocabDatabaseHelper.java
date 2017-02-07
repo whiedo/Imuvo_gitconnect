@@ -13,7 +13,14 @@ import java.util.List;
 
 public class VocabDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "vocabulary";
-    public static final String[] COLUMNS = {"_id", "german", "translation", "speech", "lection", "picture"};
+
+    public static final String[] COLUMNS = {"_id", "baseLanguage", "translation", "speech", "lection", "picture"};
+    public static final int ID_COLUMN_INDEX = 0;
+    public static final int BASELANGUAGE_COLUMN_INDEX = 1;
+    public static final int TRANSLATION_COLUMN_INDEX = 2;
+    public static final int SPEECH_COLUMN_INDEX = 3;
+    public static final int LECTION_COLUMN_INDEX = 4;
+    public static final int PICTURE_COLUMN_INDEX = 5;
 
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
             "(" +
@@ -44,11 +51,12 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
 
     public Vocab get(long id) {
         Vocab vocab = null;
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, "_id = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[] { String.valueOf(id) }, null, null, null);
 
         if (cursor.moveToFirst()) {
-            vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),cursor.getInt(4),cursor.getBlob(5));
+            vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),
+                    cursor.getInt(4),cursor.getBlob(5));
         }
 
         cursor.close();
@@ -58,18 +66,19 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
     public static ArrayList<Vocab> getFromLection(Integer lectionNo) {
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, "lection=?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[LECTION_COLUMN_INDEX] + "=?",
                 new String[] { Integer.toString(lectionNo)}, null, null, null);
-
 
         if (cursor.moveToFirst()) {
             do {
                 byte[] test = cursor.getBlob(5);
-                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),cursor.getInt(4),test);
+                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),
+                        cursor.getInt(4),test);
                 vocabs.add(vocab);
             } while (cursor.moveToNext());
 
         }
+
         cursor.close();
         return vocabs;
     }
@@ -81,7 +90,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public static Cursor getAll(int lectionNo) {
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, "lection=?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[LECTION_COLUMN_INDEX] + "=?",
                 new String[] { Integer.toString(lectionNo)}, null, null, null);
         return cursor;
     }
@@ -89,11 +98,11 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
     public static long insert(Vocab vocab) {
         GeneralDatabaseHelper.getSQLDatabase().execSQL(CREATE_TABLE);
         ContentValues values = new ContentValues();
-        values.put("german",vocab.getGerman());
-        values.put("translation",vocab.getForeign());
-        values.put("speech",vocab.getSpeech());
-        values.put("lection",vocab.getLection());
-        values.put("picture",vocab.getPicture());
+        values.put(COLUMNS[BASELANGUAGE_COLUMN_INDEX],vocab.getGerman());
+        values.put(COLUMNS[TRANSLATION_COLUMN_INDEX],vocab.getForeign());
+        values.put(COLUMNS[SPEECH_COLUMN_INDEX],vocab.getSpeech());
+        values.put(COLUMNS[LECTION_COLUMN_INDEX],vocab.getLection());
+        values.put(COLUMNS[PICTURE_COLUMN_INDEX],vocab.getPicture());
         long id = GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
 
         return id;
@@ -101,17 +110,19 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
 
     public static int update(Vocab vocab) {
         ContentValues values = new ContentValues();
-        values.put("german",vocab.getGerman());
-        values.put("translation",vocab.getForeign());
-        values.put("speech",vocab.getSpeech());
-        values.put("lection",vocab.getLection());
-        values.put("picture",vocab.getPicture());
-        int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, "_id = ?", new String[] { String.valueOf(vocab.getSqlID()) });
+        values.put(COLUMNS[BASELANGUAGE_COLUMN_INDEX],vocab.getGerman());
+        values.put(COLUMNS[TRANSLATION_COLUMN_INDEX],vocab.getForeign());
+        values.put(COLUMNS[SPEECH_COLUMN_INDEX],vocab.getSpeech());
+        values.put(COLUMNS[LECTION_COLUMN_INDEX],vocab.getLection());
+        values.put(COLUMNS[PICTURE_COLUMN_INDEX],vocab.getPicture());
+        int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
+                new String[] { String.valueOf(vocab.getSqlID()) });
         return rows;
     }
 
     public int delete(long id) {
-        return GeneralDatabaseHelper.getSQLDatabase().delete(TABLE_NAME, "_id = ?", new String[]{String.valueOf(id)});
+        return GeneralDatabaseHelper.getSQLDatabase().delete(TABLE_NAME, COLUMNS[ID_COLUMN_INDEX] + "=?",
+                new String[]{String.valueOf(id)});
     }
 
     public void Create() {
@@ -121,21 +132,19 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
     public static ArrayList<Vocab> getFromMultipleLection(List<Integer> indices) {
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
-        String selectionStatement = "lection in (";
+        String selectionStatement = COLUMNS[LECTION_COLUMN_INDEX] + " in (";
         String[] args = new String[indices.size()];
         Integer counter = 0;
 
-        for (Integer i:
-             indices) {
+        for (Integer i : indices) {
 
             args[counter] = String.valueOf(i + 1);
             counter++;
         }
 
-        for (String s:
-             args) {
+        for (String s : args) {
             if (s != null){
-                selectionStatement += s +",";
+                selectionStatement += s + ",";
             }
         }
 
@@ -146,7 +155,8 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),cursor.getInt(4),cursor.getBlob(5));
+                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),
+                        cursor.getInt(4),cursor.getBlob(5));
                 vocabs.add(vocab);
             } while (cursor.moveToNext());
 

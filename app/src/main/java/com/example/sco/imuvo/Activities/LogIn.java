@@ -64,7 +64,6 @@ public class LogIn extends AppCompatActivity {
         testFunction();
         setInitData();
         initSQLData(this);
-
     }
 
     private void initSQLData(final Context context) {

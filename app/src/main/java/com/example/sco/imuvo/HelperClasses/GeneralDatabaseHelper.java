@@ -66,7 +66,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
             checkDB = SQLiteDatabase.openDatabase(myPath, null,
                     SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
-            // database does't exist yet.
+            //database does't exist yet.
         }
 
         if (checkDB != null) {
