@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import com.example.sco.imuvo.Model.Vocab;
 import com.voicerss.tts.AudioCodec;
 import com.voicerss.tts.AudioFormat;
 import com.voicerss.tts.Languages;
@@ -25,56 +26,60 @@ import com.voicerss.tts.VoiceParameters;
 import com.voicerss.tts.VoiceProvider;
 
 public class WebServiceHelper {
-    public static byte[] getSpeech(String vocab) {
-
-
+    public static byte[] getSpeechSync(String text) {
         VoiceProvider tts = new VoiceProvider("36911397cac94f028c2848220fa07eef");
-
-        VoiceParameters params = new VoiceParameters("Hello World", Languages.English_UnitedStates);
+        VoiceParameters params = new VoiceParameters(text, Languages.English_UnitedStates);
         params.setCodec(AudioCodec.WAV);
         params.setFormat(AudioFormat.Format_44KHZ.AF_44khz_16bit_stereo);
         params.setBase64(false);
         params.setSSML(false);
         params.setRate(0);
         byte[] result = null;
-
         try {
             result = tts.speech(params);
         } catch (Exception e) {
+            //TODO Log
+            Log.i("Imuvo",e.toString());
         }
         return result;
 
     }
 
-
-    public static void playMp3(byte[] mp3SoundByteArray,Context context) {
-        MediaPlayer mediaPlayer = new MediaPlayer();
+    public static void getSpeechAsync(final Vocab vocab, final VocabDatabaseHelper vocabDatabaseHelper){
         try {
-            // create temp file that will hold byte array
-            File tempMp3 = File.createTempFile("kurchina", "mp3", context.getCacheDir());
-            tempMp3.deleteOnExit();
-            FileOutputStream fos = new FileOutputStream(tempMp3);
-            fos.write(mp3SoundByteArray);
-            fos.close();
+            VoiceProvider tts = new VoiceProvider("tf1698161f6b44202b06dd3fcc855ef52");
+            VoiceParameters params = new VoiceParameters(vocab.getForeign(), Languages.English_UnitedStates);
+            params.setCodec(AudioCodec.WAV);
+            params.setFormat(AudioFormat.Format_44KHZ.AF_44khz_16bit_stereo);
+            params.setBase64(false);
+            params.setSSML(false);
+            params.setRate(0);
 
-            // resetting mediaplayer instance to evade problems
-            mediaPlayer.reset();
+            tts.addSpeechErrorEventListener(new SpeechErrorEventListener() {
+                @Override
+                public void handleSpeechErrorEvent(SpeechErrorEvent e) {
+                    //TODO Log
+                    Log.i("Imuvo",e.getException().getMessage());
+                }
+            });
+            tts.addSpeechDataEventListener(new SpeechDataEventListener() {
+                @Override
+                public void handleSpeechDataEvent(SpeechDataEvent<?> e) {
+                    try {
+                        vocab.setSpeech((byte[]) e.getData());
+                        vocabDatabaseHelper.update(vocab);
+                    } catch (Exception ex) {
+                        //TODO Log
+                        Log.i("Imuvo",ex.toString());;
+                    }
+                }
+            });
 
-            // In case you run into issues with threading consider new instance like:
-            // MediaPlayer mediaPlayer = new MediaPlayer();
-
-            // Tried passing path directly, but kept getting
-            // "Prepare failed.: status=0x1"
-            // so using file descriptor instead
-            FileInputStream fis = new FileInputStream(tempMp3);
-            mediaPlayer.setDataSource(fis.getFD());
-
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-        } catch (IOException ex) {
-            String s = ex.toString();
-            ex.printStackTrace();
+            tts.speechAsync(params);
+        } catch (Exception ex) {
+            //TODO Log
+            Log.i("Imuvo",ex.toString());
         }
     }
-
 }
+

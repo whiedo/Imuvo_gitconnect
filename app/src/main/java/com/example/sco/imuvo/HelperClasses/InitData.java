@@ -7,6 +7,7 @@ import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.Model.Vocab;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -44,10 +45,6 @@ public class InitData {
         }
     }
 
-    private static void insertVocabsFromAsset(Context context){
-
-    }
-
     private static void insertVocabs(Context context) {
         final VocabDatabaseHelper db = VocabDatabaseHelper.getInstance(context);
 
@@ -56,6 +53,7 @@ public class InitData {
             insertVocab("Hallo", "Hello", 1, db);
             insertVocab("guten Morgen", "good morning", 1, db);
             insertVocab("Wie heißt du", "What is your name", 1, db);
+            /**
             insertVocab("Ich heiße", "My name is", 1, db);
             insertVocab("Name", "name", 1, db);
             insertVocab("wie geht es dir", "How are you", 1, db);
@@ -185,34 +183,32 @@ public class InitData {
             insertVocab("essen", "eat", 6, db);
             insertVocab("kochen", "cook", 6, db);
             insertVocab("Küche", "kitchen", 6, db);
-
+            **/
         }
 
     }
 
     public static void insertVocabWithSpeech(final Vocab currVocab, final VocabDatabaseHelper db){
-        final String text = currVocab.getForeign();
-
+        currVocab.setSqlID(db.insert(currVocab));
         try {
-
-                InputStream is = glbContext.getAssets().open("speech/" + currVocab.getForeign() + ".mp3");
-                int size = is.available();
-                byte[] buffer = new byte[size]; //declare the size of the byte array with size of the file
-                is.read(buffer); //read file
-                is.close(); //close file
-                currVocab.setSpeech((byte[]) buffer);
-
-
-                InputStream is2 = glbContext.getAssets().open("picture/" + currVocab.getForeign() + ".png");
-                int size2 = is2.available();
-                byte[] buffer2 = new byte[size2]; //declare the size of the byte array with size of the file
-                is2.read(buffer2); //read file
-                is2.close(); //close file
-                currVocab.setPicture((byte[]) buffer2);
+                WebServiceHelper.getSpeechAsync(currVocab,db);
 
         } catch (Exception e) {
         }
-        db.insert(currVocab);
+
+        InputStream is2 = null;
+        try {
+            is2 = glbContext.getAssets().open("picture/" + currVocab.getForeign() + ".png");
+            int size2 = is2.available();
+            byte[] buffer2 = new byte[size2];
+            is2.read(buffer2);
+            is2.close();
+            currVocab.setPicture((byte[]) buffer2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        db.update(currVocab);
+
     }
 
     private static void insertVocab(String deutsch, String german, int i, VocabDatabaseHelper db) {
