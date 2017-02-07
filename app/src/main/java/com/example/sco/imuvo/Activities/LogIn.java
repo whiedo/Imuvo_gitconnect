@@ -1,7 +1,6 @@
 package com.example.sco.imuvo.Activities;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,7 +20,7 @@ import android.widget.TextView;
 import com.example.sco.imuvo.HelperClasses.InitData;
 import com.example.sco.imuvo.HelperClasses.TypefaceUtil;
 import com.example.sco.imuvo.HelperClasses.UserDatabaseHelper;
-import com.example.sco.imuvo.HelperClasses.Helper;
+import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.R;
 import com.example.sco.imuvo.Model.User;
@@ -85,7 +83,7 @@ public class LogIn extends AppCompatActivity {
         bubbleTextView.setText("Wilkommen! Ich bin Imuvo. Wie ist dein Name? " +
                 "TÖRÖÖÖÖÖ!");
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
-        welcomeTextView.setText(Helper.colorsString("Lernen mit Imuvo", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle),ContextCompat.getColor(this, R.color.colorMenuTextRight)));
+        welcomeTextView.setText(FormatHelper.colorsString("Lernen mit Imuvo", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle),ContextCompat.getColor(this, R.color.colorMenuTextRight)));
     }
 
     private void testFunction() {
@@ -112,7 +110,7 @@ public class LogIn extends AppCompatActivity {
             startActivity(menuIntent);
         }
         else{
-            Helper.makeLongToast(this,"Name oder Passwort sind falsch. Bitte versuche es erneut.");
+            FormatHelper.makeLongToast(this,"Name oder Passwort sind falsch. Bitte versuche es erneut.");
         }
     }
 

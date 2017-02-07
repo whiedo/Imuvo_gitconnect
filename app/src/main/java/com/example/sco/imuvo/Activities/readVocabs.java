@@ -3,40 +3,29 @@ package com.example.sco.imuvo.Activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sco.imuvo.HelperClasses.Helper;
+import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.VocabDatabaseHelper;
-import com.example.sco.imuvo.HelperClasses.WebServiceHelper;
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.Vocab;
 import com.example.sco.imuvo.R;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -75,7 +64,7 @@ public class readVocabs extends AppCompatActivity {
         try {
             setCurrVocab((Vocab) vocabIterator.next());
         } catch (NoSuchElementException e) {
-            Helper.makeShortToast(this, "Es gibt keine Vokabeln für diese Lektion.");
+            FormatHelper.makeShortToast(this, "Es gibt keine Vokabeln für diese Lektion.");
         }
 
     }
@@ -131,10 +120,10 @@ public class readVocabs extends AppCompatActivity {
         vocabIterator = vocabList.listIterator(0);
         currentDirection = bundle.getLong("selectedDirection");
         if(nextIntentType.contentEquals("read")){
-            headlineText.setText(Helper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            headlineText.setText(FormatHelper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else{
-            headlineText.setText(Helper.colorsString(this,"Vokabeln vorlesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            headlineText.setText(FormatHelper.colorsString(this,"Vokabeln vorlesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
 
     }
@@ -143,7 +132,7 @@ public class readVocabs extends AppCompatActivity {
         try {
             setCurrVocab((Vocab) vocabIterator.next());
         } catch (NoSuchElementException e) {
-            Helper.makeShortToast(this, "Letzte Vokabel erreicht!");
+            FormatHelper.makeShortToast(this, "Letzte Vokabel erreicht!");
         }
 
     }
@@ -152,7 +141,7 @@ public class readVocabs extends AppCompatActivity {
         try {
             setCurrVocab((Vocab) vocabIterator.previous());
         } catch (NoSuchElementException e) {
-            Helper.makeShortToast(this, "Es gibt keine vorherige Vokabel.");
+            FormatHelper.makeShortToast(this, "Es gibt keine vorherige Vokabel.");
         }
 
     }

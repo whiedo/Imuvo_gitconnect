@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sco.imuvo.HelperClasses.Helper;
+import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.VocabDatabaseHelper;
 import com.example.sco.imuvo.Model.AskingSingleton;
@@ -187,7 +187,7 @@ public class askVocabs extends AppCompatActivity {
             }
             else{
                 vocabList = vocabDatabaseHelper.getFromLection(currentLection.getNumber());
-                headlineText.setText(Helper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+                headlineText.setText(FormatHelper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
             }
 
         }

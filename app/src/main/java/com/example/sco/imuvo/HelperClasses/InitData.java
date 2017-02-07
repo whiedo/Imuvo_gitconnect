@@ -1,24 +1,13 @@
 package com.example.sco.imuvo.HelperClasses;
 
 import android.content.Context;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.util.Log;
 
-import com.example.sco.imuvo.Activities.LogIn;
-import com.example.sco.imuvo.Activities.readVocabs;
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.Model.Vocab;
-import com.example.sco.imuvo.R;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Simon Cox on 17.12.2016.
@@ -243,7 +232,7 @@ public class InitData {
         //generalDatabaseHelper.dropDatabase(context);
         generalDatabaseHelper.Create();
         glbContext =context;
-       if(generalDatabaseHelper.checkDataBase()){
+       if(generalDatabaseHelper.checkDatabase()){
             insertLection(context);
             insertUser(context);
             insertVocabs(context);

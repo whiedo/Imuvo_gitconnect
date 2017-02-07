@@ -8,11 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.HelperClasses.UserDatabaseHelper;
-import com.example.sco.imuvo.HelperClasses.Helper;
+import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.R;
-
-import org.w3c.dom.Text;
 
 public class CreateUserActivity extends AppCompatActivity {
 
@@ -34,13 +32,13 @@ public class CreateUserActivity extends AppCompatActivity {
         if(checkUserCorrect()){
             User user = new User(0,nameEditText.getText().toString(),passwordEditText.getText().toString());
             userDatabaseHelper.insert(user);
-            Helper.makeLongToast(this,"Nutzer wurde angelegt.");
+            FormatHelper.makeLongToast(this,"Nutzer wurde angelegt.");
             final Intent menuIntent = new Intent(this,LogIn.class);
             startActivity(menuIntent);
             finish();
         }
         else{
-            Helper.makeLongToast(this,"Name oder Passwort sind falsch. Bitte versuche es erneut.");
+            FormatHelper.makeLongToast(this,"Name oder Passwort sind falsch. Bitte versuche es erneut.");
         }
     }
 

@@ -1,32 +1,22 @@
 package com.example.sco.imuvo.Activities;
 
-import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CursorAdapter;
-import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sco.imuvo.CustomViews.CustomSpinnerMultiSelection;
-import com.example.sco.imuvo.HelperClasses.Helper;
+import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
 import com.example.sco.imuvo.Model.AskingSingleton;
-import com.example.sco.imuvo.Model.Lection;
-import com.example.sco.imuvo.Model.LectionSelectionSingleton;
-import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.R;
 
 import java.util.List;
@@ -70,19 +60,19 @@ public class vocabReadingSelection extends AppCompatActivity {
     private void setSpeechbubble() {
         if(nextIntentType.contentEquals(READING)){
             speechbubble.setText("Super! Du möchtest Vokabeln lesen. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Lesen beginnst.");
-            headline.setText(Helper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            headline.setText(FormatHelper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else if(nextIntentType.contentEquals(ASKING)){
             speechbubble.setText("Du möchtest Vokabeln mit einer Abfrage üben. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Üben beginnst.");
-            headline.setText(Helper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            headline.setText(FormatHelper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else if(nextIntentType.contentEquals(TEST)){
             speechbubble.setText("Du möchtest Vokabeln mit einem Vokabeltest üben. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Üben beginnst.");
-            headline.setText(Helper.colorsString(this,"Vokabeln testen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            headline.setText(FormatHelper.colorsString(this,"Vokabeln testen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else if(nextIntentType.contentEquals(READALOUD)){
             speechbubble.setText("Du möchtest Dir Vokabeln anhören. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Vorlesen beginnst.");
-            headline.setText(Helper.colorsString(this,"Vokabeln vorlesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            headline.setText(FormatHelper.colorsString(this,"Vokabeln vorlesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
     }
 

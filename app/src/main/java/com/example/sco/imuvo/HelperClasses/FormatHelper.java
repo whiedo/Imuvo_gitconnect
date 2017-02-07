@@ -19,7 +19,7 @@ import com.example.sco.imuvo.R;
  * Created by sco on 28.11.2016.
  */
 
-public class Helper {
+public class FormatHelper {
     public static void makeLongToast(Context context, CharSequence value){
         Toast.makeText(context,value,Toast.LENGTH_LONG).show();
 

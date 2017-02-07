@@ -14,7 +14,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "user_imuvo";
     private static final int DB_VERSION = 1;
 
-    private  static final String USER_DB_CREATE = "CREATE TABLE IF NOT EXISTS created (_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)";
+    private  static final String USER_DB_CREATE = "  TABLE IF NOT EXISTS created (_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)";
     private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS user_imuvo "
             + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT, password TEXT)";
 
@@ -78,7 +78,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean checkDataBase() {
+    public boolean checkDatabase() {
 
         SQLiteDatabase checkDB = null;
         try {
