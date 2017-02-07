@@ -32,8 +32,6 @@ public class TextViewJokerman extends TextView {
         Typeface customFont = Typeface.createFromAsset(context.getAssets(),"fonts/Jokerman-Regular.ttf");
         setTypeface(customFont);
         setTextSize(20);
-        //setTextAppearance();
-        //setTextColor(50);
     }
 
 

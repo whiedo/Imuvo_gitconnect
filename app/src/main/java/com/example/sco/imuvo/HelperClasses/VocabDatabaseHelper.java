@@ -87,7 +87,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         open();
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
-        //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME,null);
         Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, "lection=?",
                 new String[] { Integer.toString(lectionNo)}, null, null, null);
 
@@ -95,7 +94,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
                 byte[] test = cursor.getBlob(5);
-                Log.i("Vocab",cursor.getString(1));
                 vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4),test);
                 vocabs.add(vocab);
             } while (cursor.moveToNext());
@@ -164,7 +162,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
             checkDB = SQLiteDatabase.openDatabase(myPath, null,
                     SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
-            // database does't exist yet.
         }
 
         if (checkDB != null) {
@@ -179,7 +176,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         open();
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
-        //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME,null);
         String selectionStatement = "lection in (";
         String[] args = new String[indices.size()];
         Integer counter = 0;
@@ -205,7 +201,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
 
         if (cursor.moveToFirst()) {
             do {
-                Log.i("Vocab",cursor.getString(1));
                 vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4),cursor.getBlob(5));
                 vocabs.add(vocab);
             } while (cursor.moveToNext());

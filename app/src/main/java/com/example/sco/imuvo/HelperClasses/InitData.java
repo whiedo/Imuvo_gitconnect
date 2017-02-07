@@ -210,14 +210,7 @@ public class InitData {
                 is2.close(); //close file
                 currVocab.setPicture((byte[]) buffer2);
 
-                Log.i("Insert", currVocab.toString());
-
-
-
-
-
         } catch (Exception e) {
-            Log.i("Insert",e.toString());
         }
         db.insert(currVocab);
     }

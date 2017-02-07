@@ -154,7 +154,6 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Log.i("Label",Integer.toString(cursor.getInt(1)));
                 labels.add("Lektion " + Integer.toString(cursor.getInt(1)));
             } while (cursor.moveToNext());
         }

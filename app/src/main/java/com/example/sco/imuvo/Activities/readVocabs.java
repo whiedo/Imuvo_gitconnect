@@ -167,9 +167,7 @@ public class readVocabs extends AppCompatActivity {
                     String s = ex.toString();
                     ex.printStackTrace();
                 }
-            } catch (Exception ex) {
-                Log.i("Fehler3", ex.toString());
-
+            } catch (Exception e) {
             }
     }
 

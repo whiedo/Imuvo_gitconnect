@@ -21,12 +21,10 @@ public class TypefaceUtil {
     public static void overrideFont(Context context, String defaultFontNameToOverride, String customFontFileNameInAssets) {
         try {
             final Typeface customFontTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/ITCKRIST.TTF");
-
             final Field defaultFontTypefaceField = Typeface.class.getDeclaredField("SERIF");
             defaultFontTypefaceField.setAccessible(true);
             defaultFontTypefaceField.set(null, customFontTypeface);
         } catch (Exception e) {
-            Log.i("Test","Can not set custom font " + customFontFileNameInAssets + " instead of " + defaultFontNameToOverride);
         }
     }
 }

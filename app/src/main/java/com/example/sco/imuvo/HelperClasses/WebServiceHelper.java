@@ -37,14 +37,11 @@ public class WebServiceHelper {
         params.setSSML(false);
         params.setRate(0);
         byte[] result = null;
-        Log.i("ExceptionSpeech","VorWebservice");
+
         try {
-            Log.i("ExceptionSpeech","WebServiceCall");
             result = tts.speech(params);
         } catch (Exception e) {
-            Log.i("ExceptionSpeech", String.valueOf(e.getStackTrace()));
         }
-
         return result;
 
     }
