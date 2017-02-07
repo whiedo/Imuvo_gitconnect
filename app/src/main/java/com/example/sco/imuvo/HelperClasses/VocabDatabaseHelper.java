@@ -18,27 +18,17 @@ import static com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper.DB_VERSI
  * Created by sco on 05.12.2016.
  */
 
-public class VocabDatabaseHelper extends SQLiteOpenHelper{
-    private static final String TABLE_NAME = "vocabs_imuvo";
-    private static final String[] USER_COLUMNS = { "_id", "german", "translation", "lection", "speech", "picture" };
+public class VocabDatabaseHelper extends SQLiteOpenHelper {
+    public static final String TABLE_NAME = "vocabs_imuvo";
+    public static final String[] USER_COLUMNS = { "_id", "german", "translation", "lection", "speech", "picture" };
+
     private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo "
             + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, lection INTEGER, speech BLOB, picture BLOB, FOREIGN KEY(lection) REFERENCES lection_imuvo(_id))";
     private static final String USER_DROP_Table = "DROP TABLE IF EXISTS vocabs_imuvo";
 
-    private String DB_PATH = null;
-    private static VocabDatabaseHelper instance;
-
     private VocabDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
-    }
-
-    public static VocabDatabaseHelper getInstance(Context context) {
-        if (instance == null) {
-            instance = new VocabDatabaseHelper(context);
-        }
-
-        return instance;
+        String DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
     }
 
     @Override
@@ -65,7 +55,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         return vocab;
     }
 
-    public ArrayList<Vocab> getFromLection(Integer lectionNo) {
+    public static ArrayList<Vocab> getFromLection(Integer lectionNo) {
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, "lection=?",
@@ -84,19 +74,19 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         return vocabs;
     }
 
-    public Cursor getAll() {
+    public static Cursor getAll() {
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, null,
                null, null, null, null);
         return cursor;
     }
 
-    public Cursor getAll(int lectionNo) {
+    public static Cursor getAll(int lectionNo) {
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, "lection=?",
                 new String[] { Integer.toString(lectionNo)}, null, null, null);
         return cursor;
     }
 
-    public long insert(Vocab vocab) {
+    public static long insert(Vocab vocab) {
         GeneralDatabaseHelper.getSQLDatabase().execSQL(USER_CREATE_TABLE);
         ContentValues values = new ContentValues();
         values.put("german",vocab.getGerman());
@@ -109,7 +99,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         return id;
     }
 
-    public int update(Vocab vocab) {
+    public static int update(Vocab vocab) {
         ContentValues values = new ContentValues();
         values.put("german",vocab.getGerman());
         values.put("translation",vocab.getForeign());
@@ -128,7 +118,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         onCreate(GeneralDatabaseHelper.getSQLDatabase());
     }
 
-    public ArrayList<Vocab> getFromMultipleLection(List<Integer> indices) {
+    public static ArrayList<Vocab> getFromMultipleLection(List<Integer> indices) {
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
         String selectionStatement = "lection in (";
@@ -147,8 +137,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
             if (s != null){
                 selectionStatement += s +",";
             }
-
-
         }
 
         selectionStatement = selectionStatement.substring(0,selectionStatement.length()-1);

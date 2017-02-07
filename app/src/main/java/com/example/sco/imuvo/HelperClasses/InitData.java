@@ -1,7 +1,6 @@
 package com.example.sco.imuvo.HelperClasses;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.User;
@@ -46,13 +45,13 @@ public class InitData {
     }
 
     private static void insertVocabs(Context context) {
-        final VocabDatabaseHelper db = VocabDatabaseHelper.getInstance(context);
+        //final VocabDatabaseHelper db = VocabDatabaseHelper.getInstance(context);
 
-        if(!db.getAll().moveToFirst()) {
+        if(!VocabDatabaseHelper.getAll().moveToFirst()) {
 
-            insertVocab("Hallo", "Hello", 1, db);
-            insertVocab("guten Morgen", "good morning", 1, db);
-            insertVocab("Wie heißt du", "What is your name", 1, db);
+            insertVocab("Hallo", "Hello", 1);
+            insertVocab("guten Morgen", "good morning", 1);
+            insertVocab("Wie heißt du", "What is your name", 1);
             /**
             insertVocab("Ich heiße", "My name is", 1, db);
             insertVocab("Name", "name", 1, db);
@@ -188,10 +187,10 @@ public class InitData {
 
     }
 
-    public static void insertVocabWithSpeech(final Vocab currVocab, final VocabDatabaseHelper db){
-        currVocab.setSqlID(db.insert(currVocab));
+    public static void insertVocabWithSpeech(final Vocab currVocab){
+        currVocab.setSqlID(VocabDatabaseHelper.insert(currVocab));
         try {
-                WebServiceHelper.getSpeechAsync(currVocab,db);
+                WebServiceHelper.getSpeechAsync(currVocab);
 
         } catch (Exception e) {
         }
@@ -207,12 +206,12 @@ public class InitData {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        db.update(currVocab);
+        VocabDatabaseHelper.update(currVocab);
 
     }
 
-    private static void insertVocab(String deutsch, String german, int i, VocabDatabaseHelper db) {
-        insertVocabWithSpeech(new Vocab(deutsch,german,i),db);
+    private static void insertVocab(String deutsch, String german, int i) {
+        insertVocabWithSpeech(new Vocab(deutsch,german,i));
     }
 
     public static void initSQLData(Context context) {

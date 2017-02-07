@@ -172,14 +172,14 @@ public class askVocabs extends AppCompatActivity {
         lectionDatabaseHelper = lectionDatabaseHelper.getInstance(this);
 
         currentLection = lectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
-        vocabDatabaseHelper = vocabDatabaseHelper.getInstance(this);
+        //vocabDatabaseHelper = VocabDatabaseHelper.getInstance(this);
         if(bundle.getBoolean(ASKWRONGVOCABSAGAIN)){
             vocabList = AskingSingleton.wrongVocabs;
         }
         else{
             if(bundle.getBoolean("isMultipleLection")){
                 List<Integer> indices = AskingSingleton.selectedLections;
-                vocabList = vocabDatabaseHelper.getFromMultipleLection(indices);
+                vocabList = VocabDatabaseHelper.getFromMultipleLection(indices);
                 subHeadlineText.setVisibility(View.INVISIBLE);
                 headlineText.setText("Vokabeltest");
                 skipButton.setVisibility(View.INVISIBLE);

@@ -3,16 +3,7 @@ package com.example.sco.imuvo.HelperClasses;
 /**
  * Created by sco on 19.12.2016.
  */
-import android.content.Context;
-import android.media.MediaPlayer;
-import android.os.Environment;
 import android.util.Log;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import com.example.sco.imuvo.Model.Vocab;
 import com.voicerss.tts.AudioCodec;
@@ -45,7 +36,7 @@ public class WebServiceHelper {
 
     }
 
-    public static void getSpeechAsync(final Vocab vocab, final VocabDatabaseHelper vocabDatabaseHelper){
+    public static void getSpeechAsync(final Vocab vocab){
         try {
             VoiceProvider tts = new VoiceProvider("tf1698161f6b44202b06dd3fcc855ef52");
             VoiceParameters params = new VoiceParameters(vocab.getForeign(), Languages.English_UnitedStates);
@@ -67,7 +58,7 @@ public class WebServiceHelper {
                 public void handleSpeechDataEvent(SpeechDataEvent<?> e) {
                     try {
                         vocab.setSpeech((byte[]) e.getData());
-                        vocabDatabaseHelper.update(vocab);
+                        VocabDatabaseHelper.update(vocab);
                     } catch (Exception ex) {
                         //TODO Log
                         Log.i("Imuvo",ex.toString());;
