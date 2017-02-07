@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/ImuvoTheme.">
         <activity
-            android:name=".Activities.Login2"
+            android:name=".Activities.Login"
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -24,7 +24,7 @@ import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.R;
 
-public class Login2 extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     TextView welcomeTextView, bubbleTextView;

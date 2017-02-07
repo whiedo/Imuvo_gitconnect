@@ -33,7 +33,7 @@ public class CreateUser extends AppCompatActivity {
             User user = new User(0,nameEditText.getText().toString(),passwordEditText.getText().toString());
             userDatabaseHelper.insert(user);
             FormatHelper.makeLongToast(this,"Nutzer wurde angelegt.");
-            final Intent menuIntent = new Intent(this,Login2.class);
+            final Intent menuIntent = new Intent(this,Login.class);
             startActivity(menuIntent);
             finish();
         }
@@ -47,7 +47,7 @@ public class CreateUser extends AppCompatActivity {
     }
 
     public void onClickBurgerMenu(View v){
-        final Intent menuIntent = new Intent(this,Login2.class);
+        final Intent menuIntent = new Intent(this,Login.class);
         menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
         finish();
