@@ -13,7 +13,12 @@ import java.util.List;
 
 public class LectionDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "lection";
+
     public static final String[] COLUMNS = {"_id", "number", "language"};
+    public static final int ID_COLUMN_INDEX = 0;
+    public static final int NUMBER_COLUMN_INDEX = 1;
+    public static final int LANGUAGE_COLUMN_INDEX = 2;
+
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " " +
             "(" +
             COLUMNS[0] + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
@@ -40,7 +45,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
     public static Lection get(long id) {
         Lection Lection = null;
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query("Lection_imuvo", COLUMNS, "_id = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[ID_COLUMN_INDEX] + " = ?",
                 new String[]{String.valueOf(id)}, null, null, null);
         if (cursor.moveToFirst()) {
             Lection = new Lection(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
@@ -51,7 +56,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
     public Lection get(Integer number) {
         Lection Lection = null;
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query("Lection_imuvo", COLUMNS, "number = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[NUMBER_COLUMN_INDEX] + " = ?",
                 new String[]{number.toString()}, null, null, null);
         if (cursor.moveToFirst()) {
             Lection = new Lection(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
@@ -61,23 +66,23 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public static Cursor getAll() {
-        return GeneralDatabaseHelper.getSQLDatabase().query("Lection_imuvo", COLUMNS, null, null, null, null, "number");
+        return GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, null, null, null, null, COLUMNS[NUMBER_COLUMN_INDEX]);
     }
 
     public static long insert(Lection Lection) {
         GeneralDatabaseHelper.getSQLDatabase().execSQL(CREATE_TABLE);
         ContentValues values = new ContentValues();
-        values.put("number", Lection.getNumber());
-        values.put("language", Lection.getLanguage());
-        long id = GeneralDatabaseHelper.getSQLDatabase().insert("lection_imuvo", null, values);
+        values.put(COLUMNS[NUMBER_COLUMN_INDEX], Lection.getNumber());
+        values.put(COLUMNS[LANGUAGE_COLUMN_INDEX], Lection.getLanguage());
+        long id = GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
         return id;
     }
 
     public int update(Lection Lection) {
         ContentValues values = new ContentValues();
-        values.put("number", Lection.getNumber());
-        values.put("language", Lection.getLanguage());
-        int rows = GeneralDatabaseHelper.getSQLDatabase().update("lection_imuvo", values, "_id = ?", new String[]{String.valueOf(Lection.getSqlID())});
+        values.put(COLUMNS[NUMBER_COLUMN_INDEX], Lection.getNumber());
+        values.put(COLUMNS[LANGUAGE_COLUMN_INDEX], Lection.getLanguage());
+        int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, "_id = ?", new String[]{String.valueOf(Lection.getSqlID())});
         return rows;
     }
 
@@ -91,13 +96,13 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
     public static List<String> getAllLabels(){
         List<String> labels = new ArrayList<String>();
-        String selectQuery = "SELECT  * FROM lection_imuvo";
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
 
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
-                labels.add("Lektion " + Integer.toString(cursor.getInt(1)));
+                labels.add(Integer.toString(cursor.getInt(1)));
             } while (cursor.moveToNext());
         }
         cursor.close();

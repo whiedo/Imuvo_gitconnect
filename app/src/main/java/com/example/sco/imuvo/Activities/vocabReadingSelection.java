@@ -103,6 +103,7 @@ public class vocabReadingSelection extends AppCompatActivity {
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,R.layout.support_simple_spinner_dropdown_item,cursor,from,to,0);
         lectionSpinner.setAdapter(cursorAdapter);
         List<String> lables = LectionDatabaseHelper.getAllLabels();
+        //TODO add caption "Lektion " for each lables
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.customspinner, lables);
         dataAdapter.setDropDownViewResource(R.layout.customspinner);
         lectionSpinner.setAdapter(dataAdapter);
