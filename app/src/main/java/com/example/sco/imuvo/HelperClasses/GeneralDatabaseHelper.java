@@ -1,27 +1,21 @@
 package com.example.sco.imuvo.HelperClasses;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.example.sco.imuvo.Model.User;
-import com.example.sco.imuvo.Model.Vocab;
 
 public class GeneralDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "user_imuvo";
     private static final int DB_VERSION = 1;
 
-    private  static final String USER_DB_CREATE = "  TABLE IF NOT EXISTS created (_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)";
-    private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS user_imuvo "
-            + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT, password TEXT)";
+    private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS user_imuvo" + " " +
+            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT, password TEXT)";
 
-    public static final String VOCAB_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo " +
+    public static final String VOCAB_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo" + " " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, speech BLOB, lection INTEGER, picture BLOB)";
 
-    private static final String LECTION_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS lection_imuvo " +
+    private static final String LECTION_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS lection_imuvo" + " " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, number INTEGER, language TEXT)";
     private static final String USER_DROP_Table = "DROP TABLE IF EXISTS user_imuvo";
     private static final String VOCAB_DROP_TABLE = "DROP TABLE IF EXISTS vocabs_imuvo";
@@ -29,7 +23,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
     private String DB_PATH = null;
     private static GeneralDatabaseHelper instance;
-    private SQLiteDatabase db;
+    private static SQLiteDatabase db;
 
     private GeneralDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -49,9 +43,6 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(USER_CREATE_TABLE);
             db.execSQL(VOCAB_CREATE_TABLE);
             db.execSQL(LECTION_CREATE_TABLE);
-            db.execSQL(USER_DB_CREATE);
-
-
     }
 
     @Override
@@ -98,6 +89,9 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
     public void dropDatabase(Context context){
         context.deleteDatabase(DB_NAME);
+    }
 
+    public static SQLiteDatabase getSQLDatabase() {
+        return db;
     }
 }

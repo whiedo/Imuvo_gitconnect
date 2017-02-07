@@ -6,13 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.design.widget.TabLayout;
-import android.util.Log;
 
-import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.Model.Vocab;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +27,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
 
     private String DB_PATH = null;
     private static VocabDatabaseHelper instance;
-    private SQLiteDatabase db;
 
     private VocabDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -42,15 +37,13 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         if (instance == null) {
             instance = new VocabDatabaseHelper(context);
         }
+
         return instance;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
             db.execSQL(USER_CREATE_TABLE);
-
-
     }
 
     @Override
@@ -59,35 +52,23 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    private void open() {
-        if (db == null)
-            db = getWritableDatabase();
-    }
-
-    public void close() {
-        if (db != null) {
-            db.close();
-            db = null;
-        }
-    }
-
     public Vocab get(long id) {
-        open();
         Vocab vocab = null;
-        Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, "_id = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, "_id = ?",
                 new String[] { String.valueOf(id) }, null, null, null);
+
         if (cursor.moveToFirst()) {
             vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4),cursor.getBlob(5));
         }
+
         cursor.close();
         return vocab;
     }
 
     public ArrayList<Vocab> getFromLection(Integer lectionNo) {
-        open();
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
-        Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, "lection=?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, "lection=?",
                 new String[] { Integer.toString(lectionNo)}, null, null, null);
 
 
@@ -103,55 +84,48 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         return vocabs;
     }
 
-
-
     public Cursor getAll() {
-        open();
-        Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, null,
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, null,
                null, null, null, null);
         return cursor;
     }
+
     public Cursor getAll(int lectionNo) {
-        open();
-        Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, "lection=?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, "lection=?",
                 new String[] { Integer.toString(lectionNo)}, null, null, null);
         return cursor;
     }
 
     public long insert(Vocab vocab) {
-        open();
-        db.execSQL(USER_CREATE_TABLE);
+        GeneralDatabaseHelper.getSQLDatabase().execSQL(USER_CREATE_TABLE);
         ContentValues values = new ContentValues();
         values.put("german",vocab.getGerman());
         values.put("translation",vocab.getForeign());
         values.put("speech",vocab.getSpeech());
         values.put("lection",vocab.getLection());
         values.put("picture",vocab.getPicture());
-        long id = db.insert(TABLE_NAME, null, values);
+        long id = GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
 
         return id;
     }
 
     public int update(Vocab vocab) {
-        open();
         ContentValues values = new ContentValues();
         values.put("german",vocab.getGerman());
         values.put("translation",vocab.getForeign());
         values.put("speech",vocab.getSpeech());
         values.put("lection",vocab.getLection());
         values.put("picture",vocab.getPicture());
-        int rows = db.update(TABLE_NAME, values, "_id = ?", new String[] { String.valueOf(vocab.getSqlID()) });
+        int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, "_id = ?", new String[] { String.valueOf(vocab.getSqlID()) });
         return rows;
     }
 
     public int delete(long id) {
-        open();
-        return db.delete(TABLE_NAME, "_id = ?", new String[]{String.valueOf(id)});
+        return GeneralDatabaseHelper.getSQLDatabase().delete(TABLE_NAME, "_id = ?", new String[]{String.valueOf(id)});
     }
 
     public void Create() {
-        open();
-        onCreate(db);
+        onCreate(GeneralDatabaseHelper.getSQLDatabase());
     }
 
     private boolean checkDataBase() {
@@ -173,18 +147,19 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
 
 
     public ArrayList<Vocab> getFromMultipleLection(List<Integer> indices) {
-        open();
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
         String selectionStatement = "lection in (";
         String[] args = new String[indices.size()];
         Integer counter = 0;
+
         for (Integer i:
              indices) {
 
             args[counter] = String.valueOf(i + 1);
             counter++;
         }
+
         for (String s:
              args) {
             if (s != null){
@@ -193,11 +168,11 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
 
 
         }
+
         selectionStatement = selectionStatement.substring(0,selectionStatement.length()-1);
         selectionStatement += ")";
-        Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, selectionStatement,
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, USER_COLUMNS, selectionStatement,
                 null, null, null, null);
-
 
         if (cursor.moveToFirst()) {
             do {

@@ -51,19 +51,17 @@ public class LogIn extends AppCompatActivity {
             } else {
 
                 // No explanation needed, we can request the permission.
-
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-
             }
         }
         super.onCreate(savedInstanceState);
         TypefaceUtil.overrideFont(this,"SERIF","fonts");
         setContentView(R.layout.activity_log_in);
         getElements();
-        //testFunction();
+        //TODO test fct.
+        testFunction();
         setInitData();
         initSQLData(this);
 
