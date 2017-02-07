@@ -147,10 +147,10 @@ public class readVocabs extends AppCompatActivity {
     }
 
     public void speakAloud(View v) {
-        if (currVocab.getSpeech() == null){
+        if (currVocab.getSpeech() != null) {
             playSound(currVocab.getSpeech());
         }
-        else{
+        else {
             WebServiceHelper webServiceHelper = new WebServiceHelper();
             webServiceHelper.setWebServiceHelperListener(new WebServiceHelperListener() {
                 @Override
