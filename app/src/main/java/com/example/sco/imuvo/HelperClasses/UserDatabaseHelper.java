@@ -42,9 +42,11 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         User user = null;
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[] { String.valueOf(id) }, null, null, null);
+
         if (cursor.moveToFirst()) {
             user = new User(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
         }
+
         cursor.close();
         return user;
     }
@@ -53,9 +55,11 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         User user = null;
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[USERNAME_COLUMN_INDEX] + "=?",
                 new String[] { name }, null, null, null);
+
         if (cursor.moveToFirst()) {
             user = new User(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
         }
+
         cursor.close();
         return user;
     }
@@ -67,16 +71,20 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
     public static long insert(User user) {
         GeneralDatabaseHelper.getSQLDatabase().execSQL(CREATE_TABLE);
         ContentValues values = new ContentValues();
+
         values.put(COLUMNS[USERNAME_COLUMN_INDEX], user.getUserName());
         values.put(COLUMNS[PASSWORD_COLUMN_INDEX], user.getPassword());
+
         long id = GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
         return id;
     }
 
     public int update(User user) {
         ContentValues values = new ContentValues();
+
         values.put(COLUMNS[USERNAME_COLUMN_INDEX], user.getUserName());
         values.put(COLUMNS[PASSWORD_COLUMN_INDEX], user.getPassword());
+
         int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[] { String.valueOf(user.getId()) });
         return rows;

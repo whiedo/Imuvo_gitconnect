@@ -45,9 +45,11 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
         Lection Lection = null;
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[ID_COLUMN_INDEX] + " = ?",
                 new String[]{String.valueOf(id)}, null, null, null);
+
         if (cursor.moveToFirst()) {
             Lection = new Lection(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
         }
+
         cursor.close();
         return Lection;
     }
@@ -56,9 +58,11 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
         Lection Lection = null;
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[NUMBER_COLUMN_INDEX] + "=?",
                 new String[]{number.toString()}, null, null, null);
+
         if (cursor.moveToFirst()) {
             Lection = new Lection(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
         }
+
         cursor.close();
         return Lection;
     }
@@ -70,16 +74,20 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
     public static long insert(Lection Lection) {
         GeneralDatabaseHelper.getSQLDatabase().execSQL(CREATE_TABLE);
         ContentValues values = new ContentValues();
+
         values.put(COLUMNS[NUMBER_COLUMN_INDEX], Lection.getNumber());
         values.put(COLUMNS[LANGUAGE_COLUMN_INDEX], Lection.getLanguage());
+
         long id = GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
         return id;
     }
 
     public int update(Lection Lection) {
         ContentValues values = new ContentValues();
+
         values.put(COLUMNS[NUMBER_COLUMN_INDEX], Lection.getNumber());
         values.put(COLUMNS[LANGUAGE_COLUMN_INDEX], Lection.getLanguage());
+
         int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[]{String.valueOf(Lection.getSqlID())});
         return rows;

@@ -96,11 +96,13 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
     public static long insert(Vocab vocab) {
         GeneralDatabaseHelper.getSQLDatabase().execSQL(CREATE_TABLE);
         ContentValues values = new ContentValues();
+
         values.put(COLUMNS[BASELANGUAGE_COLUMN_INDEX],vocab.getGerman());
         values.put(COLUMNS[TRANSLATION_COLUMN_INDEX],vocab.getForeign());
         values.put(COLUMNS[SPEECH_COLUMN_INDEX],vocab.getSpeech());
         values.put(COLUMNS[LECTION_COLUMN_INDEX],vocab.getLection());
         values.put(COLUMNS[PICTURE_COLUMN_INDEX],vocab.getPicture());
+
         long id = GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
 
         return id;
@@ -108,11 +110,13 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
 
     public static int update(Vocab vocab) {
         ContentValues values = new ContentValues();
+
         values.put(COLUMNS[BASELANGUAGE_COLUMN_INDEX],vocab.getGerman());
         values.put(COLUMNS[TRANSLATION_COLUMN_INDEX],vocab.getForeign());
         values.put(COLUMNS[SPEECH_COLUMN_INDEX],vocab.getSpeech());
         values.put(COLUMNS[LECTION_COLUMN_INDEX],vocab.getLection());
         values.put(COLUMNS[PICTURE_COLUMN_INDEX],vocab.getPicture());
+
         int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[] { String.valueOf(vocab.getSqlID()) });
         return rows;
