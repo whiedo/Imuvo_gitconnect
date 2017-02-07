@@ -45,38 +45,24 @@ public class WebServiceHelper {
             params.setBase64(false);
             params.setSSML(false);
             params.setRate(0);
-            //TODO Log
-            Log.i("Imuvo","Vorbereitet");
             tts.addSpeechErrorEventListener(new SpeechErrorEventListener() {
                 @Override
                 public void handleSpeechErrorEvent(SpeechErrorEvent e) {
-                    //TODO Log
-                    Log.i("Imuvo",e.getException().getMessage());
                 }
             });
-            //TODO Log
-            Log.i("Imuvo","Error Event added");
             tts.addSpeechDataEventListener(new SpeechDataEventListener() {
                 @Override
                 public void handleSpeechDataEvent(SpeechDataEvent<?> e) {
                     try {
-                        //TODO Log
-                        Log.i("Imuvo","Webservice Response");
                         vocab.setSpeech((byte[]) e.getData());
                         VocabDatabaseHelper.update(vocab);
                     } catch (Exception ex) {
-                        //TODO Log
-                        Log.i("Imuvo",ex.toString());;
                     }
                 }
             });
-            //TODO Log
-            Log.i("Imuvo","Webservice Anfrage");
             tts.speechAsync(params);
 
         } catch (Exception ex) {
-            //TODO Log
-            Log.i("Imuvo",ex.toString());
         }
     }
 }
