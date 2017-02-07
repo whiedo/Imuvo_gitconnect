@@ -38,14 +38,15 @@ public class WebServiceHelper {
 
     public static void getSpeechAsync(final Vocab vocab){
         try {
-            VoiceProvider tts = new VoiceProvider("tf1698161f6b44202b06dd3fcc855ef52");
+            VoiceProvider tts = new VoiceProvider("9c51e2ccdb01408e8f0caf7e90e60f7f");
             VoiceParameters params = new VoiceParameters(vocab.getForeign(), Languages.English_UnitedStates);
             params.setCodec(AudioCodec.WAV);
             params.setFormat(AudioFormat.Format_44KHZ.AF_44khz_16bit_stereo);
             params.setBase64(false);
             params.setSSML(false);
             params.setRate(0);
-
+            //TODO Log
+            Log.i("Imuvo","Vorbereitet");
             tts.addSpeechErrorEventListener(new SpeechErrorEventListener() {
                 @Override
                 public void handleSpeechErrorEvent(SpeechErrorEvent e) {
@@ -53,10 +54,14 @@ public class WebServiceHelper {
                     Log.i("Imuvo",e.getException().getMessage());
                 }
             });
+            //TODO Log
+            Log.i("Imuvo","Error Event added");
             tts.addSpeechDataEventListener(new SpeechDataEventListener() {
                 @Override
                 public void handleSpeechDataEvent(SpeechDataEvent<?> e) {
                     try {
+                        //TODO Log
+                        Log.i("Imuvo","Webservice Response");
                         vocab.setSpeech((byte[]) e.getData());
                         VocabDatabaseHelper.update(vocab);
                     } catch (Exception ex) {
@@ -65,8 +70,10 @@ public class WebServiceHelper {
                     }
                 }
             });
-
+            //TODO Log
+            Log.i("Imuvo","Webservice Anfrage");
             tts.speechAsync(params);
+
         } catch (Exception ex) {
             //TODO Log
             Log.i("Imuvo",ex.toString());

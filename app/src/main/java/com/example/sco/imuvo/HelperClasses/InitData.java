@@ -50,9 +50,9 @@ public class InitData {
         if(!VocabDatabaseHelper.getAll().moveToFirst()) {
 
             insertVocab("Hallo", "Hello", 1);
+            /**
             insertVocab("guten Morgen", "good morning", 1);
             insertVocab("Wie heißt du", "What is your name", 1);
-            /**
             insertVocab("Ich heiße", "My name is", 1, db);
             insertVocab("Name", "name", 1, db);
             insertVocab("wie geht es dir", "How are you", 1, db);
@@ -206,7 +206,7 @@ public class InitData {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        VocabDatabaseHelper.update(currVocab);
+        //VocabDatabaseHelper.update(currVocab);
 
     }
 
