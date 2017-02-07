@@ -4,23 +4,21 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.example.sco.imuvo.Model.Lection;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper.DB_NAME;
+import static com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper.DB_VERSION;
+
 /**
  * Created by sco on 05.12.2016.
  */
 
 public class LectionDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "user_imuvo";
-    private static final int DB_VERSION = 1;
-
     private static final String[] LECTION_COLUMNS = {"_id", "number", "language"};
     private static final String LECTION_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS lection_imuvo " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, number INTEGER, language TEXT)";
@@ -28,7 +26,6 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
     private String DB_PATH = null;
     private static LectionDatabaseHelper instance;
-    private SQLiteDatabase db;
 
     private LectionDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -44,9 +41,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-            db.execSQL(LECTION_CREATE_TABLE);
-
+        db.execSQL(LECTION_CREATE_TABLE);
     }
 
     @Override
@@ -55,22 +50,9 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private void open() {
-        if (db == null)
-            db = getWritableDatabase();
-    }
-
-    public void close() {
-        if (db != null) {
-            db.close();
-            db = null;
-        }
-    }
-
     public Lection get(long id) {
-        open();
         Lection Lection = null;
-        Cursor cursor = db.query("Lection_imuvo", LECTION_COLUMNS, "_id = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query("Lection_imuvo", LECTION_COLUMNS, "_id = ?",
                 new String[]{String.valueOf(id)}, null, null, null);
         if (cursor.moveToFirst()) {
             Lection = new Lection(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
@@ -80,9 +62,8 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Lection get(Integer number) {
-        open();
         Lection Lection = null;
-        Cursor cursor = db.query("Lection_imuvo", LECTION_COLUMNS, "number = ?",
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query("Lection_imuvo", LECTION_COLUMNS, "number = ?",
                 new String[]{number.toString()}, null, null, null);
         if (cursor.moveToFirst()) {
             Lection = new Lection(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
@@ -92,65 +73,39 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getAll() {
-        open();
-        return db.query("Lection_imuvo", LECTION_COLUMNS, null, null, null, null, "number");
+        return GeneralDatabaseHelper.getSQLDatabase().query("Lection_imuvo", LECTION_COLUMNS, null, null, null, null, "number");
     }
 
     public long insert(Lection Lection) {
-        open();
-        db.execSQL(LECTION_CREATE_TABLE);
+        GeneralDatabaseHelper.getSQLDatabase().execSQL(LECTION_CREATE_TABLE);
         ContentValues values = new ContentValues();
         values.put("number", Lection.getNumber());
         values.put("language", Lection.getLanguage());
-        long id = db.insert("lection_imuvo", null, values);
+        long id = GeneralDatabaseHelper.getSQLDatabase().insert("lection_imuvo", null, values);
         return id;
     }
 
     public int update(Lection Lection) {
-        open();
         ContentValues values = new ContentValues();
         values.put("number", Lection.getNumber());
         values.put("language", Lection.getLanguage());
-        int rows = db.update("lection_imuvo", values, "_id = ?", new String[]{String.valueOf(Lection.getSqlID())});
+        int rows = GeneralDatabaseHelper.getSQLDatabase().update("lection_imuvo", values, "_id = ?", new String[]{String.valueOf(Lection.getSqlID())});
         return rows;
     }
 
     public int delete(long id) {
-        open();
-        return db.delete("Lection", "_id = ?", new String[]{String.valueOf(id)});
+        return GeneralDatabaseHelper.getSQLDatabase().delete("Lection", "_id = ?", new String[]{String.valueOf(id)});
     }
 
     public void Create() {
-        open();
-        onCreate(db);
-    }
-
-    private boolean checkDataBase() {
-
-        SQLiteDatabase checkDB = null;
-        try {
-            String myPath = DB_PATH + DB_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null,
-                    SQLiteDatabase.OPEN_READONLY);
-        } catch (SQLiteException e) {
-            // database does't exist yet.
-        }
-
-        if (checkDB != null) {
-            checkDB.close();
-        }
-
-        return checkDB != null ? true : false;
+        onCreate(GeneralDatabaseHelper.getSQLDatabase());
     }
 
     public List<String> getAllLabels(){
         List<String> labels = new ArrayList<String>();
         String selectQuery = "SELECT  * FROM lection_imuvo";
-        if (db.isOpen() == false) {
-            open();
-        }
 
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {

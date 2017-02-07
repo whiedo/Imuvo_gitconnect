@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class GeneralDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "user_imuvo";
-    private static final int DB_VERSION = 1;
+    public static final String DB_NAME = "vocabulary_traniner";
+    public static final int DB_VERSION = 1;
 
     private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS user_imuvo" + " " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT, password TEXT)";
@@ -88,7 +88,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
         return checkDB != null ? true : false;
     }
 
-    public void dropDatabase(Context context){
+    public void dropDatabase(Context context) {
         context.deleteDatabase(DB_NAME);
     }
 

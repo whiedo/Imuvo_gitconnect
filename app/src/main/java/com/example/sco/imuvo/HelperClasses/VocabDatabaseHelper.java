@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.sco.imuvo.Model.Vocab;
@@ -12,13 +11,14 @@ import com.example.sco.imuvo.Model.Vocab;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper.DB_NAME;
+import static com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper.DB_VERSION;
+
 /**
  * Created by sco on 05.12.2016.
  */
 
 public class VocabDatabaseHelper extends SQLiteOpenHelper{
-    private static final String DB_NAME = "user_imuvo";
-    private static final int DB_VERSION = 1;
     private static final String TABLE_NAME = "vocabs_imuvo";
     private static final String[] USER_COLUMNS = { "_id", "german", "translation", "lection", "speech", "picture" };
     private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo "
@@ -128,24 +128,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         onCreate(GeneralDatabaseHelper.getSQLDatabase());
     }
 
-    private boolean checkDataBase() {
-
-        SQLiteDatabase checkDB = null;
-        try {
-            String myPath = DB_PATH + DB_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null,
-                    SQLiteDatabase.OPEN_READONLY);
-        } catch (SQLiteException e) {
-        }
-
-        if (checkDB != null) {
-            checkDB.close();
-        }
-
-        return checkDB != null ? true : false;
-    }
-
-
     public ArrayList<Vocab> getFromMultipleLection(List<Integer> indices) {
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
@@ -181,6 +163,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
             } while (cursor.moveToNext());
 
         }
+
         cursor.close();
         return vocabs;
     }
