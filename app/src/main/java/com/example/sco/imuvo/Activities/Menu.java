@@ -18,12 +18,13 @@ import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.R;
 import com.example.sco.imuvo.Model.User;
 
-public class MenuImuvo extends AppCompatActivity {
+public class Menu extends AppCompatActivity {
 
     ButtonJokerman playButton, readButton, vocabsButton, readAloudButton, testButton, taskButton;
     User user;
     ImageView bubbleImageView;
     TextViewITCKRIST bubbleTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -51,7 +52,7 @@ public class MenuImuvo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(),LogIn.class);
+                Intent intent = new Intent(getApplicationContext(),Login2.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 finish();
 
@@ -91,32 +92,32 @@ public class MenuImuvo extends AppCompatActivity {
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
     }
     public void onClickPlay(View v){
-        final Intent menuIntent = new Intent(this,play.class);
+        final Intent menuIntent = new Intent(this,VocabularyPlay.class);
         startActivity(menuIntent);
     }
     public void onClickRead(View v){
-        final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
+        final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type",vocabReadingSelection.READING);
+        bundle.putString("type", VocabularyLectionSelection.READING);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
     }
 
     public void onClickVocabs(View v){
-        final Intent menuIntent = new Intent(this,LectionList.class);
+        final Intent menuIntent = new Intent(this,VocabularyLectionList.class);
         startActivity(menuIntent);
 
     }
     public void onClickReadAloud(View v){
-        final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
+        final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type",vocabReadingSelection.READALOUD);
+        bundle.putString("type", VocabularyLectionSelection.READALOUD);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
 
     }
     public void onClickTest(View v){
-        final Intent menuIntent = new Intent(this,testSelection.class);
+        final Intent menuIntent = new Intent(this,VocabularyTest.class);
         startActivity(menuIntent);
 
     }

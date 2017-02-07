@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,12 +19,12 @@ import android.widget.TextView;
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.InitData;
 import com.example.sco.imuvo.HelperClasses.TypefaceUtil;
-import com.example.sco.imuvo.HelperClasses.UserDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.UserDatabaseHelper;
 import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.R;
 
-public class LogIn extends AppCompatActivity {
+public class Login2 extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     TextView welcomeTextView, bubbleTextView;
@@ -34,31 +33,21 @@ public class LogIn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             }
         }
+
         super.onCreate(savedInstanceState);
         TypefaceUtil.overrideFont(this);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.activity_login);
         getElements();
         //TODO test fct.
         testFunction();
@@ -98,7 +87,7 @@ public class LogIn extends AppCompatActivity {
 
     public void onClickStart(View v){
         if(checkUserCorrect()){
-            final Intent menuIntent = new Intent(this,MenuImuvo.class);
+            final Intent menuIntent = new Intent(this,Menu.class);
             String username = nameEditText.getText().toString();
             SingletonUser.data = username;
             nameEditText.setText("");
@@ -126,7 +115,7 @@ public class LogIn extends AppCompatActivity {
 
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menulogin,menu);
         return true;
@@ -146,12 +135,12 @@ public class LogIn extends AppCompatActivity {
     }
 
     private void showVocabs() {
-        final Intent menuIntent = new Intent(this,LectionList.class);
+        final Intent menuIntent = new Intent(this,VocabularyLectionList.class);
         startActivity(menuIntent);
     }
 
     private void newUser() {
-        final Intent menuIntent = new Intent(this,CreateUserActivity.class);
+        final Intent menuIntent = new Intent(this,CreateUser.class);
         String username = nameEditText.getText().toString();
         SingletonUser.data = username;
         startActivity(menuIntent);

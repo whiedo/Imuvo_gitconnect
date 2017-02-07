@@ -5,7 +5,6 @@ package com.example.sco.imuvo.HelperClasses;
  */
 import android.util.Log;
 
-import com.example.sco.imuvo.Activities.readVocabs;
 import com.example.sco.imuvo.Model.Vocab;
 import com.voicerss.tts.AudioCodec;
 import com.voicerss.tts.AudioFormat;

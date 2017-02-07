@@ -10,13 +10,14 @@ import android.widget.TextView;
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.R;
 
-public class testSelection extends AppCompatActivity {
+public class VocabularyTest extends AppCompatActivity {
     TextView speechbubble, headlineTextView;
     String nextIntentType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_selection);
+        setContentView(R.layout.activity_vocabulary_test);
         getElements();
         getInitialValuesFromIntent();
         setSpeechbubble();
@@ -39,23 +40,23 @@ public class testSelection extends AppCompatActivity {
     }
 
      public void onClickStartTest(View v){
-         final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
+         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
          Bundle bundle = new Bundle();
-         bundle.putString("type",vocabReadingSelection.TEST);
+         bundle.putString("type", VocabularyLectionSelection.TEST);
          menuIntent.putExtras(bundle);
          startActivity(menuIntent);
     }
 
     public void onClickStartAsking(View v){
-        final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
+        final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type",vocabReadingSelection.ASKING);
+        bundle.putString("type", VocabularyLectionSelection.ASKING);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
     }
 
     public void onClickBurgerMenu(View v){
-        final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        final Intent menuIntent = new Intent(this,Menu.class);
         menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
         finish();

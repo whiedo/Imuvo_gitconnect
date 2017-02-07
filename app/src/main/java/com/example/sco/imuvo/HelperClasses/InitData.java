@@ -2,6 +2,10 @@ package com.example.sco.imuvo.HelperClasses;
 
 import android.content.Context;
 
+import com.example.sco.imuvo.DatabaseHelper.GeneralDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.UserDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.VocabDatabaseHelper;
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.Model.Vocab;
@@ -196,8 +200,6 @@ public class InitData {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private static void insertVocab(String deutsch, String german, int i) {

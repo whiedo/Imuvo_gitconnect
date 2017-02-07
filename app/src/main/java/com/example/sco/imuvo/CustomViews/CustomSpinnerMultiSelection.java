@@ -1,19 +1,15 @@
 package com.example.sco.imuvo.CustomViews;
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.example.sco.imuvo.Model.LectionSelectionSingleton;
 import com.example.sco.imuvo.R;
 
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +35,7 @@ public class CustomSpinnerMultiSelection extends Spinner implements
         super(context);
 
         simple_adapter = new ArrayAdapter<>(context,
-                R.layout.customspinner);
+                R.layout.embedded_customspinner);
         super.setAdapter(simple_adapter);
     }
 
@@ -47,7 +43,7 @@ public class CustomSpinnerMultiSelection extends Spinner implements
         super(context, attrs);
 
         simple_adapter = new ArrayAdapter<>(context,
-                R.layout.customspinner);
+                R.layout.embedded_customspinner);
         super.setAdapter(simple_adapter);
     }
 
@@ -68,8 +64,6 @@ public class CustomSpinnerMultiSelection extends Spinner implements
 
     @Override
     public boolean performClick() {
-        DialogFragment customTypeface = TypefaceDialog.newInstance(1);
-
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         TextView tv = new TextViewJokerman(getContext());
         tv.setText("Lektionen auswählen");

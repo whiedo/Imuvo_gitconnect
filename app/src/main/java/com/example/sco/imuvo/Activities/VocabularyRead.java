@@ -3,7 +3,6 @@ package com.example.sco.imuvo.Activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -15,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
-import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
-import com.example.sco.imuvo.HelperClasses.VocabDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.VocabDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.WebServiceHelper;
 import com.example.sco.imuvo.HelperClasses.WebServiceHelperListener;
 import com.example.sco.imuvo.Model.Lection;
@@ -32,7 +31,7 @@ import java.util.Collections;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-public class readVocabs extends AppCompatActivity {
+public class VocabularyRead extends AppCompatActivity {
 
     VocabDatabaseHelper vocabDatabaseHelper;
     LectionDatabaseHelper lectionDatabaseHelper;
@@ -51,7 +50,7 @@ public class readVocabs extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_read_vocabs);
+        setContentView(R.layout.activity_vocabulary_read);
         getInitialValuesFromIntent();
         findElements();
         getCurrentLection();
@@ -185,7 +184,7 @@ public class readVocabs extends AppCompatActivity {
 
 
     public void onClickBurgerMenu(View v){
-        final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        final Intent menuIntent = new Intent(this,Menu.class);
         menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
         finish();

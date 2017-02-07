@@ -18,8 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
-import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
-import com.example.sco.imuvo.HelperClasses.VocabDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.VocabDatabaseHelper;
 import com.example.sco.imuvo.Model.AskingSingleton;
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.Vocab;
@@ -34,7 +34,7 @@ import java.util.Random;
 
 
 
-public class askVocabs extends AppCompatActivity {
+public class VocabularyQuery extends AppCompatActivity {
 
     public static final String ASKWRONGVOCABSAGAIN = "askWrongVocabsAgain" ;
     public static final String ISRANDOM = "isRandom";
@@ -107,7 +107,7 @@ public class askVocabs extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ask_vocabs);
+        setContentView(R.layout.activity_vocabulary_query);
         findElements();
         getCurrentLection();
         nextVocab();
@@ -119,31 +119,34 @@ public class askVocabs extends AppCompatActivity {
         try {
             setCurrVocab((Vocab) vocabIterator.next());
         } catch (NoSuchElementException e) {
-            final Intent intent = new Intent(this,resultAfterAsking.class);
+            final Intent intent = new Intent(this,VocabularyResult.class);
             startActivity(intent);
         }
+
         answerEditText.setEnabled(true);
         answerEditText.setText("");
         nextButton.setText("Prüfen");
-
-
     }
 
     private void setCurrVocab(Vocab vocab) {
         currVocab = vocab;
+
         if (currentDirection == 1l){
             questionTextView.setText(vocab.getForeign());
         }
         else{
             questionTextView.setText(vocab.getGerman());
         }
+
         char firstChar = getAnswer().charAt(0);
+
         if (Character.isUpperCase(firstChar)){
             answerEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         }
         else{
             answerEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
+
         subHeadlineText.setText("Lektion " + Integer.toString(vocab.getLection()));
         if(currVocab.getPicture() != null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(currVocab.getPicture(), 0, currVocab.getPicture().length);
@@ -285,7 +288,7 @@ public class askVocabs extends AppCompatActivity {
     }
 
     public void onClickBurgerMenu(View v){
-        final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        final Intent menuIntent = new Intent(this,Menu.class);
         menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
         finish();

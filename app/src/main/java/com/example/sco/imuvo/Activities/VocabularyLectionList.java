@@ -6,17 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.example.sco.imuvo.HelperClasses.LectionCursorAdapter;
-import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
 import com.example.sco.imuvo.R;
 
-public class LectionList extends AppCompatActivity {
+public class VocabularyLectionList extends AppCompatActivity {
 
     private ListView lectionListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lection_list);
+        setContentView(R.layout.activity_vocabulary_lection_list);
         popoulateListView();
     }
 

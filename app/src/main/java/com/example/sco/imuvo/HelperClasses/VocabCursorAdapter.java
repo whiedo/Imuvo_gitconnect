@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.example.sco.imuvo.R;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by sco on 17.12.2016.
  */
@@ -27,7 +25,7 @@ public class VocabCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.list_view_vocabs,parent,false);
+        return LayoutInflater.from(context).inflate(R.layout.embedded_list_view_vocabulary,parent,false);
     }
 
     @Override
@@ -38,7 +36,6 @@ public class VocabCursorAdapter extends CursorAdapter {
 
         german.setText(cursor.getString(2));
         foreign.setText(cursor.getString(1));
-        lection.setText(Integer.toString(cursor.getInt(3)));
-
+        lection.setText(Integer.toString(cursor.getInt(4)));
     }
 }

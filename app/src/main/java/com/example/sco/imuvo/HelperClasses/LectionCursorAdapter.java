@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.sco.imuvo.Activities.CreateUserActivity;
-import com.example.sco.imuvo.Activities.VocabList;
+import com.example.sco.imuvo.Activities.VocabularyList;
 import com.example.sco.imuvo.R;
 
 /**
@@ -29,7 +28,7 @@ public class LectionCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.list_view_vocabs,parent,false);
+        return LayoutInflater.from(context).inflate(R.layout.embedded_list_view_vocabulary,parent,false);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class LectionCursorAdapter extends CursorAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent menuIntent = new Intent(context,VocabList.class);
+                final Intent menuIntent = new Intent(context,VocabularyList.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("lectionNumber",lectionNo);
                 menuIntent.putExtras(bundle);

@@ -15,13 +15,13 @@ import android.widget.TextView;
 
 import com.example.sco.imuvo.CustomViews.CustomSpinnerMultiSelection;
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
-import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
+import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
 import com.example.sco.imuvo.Model.AskingSingleton;
 import com.example.sco.imuvo.R;
 
 import java.util.List;
 
-public class vocabReadingSelection extends AppCompatActivity {
+public class VocabularyLectionSelection extends AppCompatActivity {
     public static final String ASKING = "asking";
     public static final String TEST = "test";
     public static final String READING = "read";
@@ -33,10 +33,11 @@ public class vocabReadingSelection extends AppCompatActivity {
     String nextIntentType;
     CheckBox randomCheckBox;
     List<Integer> selectedLections = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vocab_reading_selection);
+        setContentView(R.layout.activity_vocabulary_lection_selection);
 
         getElements();
         getInitialValuesFromIntent();
@@ -76,15 +77,11 @@ public class vocabReadingSelection extends AppCompatActivity {
         }
     }
 
-
     private void getInitialValuesFromIntent(){
-
         Bundle bundle = getIntent().getExtras();
         nextIntentType = bundle.getString("type");
-
-
-
     }
+
     private void getElements() {
         lectionSpinner = (Spinner) findViewById(R.id.lectionSpinner);
         directionSpinner = (Spinner) findViewById(R.id.directionSpinner);
@@ -104,8 +101,8 @@ public class vocabReadingSelection extends AppCompatActivity {
         lectionSpinner.setAdapter(cursorAdapter);
         List<String> lables = LectionDatabaseHelper.getAllLabels();
         //TODO add caption "Lektion " for each lables
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.customspinner, lables);
-        dataAdapter.setDropDownViewResource(R.layout.customspinner);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.embedded_customspinner, lables);
+        dataAdapter.setDropDownViewResource(R.layout.embedded_customspinner);
         lectionSpinner.setAdapter(dataAdapter);
         multipleLectionSpinner.setListener(new CustomSpinnerMultiSelection.OnMultipleItemsSelectedListener() {
             @Override
@@ -123,8 +120,8 @@ public class vocabReadingSelection extends AppCompatActivity {
     }
 
     private void loadDirectionSpinnerData() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.direction_array, R.layout.customspinner);
-        adapter.setDropDownViewResource(R.layout.customspinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.direction_array, R.layout.embedded_customspinner);
+        adapter.setDropDownViewResource(R.layout.embedded_customspinner);
         directionSpinner.setAdapter(adapter);
 
     }
@@ -132,13 +129,13 @@ public class vocabReadingSelection extends AppCompatActivity {
         if(checkEverythingSelected() == true){
             final Intent nextIntent;
             if(nextIntentType.contentEquals(READING)){
-                nextIntent = new Intent(this,readVocabs.class);
+                nextIntent = new Intent(this,VocabularyRead.class);
             }
             else if(nextIntentType.contentEquals(READALOUD)){
-                nextIntent = new Intent(this,readVocabs.class);
+                nextIntent = new Intent(this,VocabularyRead.class);
             }
             else{
-                nextIntent = new Intent(this,askVocabs.class);
+                nextIntent = new Intent(this,VocabularyQuery.class);
             }
 
             Bundle bundle = new Bundle();
@@ -164,7 +161,7 @@ public class vocabReadingSelection extends AppCompatActivity {
     }
 
     public void onClickBurgerMenu(View v){
-        final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        final Intent menuIntent = new Intent(this,Menu.class);
         menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
         finish();

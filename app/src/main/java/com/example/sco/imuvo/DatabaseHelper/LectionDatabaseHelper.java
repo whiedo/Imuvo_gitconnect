@@ -1,4 +1,4 @@
-package com.example.sco.imuvo.HelperClasses;
+package com.example.sco.imuvo.DatabaseHelper;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/ImuvoTheme.">
         <activity
-            android:name=".Activities.LogIn"
+            android:name=".Activities.Login2"
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,33 +22,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MenuImuvo"
+            android:name=".Activities.Menu"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Activities.CreateUserActivity"
+            android:name=".Activities.CreateUser"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Activities.vocabReadingSelection"
+            android:name=".Activities.VocabularyLectionSelection"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Activities.readVocabs"
+            android:name=".Activities.VocabularyRead"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Activities.VocabList"
+            android:name=".Activities.VocabularyList"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Activities.askVocabs"
+            android:name=".Activities.VocabularyQuery"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Activities.LectionList"
+            android:name=".Activities.VocabularyLectionList"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Activities.testSelection"
+            android:name=".Activities.VocabularyTest"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Activities.resultAfterAsking"
+            android:name=".Activities.VocabularyResult"
             android:screenOrientation="nosensor" />
-        <activity android:name=".Activities.play"></activity>
+        <activity android:name=".Activities.VocabularyPlay"></activity>
     </application>
 
 </manifest>
