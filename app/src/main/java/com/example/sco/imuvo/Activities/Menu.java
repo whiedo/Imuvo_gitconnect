@@ -117,7 +117,7 @@ public class Menu extends AppCompatActivity {
 
     }
     public void onClickTest(View v){
-        final Intent menuIntent = new Intent(this,VocabularyTest.class);
+        final Intent menuIntent = new Intent(this,VocabularyTestSelection.class);
         startActivity(menuIntent);
 
     }

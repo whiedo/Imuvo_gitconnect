@@ -43,7 +43,7 @@
             android:name=".Activities.VocabularyLectionList"
             android:screenOrientation="nosensor" />
         <activity
-            android:name=".Activities.VocabularyTest"
+            android:name=".Activities.VocabularyTestSelection"
             android:screenOrientation="nosensor" />
         <activity
             android:name=".Activities.VocabularyResult"

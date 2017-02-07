@@ -2,9 +2,9 @@ package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,8 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.CustomViews.CustomSpinnerMultiSelection;
-import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
+import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.Model.AskingSingleton;
 import com.example.sco.imuvo.R;
 
@@ -26,8 +26,9 @@ public class VocabularyLectionSelection extends AppCompatActivity {
     public static final String TEST = "test";
     public static final String READING = "read";
     public static final String READALOUD = "readAloud";
+
     Button startButton;
-    Spinner lectionSpinner,directionSpinner;
+    Spinner lectionSpinner, directionSpinner;
     CustomSpinnerMultiSelection multipleLectionSpinner;
     TextView speechbubble, headline;
     String nextIntentType;
@@ -90,20 +91,28 @@ public class VocabularyLectionSelection extends AppCompatActivity {
         headline = (TextView) findViewById(R.id.headline);
         randomCheckBox = (CheckBox) findViewById(R.id.random);
         multipleLectionSpinner = (CustomSpinnerMultiSelection) findViewById(R.id.lectionSpinnerMultiple);
-
     }
 
     private void loadLectionSpinnerData() {
         Cursor cursor = LectionDatabaseHelper.getAll();
-        String[] from = {"number"};
+
+        String[] from = {LectionDatabaseHelper.COLUMNS[LectionDatabaseHelper.NUMBER_COLUMN_INDEX]};
         int[] to = {R.id.lectionSpinner};
-        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,R.layout.support_simple_spinner_dropdown_item,cursor,from,to,0);
+        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
+                this, R.layout.support_simple_spinner_dropdown_item, cursor, from, to, 0);
         lectionSpinner.setAdapter(cursorAdapter);
+
         List<String> lables = LectionDatabaseHelper.getAllLabels();
-        //TODO add caption "Lektion " for each lables
+        for(int i = 0; i < lables.size(); i++) {
+            lables.set(i, "Lektion " + lables.get(i));
+        }
+
+        //TODO DELETE NEXT BLOCK AND FIX EMPTY CONTENT
+        //MULTIPLE SELECTION
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.embedded_customspinner, lables);
         dataAdapter.setDropDownViewResource(R.layout.embedded_customspinner);
         lectionSpinner.setAdapter(dataAdapter);
+
         multipleLectionSpinner.setListener(new CustomSpinnerMultiSelection.OnMultipleItemsSelectedListener() {
             @Override
             public void selectedIndices(List<Integer> indices) {
@@ -115,6 +124,7 @@ public class VocabularyLectionSelection extends AppCompatActivity {
 
             }
         });
+
         multipleLectionSpinner.setItems(lables);
         AskingSingleton.selectedLections = multipleLectionSpinner.getSelectedIndices();
     }

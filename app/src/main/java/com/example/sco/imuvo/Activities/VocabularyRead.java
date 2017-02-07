@@ -59,8 +59,8 @@ public class VocabularyRead extends AppCompatActivity {
     private void getInitialValuesFromIntent(){
         Bundle bundle = getIntent().getExtras();
         nextIntentType = bundle.getString("type");
-
     }
+
     private void setVocabs() {
         try {
             setCurrVocab((Vocab) vocabIterator.next());

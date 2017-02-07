@@ -10,16 +10,15 @@ import android.widget.TextView;
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.R;
 
-public class VocabularyTest extends AppCompatActivity {
+public class VocabularyTestSelection extends AppCompatActivity {
     TextView speechbubble, headlineTextView;
     String nextIntentType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vocabulary_test);
+        setContentView(R.layout.activity_vocabulary_test_selection);
         getElements();
-        getInitialValuesFromIntent();
         setSpeechbubble();
     }
 
@@ -28,12 +27,6 @@ public class VocabularyTest extends AppCompatActivity {
         headlineTextView.setText(FormatHelper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
     }
 
-
-    private void getInitialValuesFromIntent(){
-        //Bundle bundle = getIntent().getExtras();
-        //nextIntentType = bundle.getString("type");
-
-    }
     private void getElements() {
         speechbubble = (TextView) findViewById(R.id.speechbubble);
         headlineTextView = (TextView) findViewById(R.id.headline);
