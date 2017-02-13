@@ -9,20 +9,37 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.sco.imuvo.DatabaseHelper.UserDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.InitData;
+import com.example.sco.imuvo.HelperClasses.SocialMediaHelper;
 import com.example.sco.imuvo.HelperClasses.TypefaceUtil;
-import com.example.sco.imuvo.DatabaseHelper.UserDatabaseHelper;
 import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.R;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.Callable;
 
 public class Login extends AppCompatActivity {
 
@@ -30,6 +47,8 @@ public class Login extends AppCompatActivity {
     TextView welcomeTextView, bubbleTextView;
     Button startButton;
     EditText nameEditText, passwordEditText;
+    CallbackManager mFacebookCallbackManager;
+    LoginButton facebookSignInButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +66,96 @@ public class Login extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         TypefaceUtil.overrideFont(this);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        mFacebookCallbackManager = CallbackManager.Factory.create();
+        SocialMediaHelper.logOutFromSocialMedia();
+
         setContentView(R.layout.activity_login);
         getElements();
+        registerSocialMediaCallbacks();
         //TODO test fct.
         testFunction();
         setInitData();
         initSQLData(this);
     }
+
+    private void registerSocialMediaCallbacks() {
+        facebookSignInButton = (LoginButton)findViewById(R.id.facebook_sign_in_button);
+        facebookSignInButton.setReadPermissions("public_profile");
+        facebookSignInButton.setReadPermissions("email");
+        facebookSignInButton.registerCallback(mFacebookCallbackManager,
+                new FacebookCallback<LoginResult>() {
+
+                    @Override
+                    public void onSuccess(final LoginResult loginResult) {
+                        GraphRequest request = GraphRequest.newMeRequest(
+                                loginResult.getAccessToken(),
+                                new GraphRequest.GraphJSONObjectCallback() {
+                                    @Override
+                                    public void onCompleted(JSONObject object, GraphResponse response) {
+                                        try {
+                                            String email = object.getString("email");
+                                            if (UserDatabaseHelper.get(email) == null) {
+                                                User user = new User(0, email, passwordEditText.getText().toString());
+                                                UserDatabaseHelper.insert(user);
+                                            }
+
+                                            SingletonUser.data = email;
+
+                                            nameEditText.setText(email);
+                                            passwordEditText.setText("");
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id,name,email,gender,birthday");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+
+                        handleSignInResult(new Callable<Void>() {
+                            @Override
+                            public Void call() throws Exception {
+                                LoginManager.getInstance().logOut();
+                                return null;
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        handleSignInResult(null);
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.d(Login.class.getCanonicalName(), error.getMessage());
+                        handleSignInResult(null);
+                    }
+                }
+        );
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void handleSignInResult(Callable<Void> logout) {
+        if(logout == null) {
+            /* Login error */
+            Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT).show();
+        } else {
+            /* Login success */
+            //Application.getInstance().setLogoutCallable(logout);
+            startActivity(new Intent(this, Menu.class));
+        }
+    }
+
 
     private void initSQLData(final Context context) {
         new Thread(new Runnable() {

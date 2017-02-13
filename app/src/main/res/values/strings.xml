@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name">Imuvo</string>
     <string name="action_settings">Settings</string>
-    <string name="facebook_app_id">1671329073123097</string>
+    <string name="facebook_app_id">1065468250226511</string>
+    <string name="login_error">Fehler bei Login</string>
     <string name="title_activity_read_vocabs">ReadVocabs</string>
     <string name="title_activity_lection_list">LectionList</string>
     <string name="title_activity_test">test</string>
     <string name="createUserText">Hier kannst du einen neuen Benutzer anlegen. Bitte lege einen Benutzernamen und ein Passwort fest.</string>
     <string name="userCreated">Nutzer wurde angelegt.</string>
-    <string name="passwordWrong">Name oder Passwort sind falsch. Bitte versuche es erneut.</string>
+    <string name="passwordWrong">Benutzerkonto existiert bereits oder Name oder Passwort sind falsch. Bitte versuche es erneut.</string>
     <string name="welcomeText">Wilkommen! Ich bin Imuvo. Wie ist dein Name?</string>
     <string name="learningWithImuvo">Lernen mit Imuvo</string>
     <string name="logOutQuestion">Willst du dich ausloggen?</string>

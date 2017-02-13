@@ -3,8 +3,8 @@ package com.example.sco.imuvo.Activities;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -14,9 +14,10 @@ import android.widget.Toast;
 
 import com.example.sco.imuvo.CustomViews.ButtonJokerman;
 import com.example.sco.imuvo.CustomViews.TextViewITCKRIST;
+import com.example.sco.imuvo.HelperClasses.SocialMediaHelper;
 import com.example.sco.imuvo.Model.SingletonUser;
-import com.example.sco.imuvo.R;
 import com.example.sco.imuvo.Model.User;
+import com.example.sco.imuvo.R;
 
 public class Menu extends AppCompatActivity {
 
@@ -50,6 +51,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                SocialMediaHelper.logOutFromSocialMedia();
                 Intent intent = new Intent(getApplicationContext(),Login.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 finish();
@@ -66,7 +68,6 @@ public class Menu extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
 
         dialog.show();
     }

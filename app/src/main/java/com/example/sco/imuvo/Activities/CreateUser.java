@@ -15,13 +15,13 @@ import com.example.sco.imuvo.R;
 public class CreateUser extends AppCompatActivity {
 
     EditText nameEditText, passwordEditText;
-    public UserDatabaseHelper userDatabaseHelper;
     TextView bubbleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
+
         nameEditText = (EditText) findViewById(R.id.name);
         passwordEditText = (EditText) findViewById(R.id.password);
         bubbleText = (TextView) findViewById(R.id.speechbubble);
@@ -29,9 +29,10 @@ public class CreateUser extends AppCompatActivity {
     }
 
     public void onClickCreateUser(View v){
-        if(checkUserCorrect()){
+        if(checkUserCorrect() && UserDatabaseHelper.get(nameEditText.getText().toString()) == null){
             User user = new User(0,nameEditText.getText().toString(),passwordEditText.getText().toString());
-            userDatabaseHelper.insert(user);
+            UserDatabaseHelper.insert(user);
+
             FormatHelper.makeLongToast(this,getString(R.string.userCreated));
             final Intent menuIntent = new Intent(this,Login.class);
             startActivity(menuIntent);
