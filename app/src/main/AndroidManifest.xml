@@ -49,26 +49,6 @@
             android:name=".Activities.VocabularyResult"
             android:screenOrientation="nosensor" />
         <activity android:name=".Activities.VocabularyPlay"></activity>
-
-        <!--Auth0 Lock
-        <activity
-            android:name="com.auth0.lock.LockActivity"
-            android:theme="@style/Lock.Theme"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.LAUNCHER" />
-                <data android:scheme="a0@string/auth0_client_id"
-                    android:host="@string/auth0_domain"/>
-            </intent-filter>
-        </activity>
-        <meta-data android:name="com.auth0.lock.client-id" android:value="@string/auth0_client_id"/>
-        <meta-data android:name="com.auth0.lock.domain-url" android:value="@string/auth0_domain"/>
-        Auth0 Lock End-->
     </application>
 
 </manifest>

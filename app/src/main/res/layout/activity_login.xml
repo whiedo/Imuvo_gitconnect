@@ -85,9 +85,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/rectangleroundedvocabs"
                 android:layout_width="200dp" />
+
         </LinearLayout>
-
-
 
 
     </RelativeLayout>
@@ -95,17 +94,17 @@
 
     <com.example.sco.imuvo.CustomViews.ButtonJokerman
         android:text="@string/start"
-        android:layout_width="200dp"
         android:layout_height="0dp"
         android:id="@+id/start"
         android:layout_weight="3"
         android:onClick="onClickStart"
-        android:layout_gravity="center"
+        android:layout_gravity="right"
         android:layout_below="@+id/password"
         android:layout_alignLeft="@+id/password"
         android:layout_alignStart="@+id/password"
         android:layout_marginTop="29dp"
         android:layout_alignRight="@+id/password"
-        android:layout_alignEnd="@+id/password" />
+        android:layout_alignEnd="@+id/password"
+        android:layout_width="200dp" />
 
 </LinearLayout>
