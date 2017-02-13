@@ -74,6 +74,7 @@ public class Menu extends AppCompatActivity {
     private void getInitialValuesFromIntent(){
         user = new User(0,SingletonUser.data,"");
     }
+
     private void getElements() {
         playButton = (ButtonJokerman) findViewById(R.id.play);
         readButton = (ButtonJokerman) findViewById(R.id.read);
@@ -125,6 +126,5 @@ public class Menu extends AppCompatActivity {
     public void onClickTask(View v){
         Button t = (Button) v;
         Toast.makeText(this,t.getText(),Toast.LENGTH_LONG).show();
-
     }
 }

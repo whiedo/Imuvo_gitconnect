@@ -61,8 +61,6 @@ public class Login extends AppCompatActivity {
                 InitData.initSQLData(context);
             }
         }).start();
-
-
     }
 
     private void setInitData() {
@@ -111,7 +109,6 @@ public class Login extends AppCompatActivity {
         catch (NullPointerException e){
             return false;
         }
-
     }
 
     public boolean onCreateOptionsMenu(android.view.Menu menu) {

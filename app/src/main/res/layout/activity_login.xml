@@ -10,8 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.example.sco.imuvo.Activities.i"
-    >
+    tools:context="com.example.sco.imuvo.Activities.Login">
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
         android:text="@string/learningWithImuvo"
