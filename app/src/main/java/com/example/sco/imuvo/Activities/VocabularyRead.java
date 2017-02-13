@@ -47,6 +47,7 @@ public class VocabularyRead extends AppCompatActivity {
     private String nextIntentType;
     private ImageView vocabPictureImageView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,14 +59,14 @@ public class VocabularyRead extends AppCompatActivity {
     }
     private void getInitialValuesFromIntent(){
         Bundle bundle = getIntent().getExtras();
-        nextIntentType = bundle.getString("type");
+        nextIntentType = bundle.getString(VocabularyLectionSelection.TYPE);
     }
 
     private void setVocabs() {
         try {
             setCurrVocab((Vocab) vocabIterator.next());
         } catch (NoSuchElementException e) {
-            FormatHelper.makeShortToast(this, "Es gibt keine Vokabeln für diese Lektion.");
+            FormatHelper.makeShortToast(this, getString(R.string.noVocabsForLection));
         }
 
     }
@@ -80,7 +81,7 @@ public class VocabularyRead extends AppCompatActivity {
             text2Text.setText(vocab.getForeign());
             text1Text.setText(vocab.getGerman());
         }
-        subHeadlineText.setText("Lektion " + Integer.toString(vocab.getLection()));
+        subHeadlineText.setText(getString(R.string.lection)+ " " + Integer.toString(vocab.getLection()));
         if(currVocab.getPicture() != null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(currVocab.getPicture(), 0, currVocab.getPicture().length);
             vocabPictureImageView.setImageBitmap(bitmap);
@@ -111,18 +112,18 @@ public class VocabularyRead extends AppCompatActivity {
 
     private void getCurrentLection() {
         Bundle bundle = getIntent().getExtras();
-        currentLection = LectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
+        currentLection = LectionDatabaseHelper.get(bundle.getLong(VocabularyLectionSelection.SELECTED_LECTION) + 1l);
         vocabList = VocabDatabaseHelper.getFromLection(currentLection.getNumber());
-        if(bundle.getBoolean("isRandom")){
+        if(bundle.getBoolean(VocabularyLectionSelection.RANDOM)){
             Collections.shuffle(vocabList);
         }
         vocabIterator = vocabList.listIterator(0);
-        currentDirection = bundle.getLong("selectedDirection");
-        if(nextIntentType.contentEquals("read")){
-            headlineText.setText(FormatHelper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+        currentDirection = bundle.getLong(VocabularyLectionSelection.SELECTED_DIRECTION);
+        if(nextIntentType.contentEquals(VocabularyLectionSelection.READING)){
+            headlineText.setText(FormatHelper.colorsString(this,getString(R.string.readVocab), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else{
-            headlineText.setText(FormatHelper.colorsString(this,"Vokabeln vorlesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            headlineText.setText(FormatHelper.colorsString(this,getString(R.string.readAloudVocabs), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
 
     }
@@ -131,7 +132,7 @@ public class VocabularyRead extends AppCompatActivity {
         try {
             setCurrVocab((Vocab) vocabIterator.next());
         } catch (NoSuchElementException e) {
-            FormatHelper.makeShortToast(this, "Letzte Vokabel erreicht!");
+            FormatHelper.makeShortToast(this, getString(R.string.reachedLastVocab));
         }
 
     }
@@ -140,7 +141,7 @@ public class VocabularyRead extends AppCompatActivity {
         try {
             setCurrVocab((Vocab) vocabIterator.previous());
         } catch (NoSuchElementException e) {
-            FormatHelper.makeShortToast(this, "Es gibt keine vorherige Vokabel.");
+            FormatHelper.makeShortToast(this, getString(R.string.noPreviousVocab));
         }
 
     }
@@ -182,34 +183,10 @@ public class VocabularyRead extends AppCompatActivity {
 
     }
 
-
     public void onClickBurgerMenu(View v){
         final Intent menuIntent = new Intent(this,Menu.class);
         menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
         finish();
     }
-
-    final MediaPlayer.OnPreparedListener onPreparedListener = new MediaPlayer.OnPreparedListener() {
-        @Override
-        public void onPrepared(MediaPlayer mp) {
-            mp.setVolume(1, 1);
-            mp.start();
-        }
-    };
-
-    final MediaPlayer.OnErrorListener onErrorListener = new MediaPlayer.OnErrorListener() {
-        @Override
-        public boolean onError(MediaPlayer mp, int what, int extra) {
-            return false;
-        }
-    };
-
-    final MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
-        @Override
-        public void onCompletion(MediaPlayer mp) {
-            mp.release();
-            mp = null;
-        }
-    };
 }

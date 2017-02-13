@@ -25,20 +25,20 @@ public class CreateUser extends AppCompatActivity {
         nameEditText = (EditText) findViewById(R.id.name);
         passwordEditText = (EditText) findViewById(R.id.password);
         bubbleText = (TextView) findViewById(R.id.speechbubble);
-        bubbleText.setText("Hier kannst du einen neuen Benutzer anlegen. Bitte lege einen Benutzernamen und ein Passwort fest.");
+        bubbleText.setText(R.string.createUserText);
     }
 
     public void onClickCreateUser(View v){
         if(checkUserCorrect()){
             User user = new User(0,nameEditText.getText().toString(),passwordEditText.getText().toString());
             userDatabaseHelper.insert(user);
-            FormatHelper.makeLongToast(this,"Nutzer wurde angelegt.");
+            FormatHelper.makeLongToast(this,getString(R.string.userCreated));
             final Intent menuIntent = new Intent(this,Login.class);
             startActivity(menuIntent);
             finish();
         }
         else{
-            FormatHelper.makeLongToast(this,"Name oder Passwort sind falsch. Bitte versuche es erneut.");
+            FormatHelper.makeLongToast(this,getString(R.string.passwordWrong));
         }
     }
 

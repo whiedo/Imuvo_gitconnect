@@ -96,7 +96,7 @@ public class VocabularyResult extends AppCompatActivity {
         final Intent intent = new Intent(this, VocabularyQuery.class);
         Bundle bundle = new Bundle();
         bundle.putBoolean(VocabularyQuery.ASKWRONGVOCABSAGAIN,true);
-        bundle.putBoolean(VocabularyQuery.ISRANDOM,true);
+        bundle.putBoolean(VocabularyLectionSelection.RANDOM,true);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

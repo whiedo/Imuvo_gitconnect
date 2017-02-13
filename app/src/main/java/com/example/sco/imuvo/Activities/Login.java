@@ -66,10 +66,9 @@ public class Login extends AppCompatActivity {
     }
 
     private void setInitData() {
-        bubbleTextView.setText("Wilkommen! Ich bin Imuvo. Wie ist dein Name? " +
-                "TÖRÖÖÖÖÖ!");
+        bubbleTextView.setText(R.string.welcomeText);
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
-        welcomeTextView.setText(FormatHelper.colorsString("Lernen mit Imuvo", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle),ContextCompat.getColor(this, R.color.colorMenuTextRight)));
+        welcomeTextView.setText(FormatHelper.colorsString(getString(R.string.learningWithImuvo), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle),ContextCompat.getColor(this, R.color.colorMenuTextRight)));
     }
 
     private void testFunction() {
@@ -95,7 +94,7 @@ public class Login extends AppCompatActivity {
             startActivity(menuIntent);
         }
         else{
-            FormatHelper.makeLongToast(this,"Name oder Passwort sind falsch. Bitte versuche es erneut.");
+            FormatHelper.makeLongToast(this,getString(R.string.passwordWrong));
         }
     }
 
