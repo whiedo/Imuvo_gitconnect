@@ -23,8 +23,8 @@ public class VocabularyTestSelection extends AppCompatActivity {
     }
 
     private void setSpeechbubble() {
-        speechbubble.setText("Sehr gut! Du möchtest Vokabeln üben. Bitte entscheide dich zwischen einer Abfrage oder einem Vokabeltest");
-        headlineTextView.setText(FormatHelper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+        speechbubble.setText(R.string.selectTestType);
+        headlineTextView.setText(FormatHelper.colorsString(this,getString(R.string.askVocabs), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
     }
 
     private void getElements() {

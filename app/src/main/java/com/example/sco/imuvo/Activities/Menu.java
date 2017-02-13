@@ -44,7 +44,7 @@ public class Menu extends AppCompatActivity {
 
         dialog.setContentView(R.layout.activity_custom_dialog);
         TextView textView = (TextView) dialog.findViewById(R.id.textView);
-        textView.setText("Willst du dich ausloggen?");
+        textView.setText(R.string.logOutQuestion);
         Button repeatButton = (Button) dialog.findViewById(R.id.solution);
         repeatButton.setText("Ja");
         repeatButton.setTextColor(Color.GREEN);
@@ -60,7 +60,7 @@ public class Menu extends AppCompatActivity {
         });
 
         Button showSolutionButton = (Button) dialog.findViewById(R.id.repeat);
-        showSolutionButton.setText("Nein");
+        showSolutionButton.setText(R.string.no);
         showSolutionButton.setTextColor(Color.RED);
         showSolutionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +87,7 @@ public class Menu extends AppCompatActivity {
     }
 
     public void getBubble(){
-        bubbleTextView.setText("Hallo " + user.getUserName() + ", mein Name ist Imuvo, ich freue mich heute mit Dir zu lernen!\n" +
-               "Lass uns loslegen. Bitte wähle ein Symbol unter meinen Füßen!");
+        bubbleTextView.setText(getString(R.string.Hello) + user.getUserName() + getString(R.string.menuWelcomeText));
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
     }
     public void onClickPlay(View v){

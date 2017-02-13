@@ -27,6 +27,12 @@ public class VocabularyLectionSelection extends AppCompatActivity {
     public static final String READING = "read";
     public static final String READALOUD = "readAloud";
 
+
+    public static final String MULTIPLE_SELECTION = "isMultipleLection";
+    public static final String TYPE = "type";
+    public static final String SELECTED_LECTION = "selectedLection";
+    public static final String SELECTED_DIRECTION = "selectedDirection";
+    public static final String RANDOM = "isRandom";
     Button startButton;
     Spinner lectionSpinner, directionSpinner;
     CustomSpinnerMultiSelection multipleLectionSpinner;
@@ -34,6 +40,8 @@ public class VocabularyLectionSelection extends AppCompatActivity {
     String nextIntentType;
     CheckBox randomCheckBox;
     List<Integer> selectedLections = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,20 +69,20 @@ public class VocabularyLectionSelection extends AppCompatActivity {
 
     private void setSpeechbubble() {
         if(nextIntentType.contentEquals(READING)){
-            speechbubble.setText("Super! Du möchtest Vokabeln lesen. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Lesen beginnst.");
-            headline.setText(FormatHelper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            speechbubble.setText(R.string.readVocabSelection);
+            headline.setText(FormatHelper.colorsString(this,getString(R.string.readVocab), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else if(nextIntentType.contentEquals(ASKING)){
-            speechbubble.setText("Du möchtest Vokabeln mit einer Abfrage üben. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Üben beginnst.");
-            headline.setText(FormatHelper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            speechbubble.setText(R.string.queryVocabSelection);
+            headline.setText(FormatHelper.colorsString(this,getString(R.string.askVocabs), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else if(nextIntentType.contentEquals(TEST)){
-            speechbubble.setText("Du möchtest Vokabeln mit einem Vokabeltest üben. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Üben beginnst.");
-            headline.setText(FormatHelper.colorsString(this,"Vokabeln testen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            speechbubble.setText(R.string.testVocabSelection);
+            headline.setText(FormatHelper.colorsString(this,getString(R.string.testVocabs), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else if(nextIntentType.contentEquals(READALOUD)){
-            speechbubble.setText("Du möchtest Dir Vokabeln anhören. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Vorlesen beginnst.");
-            headline.setText(FormatHelper.colorsString(this,"Vokabeln vorlesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            speechbubble.setText(R.string.readAloudSelection);
+            headline.setText(FormatHelper.colorsString(this,getString(R.string.readAloudVocabs), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
     }
 
@@ -166,13 +174,13 @@ public class VocabularyLectionSelection extends AppCompatActivity {
 
             Bundle bundle = new Bundle();
             if(nextIntentType.contentEquals(TEST)){
-                bundle.putBoolean("isMultipleLection",true);
+                bundle.putBoolean(MULTIPLE_SELECTION,true);
             }
 
-            bundle.putString("type",nextIntentType);
-            bundle.putLong("selectedLection",lectionSpinner.getSelectedItemId());
-            bundle.putLong("selectedDirection",directionSpinner.getSelectedItemId());
-            bundle.putBoolean("isRandom",randomCheckBox.isChecked());
+            bundle.putString(TYPE,nextIntentType);
+            bundle.putLong(SELECTED_LECTION,lectionSpinner.getSelectedItemId());
+            bundle.putLong(SELECTED_DIRECTION,directionSpinner.getSelectedItemId());
+            bundle.putBoolean(RANDOM,randomCheckBox.isChecked());
             nextIntent.putExtras(bundle);
             startActivity(nextIntent);
         }

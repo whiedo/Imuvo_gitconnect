@@ -35,7 +35,6 @@ import java.util.Random;
 public class VocabularyQuery extends AppCompatActivity {
 
     public static final String ASKWRONGVOCABSAGAIN = "askWrongVocabsAgain" ;
-    public static final String ISRANDOM = "isRandom";
     VocabDatabaseHelper vocabDatabaseHelper;
     LectionDatabaseHelper lectionDatabaseHelper;
     ArrayList<Vocab> vocabList;
@@ -52,18 +51,18 @@ public class VocabularyQuery extends AppCompatActivity {
     private boolean doNotCheckAnswer = false;
 
     private void vocabIsFalse() {
-        if (getIntent().getExtras().getBoolean("isMultipleLection")){
+        if (getIntent().getExtras().getBoolean(VocabularyLectionSelection.MULTIPLE_SELECTION)){
             final Dialog dialog = new Dialog(this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
             dialog.setContentView(R.layout.activity_custom_dialog);
 
             Button repeatButton = (Button) dialog.findViewById(R.id.repeat);
             TextView tv = (TextView) dialog.findViewById(R.id.textView);
-            tv.setText("Leider noch nicht ganz richtig.\n\n" + "Lösung: " + getAnswer());
+            tv.setText(getString(R.string.vocabWrong) + getString(R.string.solution) + ": " + getAnswer());
             repeatButton.setVisibility(View.GONE);
             Button showSolutionButton = (Button) dialog.findViewById(R.id.solution);
-            showSolutionButton.setText("Ok");
+            showSolutionButton.setText(R.string.ok);
             showSolutionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -76,7 +75,7 @@ public class VocabularyQuery extends AppCompatActivity {
         }
         else{
             final Dialog dialog = new Dialog(this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
             dialog.setContentView(R.layout.activity_custom_dialog);
 
@@ -123,7 +122,7 @@ public class VocabularyQuery extends AppCompatActivity {
 
         answerEditText.setEnabled(true);
         answerEditText.setText("");
-        nextButton.setText("Prüfen");
+        nextButton.setText(R.string.check);
     }
 
     private void setCurrVocab(Vocab vocab) {
@@ -131,8 +130,7 @@ public class VocabularyQuery extends AppCompatActivity {
 
         if (currentDirection == 1l){
             questionTextView.setText(vocab.getForeign());
-        }
-        else{
+        } else{
             questionTextView.setText(vocab.getGerman());
         }
 
@@ -140,18 +138,16 @@ public class VocabularyQuery extends AppCompatActivity {
 
         if (Character.isUpperCase(firstChar)){
             answerEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-        }
-        else{
+        } else{
             answerEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
 
-        subHeadlineText.setText("Lektion " + Integer.toString(vocab.getLection()));
+        subHeadlineText.setText(R.string.lection + " " + Integer.toString(vocab.getLection()));
         if(currVocab.getPicture() != null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(currVocab.getPicture(), 0, currVocab.getPicture().length);
             vocabPictureImageView.setImageBitmap(bitmap);
             vocabPictureImageView.setVisibility(View.VISIBLE);
-        }
-        else{
+        } else{
             vocabPictureImageView.setVisibility(View.GONE);
         }
 
@@ -171,33 +167,31 @@ public class VocabularyQuery extends AppCompatActivity {
     private void getCurrentLection() {
         Bundle bundle = getIntent().getExtras();
 
-        currentLection = LectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
+        currentLection = LectionDatabaseHelper.get(bundle.getLong(VocabularyLectionSelection.SELECTED_LECTION) + 1l);
         //vocabDatabaseHelper = VocabDatabaseHelper.getInstance(this);
         if(bundle.getBoolean(ASKWRONGVOCABSAGAIN)){
             vocabList = AskingSingleton.wrongVocabs;
-        }
-        else{
-            if(bundle.getBoolean("isMultipleLection")){
+        } else {
+            if(bundle.getBoolean(VocabularyLectionSelection.MULTIPLE_SELECTION)){
                 List<Integer> indices = AskingSingleton.selectedLections;
                 vocabList = VocabDatabaseHelper.getFromMultipleLection(indices);
                 subHeadlineText.setVisibility(View.INVISIBLE);
-                headlineText.setText("Vokabeltest");
+                headlineText.setText(R.string.vocabTest);
                 skipButton.setVisibility(View.INVISIBLE);
 
-            }
-            else{
+            } else {
                 vocabList = vocabDatabaseHelper.getFromLection(currentLection.getNumber());
-                headlineText.setText(FormatHelper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+                headlineText.setText(FormatHelper.colorsString(this,getString(R.string.askVocabs), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
             }
         }
 
         vocabIterator = vocabList.listIterator(0);
 
-        if(bundle.getBoolean(ISRANDOM)){
+        if(bundle.getBoolean(VocabularyLectionSelection.RANDOM)){
             Collections.shuffle(vocabList);
         }
 
-        currentDirection = bundle.getLong("selectedDirection");
+        currentDirection = bundle.getLong(VocabularyLectionSelection.SELECTED_DIRECTION);
     }
 
     public void onClickButtonNext(View v) {
@@ -206,12 +200,10 @@ public class VocabularyQuery extends AppCompatActivity {
             answerEditText.setEnabled(true);
             nextVocab();
 
-        }
-        else{
+        } else{
             if (checkVocabCorrect()) {
                 vocabIsCorrect();
-            }
-            else {
+            } else {
                 vocabIsFalse();
             }
         }
@@ -221,7 +213,7 @@ public class VocabularyQuery extends AppCompatActivity {
         answerEditText.setText(getAnswer());
         answerEditText.setEnabled(false);
         AskingSingleton.wrongVocabs.add(currVocab);
-        nextButton.setText("Nächste");
+        nextButton.setText(R.string.next);
     }
 
     private void repeatVocab() {
@@ -230,8 +222,9 @@ public class VocabularyQuery extends AppCompatActivity {
 
     private void vocabIsCorrect() {
         AskingSingleton.rightVocabs.add(currVocab);
-        if(positiveFeedbackRelevant())
-        setBubbleTextAndAnimate();
+        if(positiveFeedbackRelevant()) {
+            setBubbleTextAndAnimate();
+        }
         nextVocab();
     }
 
@@ -272,6 +265,7 @@ public class VocabularyQuery extends AppCompatActivity {
     }
 
     private String getPositiveFeedbackText() {
+        //TODO auslagern in Ressourcen Datei
         String[] appreciation = new String[]{"Gut gemacht!", "Sehr gut!", "Weiter so!", "Du wirst immer besser!"};
         return(appreciation[new Random().nextInt(appreciation.length)]);
     }
@@ -279,8 +273,7 @@ public class VocabularyQuery extends AppCompatActivity {
     private String getAnswer() {
         if(currentDirection == 1l){
             return(currVocab.getGerman().trim());
-        }
-        else{
+        } else {
             return(currVocab.getForeign().trim());
         }
     }
@@ -307,11 +300,9 @@ public class VocabularyQuery extends AppCompatActivity {
         int val = rand.nextInt(4) + 1;
         if (val == 1)
         {
-            return true;  //25%
-        }
-        else
-        {
-            return false; //75%
+            return true;
+        } else {
+            return false;
         }
     }
 }
