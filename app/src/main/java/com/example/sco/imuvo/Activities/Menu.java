@@ -27,8 +27,6 @@ public class Menu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_menu);
@@ -90,10 +88,12 @@ public class Menu extends AppCompatActivity {
         bubbleTextView.setText(getString(R.string.Hello) + user.getUserName() + getString(R.string.menuWelcomeText));
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
     }
+
     public void onClickPlay(View v){
         final Intent menuIntent = new Intent(this,VocabularyPlay.class);
         startActivity(menuIntent);
     }
+
     public void onClickRead(View v){
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
@@ -105,8 +105,8 @@ public class Menu extends AppCompatActivity {
     public void onClickVocabs(View v){
         final Intent menuIntent = new Intent(this,VocabularyLectionList.class);
         startActivity(menuIntent);
-
     }
+
     public void onClickReadAloud(View v){
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
@@ -115,11 +115,13 @@ public class Menu extends AppCompatActivity {
         startActivity(menuIntent);
 
     }
+
     public void onClickTest(View v){
         final Intent menuIntent = new Intent(this,VocabularyTestSelection.class);
         startActivity(menuIntent);
 
     }
+
     public void onClickTask(View v){
         Button t = (Button) v;
         Toast.makeText(this,t.getText(),Toast.LENGTH_LONG).show();

@@ -44,6 +44,8 @@ public class LectionCursorAdapter extends ResourceCursorAdapter {
         //foreign.setText(Integer.toString(lectionNo));
         //lection.setText(cursor.getString(2));
 
+        TextView text1 = (TextView) view.findViewById(R.id.text1);
+        text1.setText(cursor.getString(cursor.getColumnIndex("number")));
         //foreign.setText(cursor.getString(cursor.getColumnIndex("number")));
         //lection.setText(cursor.getString(cursor.getColumnIndex("lection")));
 

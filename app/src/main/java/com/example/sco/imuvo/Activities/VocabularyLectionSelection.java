@@ -121,7 +121,7 @@ public class VocabularyLectionSelection extends AppCompatActivity {
 
         LectionCursorAdapter adapter2 = new LectionCursorAdapter(
                 this, R.layout.embedded_customspinner, cursor2, 0 );
-        adapter2.setDropDownViewResource(R.layout.embedded_customspinner);
+        //adapter2.setDropDownViewResource(R.layout.embedded_customspinner);
         lectionSpinner.setAdapter(adapter2);
 
 //        Spinner dropdown = lectionSpinner;
