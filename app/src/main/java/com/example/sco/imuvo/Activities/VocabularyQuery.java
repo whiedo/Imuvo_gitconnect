@@ -32,8 +32,6 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-
-
 public class VocabularyQuery extends AppCompatActivity {
 
     public static final String ASKWRONGVOCABSAGAIN = "askWrongVocabsAgain" ;

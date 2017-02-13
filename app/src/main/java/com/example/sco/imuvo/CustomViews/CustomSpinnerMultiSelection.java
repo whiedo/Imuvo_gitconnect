@@ -15,13 +15,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class CustomSpinnerMultiSelection extends Spinner implements
-        DialogInterface.OnMultiChoiceClickListener{
+public class CustomSpinnerMultiSelection extends Spinner implements DialogInterface.OnMultiChoiceClickListener{
 
     public interface OnMultipleItemsSelectedListener{
         void selectedIndices(List<Integer> indices);
         void selectedStrings(List<String> strings);
     }
+
     private OnMultipleItemsSelectedListener listener;
     String[] _items = null;
     boolean[] mSelection = null;
@@ -50,6 +50,7 @@ public class CustomSpinnerMultiSelection extends Spinner implements
     public void setListener(OnMultipleItemsSelectedListener listener){
         this.listener = listener;
     }
+
     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
         if (mSelection != null && which < mSelection.length) {
             mSelection[which] = isChecked;
@@ -66,12 +67,16 @@ public class CustomSpinnerMultiSelection extends Spinner implements
     public boolean performClick() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         TextView tv = new TextViewJokerman(getContext());
+
         tv.setText("Lektionen auswählen");
         tv.setPadding(50,50,0,0);
         tv.setTextColor(getResources().getColor(R.color.colorMenuTextRight));
+
         builder.setCustomTitle(tv);
         builder.setMultiChoiceItems(_items, mSelection, this);
+
         _itemsAtStart = getSelectedItemsAsString();
+
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

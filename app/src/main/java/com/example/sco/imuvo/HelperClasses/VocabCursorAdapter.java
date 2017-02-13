@@ -32,7 +32,7 @@ public class VocabCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         TextView german = (TextView) view.findViewById(R.id.german);
         TextView foreign = (TextView) view.findViewById(R.id.foreign);
-        TextView lection = (TextView) view.findViewById(R.id.lektion);
+        TextView lection = (TextView) view.findViewById(R.id.lection);
 
         german.setText(cursor.getString(2));
         foreign.setText(cursor.getString(1));

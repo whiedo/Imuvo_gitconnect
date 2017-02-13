@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.ResourceCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +17,18 @@ import com.example.sco.imuvo.R;
  * Created by sco on 17.12.2016.
  */
 
-public class LectionCursorAdapter extends CursorAdapter {
-    public LectionCursorAdapter(Context context, Cursor c, boolean autoRequery) {
-        super(context, c, autoRequery);
+public class LectionCursorAdapter extends ResourceCursorAdapter {
+    public LectionCursorAdapter(Context context, int layout, Cursor cursor, int flags) {
+        super(context, layout, cursor, flags);
     }
 
-    public LectionCursorAdapter(Context context, Cursor c, int flags) {
-        super(context, c, flags);
-    }
+//    public LectionCursorAdapter(Context context, Cursor c, boolean autoRequery) {
+//        super(context, c, autoRequery);
+//    }
+//
+//    public LectionCursorAdapter(Context context, Cursor c, int flags) {
+//        super(context, c, flags);
+//    }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -35,13 +39,16 @@ public class LectionCursorAdapter extends CursorAdapter {
     public void bindView(View view, final Context context, Cursor cursor) {
         TextView german = (TextView) view.findViewById(R.id.german);
         final TextView foreign = (TextView) view.findViewById(R.id.foreign);
-        TextView lection = (TextView) view.findViewById(R.id.lektion);
+        TextView lection = (TextView) view.findViewById(R.id.lection);
 
         final int lectionNo = cursor.getInt(1);
 
         german.setText("Lektion");
         foreign.setText(Integer.toString(lectionNo));
         lection.setText(cursor.getString(2));
+
+        foreign.setText(cursor.getString(cursor.getColumnIndex("foreign")));
+        lection.setText(cursor.getString(cursor.getColumnIndex("lection")));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +60,5 @@ public class LectionCursorAdapter extends CursorAdapter {
                 context.startActivity(menuIntent);
             }
         });
-
     }
 }

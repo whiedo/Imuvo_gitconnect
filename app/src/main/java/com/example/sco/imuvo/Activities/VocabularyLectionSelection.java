@@ -9,14 +9,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.CustomViews.CustomSpinnerMultiSelection;
+import com.example.sco.imuvo.DatabaseHelper.GeneralDatabaseHelper;
 import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
-import com.example.sco.imuvo.Model.AskingSingleton;
+import com.example.sco.imuvo.HelperClasses.LectionCursorAdapter;
 import com.example.sco.imuvo.R;
 
 import java.util.List;
@@ -94,43 +94,59 @@ public class VocabularyLectionSelection extends AppCompatActivity {
     }
 
     private void loadLectionSpinnerData() {
-        Cursor cursor = LectionDatabaseHelper.getAll();
+//        Cursor cursor = LectionDatabaseHelper.getAll();
+//
+//        String[] from = {LectionDatabaseHelper.COLUMNS[LectionDatabaseHelper.NUMBER_COLUMN_INDEX]};
+//        int[] to = {R.id.lectionSpinner};
+//        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
+//                this, R.layout.support_simple_spinner_dropdown_item, cursor, from, to, 0);
+//        lectionSpinner.setAdapter(cursorAdapter);
+//
+//        List<String> lables = LectionDatabaseHelper.getAllLabels();
+//        for(int i = 0; i < lables.size(); i++) {
+//            lables.set(i, "Lektion " + lables.get(i));
+//        }
 
-        String[] from = {LectionDatabaseHelper.COLUMNS[LectionDatabaseHelper.NUMBER_COLUMN_INDEX]};
-        int[] to = {R.id.lectionSpinner};
-        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
-                this, R.layout.support_simple_spinner_dropdown_item, cursor, from, to, 0);
-        lectionSpinner.setAdapter(cursorAdapter);
+        //Test-->
+        String query = "SELECT * FROM " + LectionDatabaseHelper.TABLE_NAME + " ORDER BY " +
+                LectionDatabaseHelper.COLUMNS[LectionDatabaseHelper.NUMBER_COLUMN_INDEX] + " ASC";
+        Cursor cursor2 = GeneralDatabaseHelper.getSQLDatabase().rawQuery(query, null);
 
-        List<String> lables = LectionDatabaseHelper.getAllLabels();
-        for(int i = 0; i < lables.size(); i++) {
-            lables.set(i, "Lektion " + lables.get(i));
-        }
+        LectionCursorAdapter adapter2 = new LectionCursorAdapter(
+                this, R.layout.support_simple_spinner_dropdown_item, cursor2, 0 );
+        lectionSpinner.setAdapter(adapter2);
+
+//        Spinner dropdown = lectionSpinner;
+//        List<String> items = LectionDatabaseHelper.getAllLabels();
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+//        dropdown.setAdapter(adapter);
+        //Test<--
 
         //TODO DELETE NEXT BLOCK AND FIX EMPTY CONTENT
         //MULTIPLE SELECTION
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.embedded_customspinner, lables);
-        dataAdapter.setDropDownViewResource(R.layout.embedded_customspinner);
-        lectionSpinner.setAdapter(dataAdapter);
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.embedded_customspinner, lables);
+//        dataAdapter.setDropDownViewResource(R.layout.embedded_customspinner);
+//        lectionSpinner.setAdapter(dataAdapter);
+//
+//        multipleLectionSpinner.setListener(new CustomSpinnerMultiSelection.OnMultipleItemsSelectedListener() {
+//            @Override
+//            public void selectedIndices(List<Integer> indices) {
+//                AskingSingleton.selectedLections = indices;
+//            }
+//
+//            @Override
+//            public void selectedStrings(List<String> strings) {
+//
+//            }
+//        });
 
-        multipleLectionSpinner.setListener(new CustomSpinnerMultiSelection.OnMultipleItemsSelectedListener() {
-            @Override
-            public void selectedIndices(List<Integer> indices) {
-                AskingSingleton.selectedLections = indices;
-            }
-
-            @Override
-            public void selectedStrings(List<String> strings) {
-
-            }
-        });
-
-        multipleLectionSpinner.setItems(lables);
-        AskingSingleton.selectedLections = multipleLectionSpinner.getSelectedIndices();
+//        multipleLectionSpinner.setItems(lables);
+//        AskingSingleton.selectedLections = multipleLectionSpinner.getSelectedIndices();
     }
 
     private void loadDirectionSpinnerData() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.direction_array, R.layout.embedded_customspinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.direction_array,
+                R.layout.embedded_customspinner);
         adapter.setDropDownViewResource(R.layout.embedded_customspinner);
         directionSpinner.setAdapter(adapter);
 
@@ -152,17 +168,13 @@ public class VocabularyLectionSelection extends AppCompatActivity {
             if(nextIntentType.contentEquals(TEST)){
                 bundle.putBoolean("isMultipleLection",true);
             }
+
             bundle.putString("type",nextIntentType);
             bundle.putLong("selectedLection",lectionSpinner.getSelectedItemId());
             bundle.putLong("selectedDirection",directionSpinner.getSelectedItemId());
             bundle.putBoolean("isRandom",randomCheckBox.isChecked());
             nextIntent.putExtras(bundle);
             startActivity(nextIntent);
-
-
-        }
-        else {
-
         }
     }
 
