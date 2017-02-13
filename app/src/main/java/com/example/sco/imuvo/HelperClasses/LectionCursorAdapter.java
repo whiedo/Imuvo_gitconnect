@@ -1,16 +1,13 @@
 package com.example.sco.imuvo.HelperClasses;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v4.widget.ResourceCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.sco.imuvo.Activities.VocabularyList;
 import com.example.sco.imuvo.R;
 
 /**
@@ -38,27 +35,27 @@ public class LectionCursorAdapter extends ResourceCursorAdapter {
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
         TextView german = (TextView) view.findViewById(R.id.german);
-        final TextView foreign = (TextView) view.findViewById(R.id.foreign);
+        TextView foreign = (TextView) view.findViewById(R.id.foreign);
         TextView lection = (TextView) view.findViewById(R.id.lection);
 
-        final int lectionNo = cursor.getInt(1);
+        //int lectionNo = cursor.getInt(1);
 
-        german.setText("Lektion");
-        foreign.setText(Integer.toString(lectionNo));
-        lection.setText(cursor.getString(2));
+        //german.setText("Lektion");
+        //foreign.setText(Integer.toString(lectionNo));
+        //lection.setText(cursor.getString(2));
 
-        foreign.setText(cursor.getString(cursor.getColumnIndex("foreign")));
-        lection.setText(cursor.getString(cursor.getColumnIndex("lection")));
+        //foreign.setText(cursor.getString(cursor.getColumnIndex("number")));
+        //lection.setText(cursor.getString(cursor.getColumnIndex("lection")));
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Intent menuIntent = new Intent(context,VocabularyList.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("lectionNumber",lectionNo);
-                menuIntent.putExtras(bundle);
-                context.startActivity(menuIntent);
-            }
-        });
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final Intent menuIntent = new Intent(context,VocabularyList.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("lectionNumber",lectionNo);
+//                menuIntent.putExtras(bundle);
+//                context.startActivity(menuIntent);
+//            }
+//        });
     }
 }

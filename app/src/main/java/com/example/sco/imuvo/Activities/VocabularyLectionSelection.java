@@ -116,12 +116,12 @@ public class VocabularyLectionSelection extends AppCompatActivity {
 //        }
 
         //Test-->
-        String query = "SELECT * FROM " + LectionDatabaseHelper.TABLE_NAME + " ORDER BY " +
-                LectionDatabaseHelper.COLUMNS[LectionDatabaseHelper.NUMBER_COLUMN_INDEX] + " ASC";
+        String query = "SELECT * FROM " + LectionDatabaseHelper.TABLE_NAME;
         Cursor cursor2 = GeneralDatabaseHelper.getSQLDatabase().rawQuery(query, null);
 
         LectionCursorAdapter adapter2 = new LectionCursorAdapter(
-                this, R.layout.support_simple_spinner_dropdown_item, cursor2, 0 );
+                this, R.layout.embedded_customspinner, cursor2, 0 );
+        adapter2.setDropDownViewResource(R.layout.embedded_customspinner);
         lectionSpinner.setAdapter(adapter2);
 
 //        Spinner dropdown = lectionSpinner;

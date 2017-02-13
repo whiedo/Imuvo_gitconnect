@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
-import com.example.sco.imuvo.HelperClasses.LectionCursorAdapter;
 import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
 import com.example.sco.imuvo.R;
 
@@ -23,8 +22,8 @@ public class VocabularyLectionList extends AppCompatActivity {
     private void popoulateListView() {
         lectionListView = (ListView) findViewById(R.id.listView);
         Cursor cursor = LectionDatabaseHelper.getAll();
-        LectionCursorAdapter lectionCursorAdapter = new LectionCursorAdapter(this,cursor,0);
-        lectionListView.setAdapter(lectionCursorAdapter);
+        //LectionCursorAdapter lectionCursorAdapter = new LectionCursorAdapter(this,cursor,0);
+        //lectionListView.setAdapter(lectionCursorAdapter);
     }
 
 }
