@@ -29,7 +29,7 @@
             android:gravity="center_vertical"
             android:background="@drawable/speechbubbletop"
             android:layout_weight="3"
-            tools:text="Hier kannst du einen neuen Benutzer anlegen. Bitte lege einen Benutzernamen und ein Passwort fest." />
+            tools:text="@string/createNewUserExplenation" />
 
         <Space
             android:layout_width="match_parent"
@@ -67,19 +67,17 @@
             android:layout_height="wrap_content" />
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="Registrieren"
+            android:text="@string/register"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_below="@+id/password"
-
             android:id="@+id/start"
-
             android:onClick="onClickCreateUser"
             android:layout_weight="1"/>
     </LinearLayout>
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Nutzer anlegen"
+        android:text="@string/createUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

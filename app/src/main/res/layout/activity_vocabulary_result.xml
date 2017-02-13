@@ -31,7 +31,7 @@
         />
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Ergebnis"
+        android:text="@string/result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -124,7 +124,7 @@
             android:layout_above="@+id/text2" />
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="Falsche Vokabeln erneut abfragen"
+            android:text="@string/askWrongVocabsAgain"
             android:layout_width="200dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
@@ -149,7 +149,7 @@
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:textColor="@color/colorMenuTextMiddle"
-            android:text="Übersicht"
+            android:text="@string/overview"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/button3"
@@ -160,7 +160,7 @@
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:textColor="@color/colorMenuTextRight"
-            android:text="Weitere Abfrage"
+            android:text="@string/furtherQuery"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/button2"

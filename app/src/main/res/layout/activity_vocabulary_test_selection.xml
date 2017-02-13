@@ -21,7 +21,7 @@
             android:layout_alignParentStart="true" />
 
         <com.example.sco.imuvo.CustomViews.TextViewJokerman
-            android:text="Vokabeln \n abfragen"
+            android:text="@string/askVocabs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/headline"
@@ -56,7 +56,7 @@
             android:layout_height="match_parent">
 
             <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
-                android:text="TextView"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_below="@+id/imageView"
                 android:layout_marginTop="20dp"
@@ -80,7 +80,7 @@
                 android:layout_weight="4">
 
                 <com.example.sco.imuvo.CustomViews.ButtonJokerman
-                    android:text="Abfrage"
+                    android:text="@string/query"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/buttonAsking"
@@ -91,7 +91,7 @@
                     android:onClick="onClickStartAsking"/>
 
                 <com.example.sco.imuvo.CustomViews.ButtonJokerman
-                    android:text="Test"
+                    android:text="@string/test"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/buttonTest"

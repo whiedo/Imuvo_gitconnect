@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.sco.imuvo.Activities.play">
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Spielen"
+        android:text="@string/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
