@@ -18,7 +18,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -50,7 +50,7 @@
             android:screenOrientation="nosensor" />
         <activity android:name=".Activities.VocabularyPlay"></activity>
 
-        <!--Auth0 Lock-->
+        <!--Auth0 Lock
         <activity
             android:name="com.auth0.lock.LockActivity"
             android:theme="@style/Lock.Theme"
