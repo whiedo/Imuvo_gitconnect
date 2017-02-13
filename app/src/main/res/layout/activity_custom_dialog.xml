@@ -20,7 +20,7 @@
 
 
         <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
-            android:text="Leider noch nicht ganz richtig!"
+            android:text="@string/vocabWrong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
@@ -42,7 +42,7 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:id="@id/solution"
-                android:text="Lösung anzeigen"
+                android:text="@string/showSolution"
                 android:layout_weight="1"
                 android:layout_marginRight="5dp"
                 android:textSize="14dp"
@@ -53,7 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:id="@id/repeat"
-                android:text="Nochmal versuchen"
+                android:text="@string/tryAgain"
                 android:layout_weight="1"
                 android:background="@drawable/button_menu"
                 android:textSize="14sp" />

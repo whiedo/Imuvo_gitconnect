@@ -21,7 +21,7 @@
         />
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Vokabeln lesen"
+        android:text="@string/readVocab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -31,7 +31,7 @@
         android:textSize="25sp" />
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Lektion X"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/headline"
@@ -134,7 +134,7 @@
         android:textAlignment="center"
 
         android:paddingLeft="10dp"
-        android:text="Vorherig"
+        android:text="@string/previous"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -154,7 +154,7 @@
         android:layout_alignParentEnd="true" />
 
     <ImageButton
-        android:text="anhören"
+        android:text=""
         android:layout_width="60dp"
         android:layout_centerInParent="true"
         android:layout_height="60dp"

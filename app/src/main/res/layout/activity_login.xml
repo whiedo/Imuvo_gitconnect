@@ -14,7 +14,7 @@
     >
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Lernen mit Imovu"
+        android:text="@string/learningWithImuvo"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:id="@+id/welcomeText"
@@ -63,7 +63,7 @@
                 android:layout_width="200dp"
                 android:layout_height="0dp"
                 android:inputType="text"
-                android:hint="Name"
+                android:hint="@string/name"
                 android:ems="10"
                 android:layout_weight="1"
                 android:layout_gravity="center"
@@ -76,7 +76,7 @@
                 android:layout_height="0dp"
                 android:inputType="textVisiblePassword"
                 android:layout_gravity="center"
-                android:hint="Passwort"
+                android:hint="@string/password"
                 android:ems="10"
                 android:id="@+id/password"
                 android:textAlignment="center"
@@ -95,7 +95,7 @@
 
 
     <com.example.sco.imuvo.CustomViews.ButtonJokerman
-        android:text="Los Geht's!"
+        android:text="@string/start"
         android:layout_width="200dp"
         android:layout_height="0dp"
         android:id="@+id/start"

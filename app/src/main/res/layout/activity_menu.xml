@@ -39,7 +39,7 @@
         android:layout_marginBottom="5dp">
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="Spielen"
+            android:text="@string/play"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/play"
@@ -51,7 +51,7 @@
             android:layout_marginRight="2dp"/>
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="Lesen"
+            android:text="@string/read"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/read"
@@ -63,7 +63,7 @@
             android:layout_marginRight="2dp"/>
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="Vokabeln"
+            android:text="@string/vocabs"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/vocabs"
@@ -82,7 +82,7 @@
         android:layout_weight="1">
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="Vorlesen"
+            android:text="@string/readAloud"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/readAloud"
@@ -95,7 +95,7 @@
             android:textColor="@color/colorMenuTextLeft" />
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="Abfrage"
+            android:text="@string/query"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -107,7 +107,7 @@
             android:layout_marginRight="2dp"/>
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="Aufgaben"
+            android:text="@string/task"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
@@ -118,6 +118,4 @@
             android:textColor="@color/colorMenuTextRight" />
 
     </LinearLayout>
-
-
 </LinearLayout>
