@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Imuvo</string>
-    <string name="auth0_client_id">C5uzEdE8hjc95hBOP1ctrIvsz0AfFpvH</string>
-    <string name="auth0_domain">imuvo.eu.auth0.com</string>
     <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">1671329073123097</string>
     <string name="title_activity_read_vocabs">ReadVocabs</string>
     <string name="title_activity_lection_list">LectionList</string>
     <string name="title_activity_test">test</string>
