@@ -19,7 +19,7 @@ import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.R;
 
-public class Menu extends AppCompatActivity {
+public class Menu extends BaseActivity {
 
     ButtonJokerman playButton, readButton, vocabsButton, readAloudButton, testButton, taskButton;
     User user;
@@ -29,7 +29,7 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //getLayoutInflater().inflate(R.layout.activity_menu, frameLayout);
         setContentView(R.layout.activity_menu);
         getElements();
         getInitialValuesFromIntent();
@@ -99,7 +99,7 @@ public class Menu extends AppCompatActivity {
     public void onClickRead(View v){
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type", VocabularyLectionSelection.READING);
+        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READING);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
     }
@@ -112,7 +112,7 @@ public class Menu extends AppCompatActivity {
     public void onClickReadAloud(View v){
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type", VocabularyLectionSelection.READALOUD);
+        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READALOUD);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
 

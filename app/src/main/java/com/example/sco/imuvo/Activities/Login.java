@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,7 @@ import org.json.JSONObject;
 
 import java.util.concurrent.Callable;
 
-public class Login extends AppCompatActivity {
+public class Login extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     TextView welcomeTextView, bubbleTextView;
@@ -63,7 +64,8 @@ public class Login extends AppCompatActivity {
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             }
         }
-
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_login, frameLayout);
         super.onCreate(savedInstanceState);
         TypefaceUtil.overrideFont(this);
 
@@ -71,7 +73,7 @@ public class Login extends AppCompatActivity {
         mFacebookCallbackManager = CallbackManager.Factory.create();
         SocialMediaHelper.logOutFromSocialMedia();
 
-        setContentView(R.layout.activity_login);
+        //setContentView(R.layout.activity_login);
         getElements();
         registerSocialMediaCallbacks();
         //TODO test fct.
