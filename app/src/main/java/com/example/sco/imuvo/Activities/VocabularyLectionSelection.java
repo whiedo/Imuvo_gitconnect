@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ import com.example.sco.imuvo.R;
 
 import java.util.List;
 
-public class VocabularyLectionSelection extends AppCompatActivity {
+public class VocabularyLectionSelection extends BaseActivity {
     public static final String ASKING = "asking";
     public static final String TEST = "test";
     public static final String READING = "read";
@@ -45,8 +46,10 @@ public class VocabularyLectionSelection extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vocabulary_lection_selection);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_vocabulary_lection_selection, frameLayout);
 
         getElements();
         getInitialValuesFromIntent();

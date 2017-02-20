@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.Model.AskingSingleton;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class VocabularyResult extends AppCompatActivity {
+public class VocabularyResult extends BaseActivity {
 
     TextView bubbleTextView, rightTextView, skippedTextView, wrongTextView, durationTextView;
     ArrayList<Vocab> rightVocabList, skippedVocabList, wrongVocabList;
@@ -22,7 +23,8 @@ public class VocabularyResult extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vocabulary_result);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_vocabulary_result, frameLayout);
         getElements();
         getValuesFromSingleton();
         setValuesToTextView();

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +30,8 @@ public class Menu extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getLayoutInflater().inflate(R.layout.activity_menu, frameLayout);
-        setContentView(R.layout.activity_menu);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_menu, frameLayout);
         getElements();
         getInitialValuesFromIntent();
         getBubble();

@@ -53,6 +53,9 @@ public class Login extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_login, frameLayout);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
@@ -64,9 +67,7 @@ public class Login extends BaseActivity {
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             }
         }
-        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
-        getLayoutInflater().inflate(R.layout.activity_login, frameLayout);
-        super.onCreate(savedInstanceState);
+
         TypefaceUtil.overrideFont(this);
 
         FacebookSdk.sdkInitialize(getApplicationContext());

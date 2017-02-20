@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-public class VocabularyQuery extends AppCompatActivity {
+public class VocabularyQuery extends BaseActivity {
 
     public static final String ASKWRONGVOCABSAGAIN = "askWrongVocabsAgain" ;
     VocabDatabaseHelper vocabDatabaseHelper;
@@ -49,6 +50,19 @@ public class VocabularyQuery extends AppCompatActivity {
     private long currentDirection;
     private AskingSingleton askingSingleton;
     private boolean doNotCheckAnswer = false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_vocabulary_query, frameLayout);
+
+        findElements();
+        getCurrentLection();
+        nextVocab();
+        askingSingleton = AskingSingleton.getInstance();
+        askingSingleton.resetData();
+    }
 
     private void vocabIsFalse() {
         if (getIntent().getExtras().getBoolean(VocabularyLectionSelection.MULTIPLE_SELECTION)){
@@ -72,8 +86,7 @@ public class VocabularyQuery extends AppCompatActivity {
                 }
             });
             dialog.show();
-        }
-        else{
+        } else{
             final Dialog dialog = new Dialog(this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -99,17 +112,6 @@ public class VocabularyQuery extends AppCompatActivity {
             dialog.show();
         }
 
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vocabulary_query);
-        findElements();
-        getCurrentLection();
-        nextVocab();
-        askingSingleton = AskingSingleton.getInstance();
-        askingSingleton.resetData();
     }
 
     private void nextVocab() {

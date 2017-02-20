@@ -19,13 +19,6 @@ import android.widget.Toast;
 
 import com.example.sco.imuvo.R;
 
-/**
- * @author dipenp
- *
- * This activity will add Navigation Drawer for our application and all the code related to navigation drawer.
- * We are going to extend all our other activites from this BaseActivity so that every activity will have Navigation Drawer in it.
- * This activity layout contain one frame layout in which we will add our child activity layout.
- */
 public class BaseActivity extends AppCompatActivity
 {
     public DrawerLayout drawerLayout;
@@ -34,37 +27,69 @@ public class BaseActivity extends AppCompatActivity
 
     protected void onCreate(Bundle savedInstanceState)
     {
-        String[] items = new String[]{"Spielen","test2","test3","test4","test5","test6"};
-        // R.id.drawer_layout should be in every activity with exactly the same id.
+        setContentView(R.layout.activity_basic);
+        super.onCreate(savedInstanceState);
+        String[] items = new String[]{"Spielen","Lesen","Vokabeln","Vorlesen","Abfrage","Aufgaben"};
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        drawerToggle = new ActionBarDrawerToggle((AppCompatActivity) this, drawerLayout, R.drawable.animal, 0, 0)
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.animal, 0, 0)
         {
             public void onDrawerClosed(View view)
             {
-                getActionBar().setTitle(R.string.app_name);
+                //getActionBar().setTitle(R.string.app_name);
             }
 
             public void onDrawerOpened(View drawerView)
             {
-                getActionBar().setTitle(R.string.app_name);
+                //getActionBar().setTitle(R.string.app_name);
             }
         };
         drawerLayout.setDrawerListener(drawerToggle);
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        //TODO
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        //getActionBar().setHomeButtonEnabled(true);
 
         drawerList = (ListView) findViewById(R.id.left_drawer);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1,
-                items)); //Items is an ArrayList or array with the items you want to put in the Navigation Drawer.
+        drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.embedded_customspinner,
+                items));
 
         drawerList.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
-                // Do what you want when an item from the Navigation Drawer is clicked
+                Intent intent = new Intent(getApplicationContext(), com.example.sco.imuvo.Activities.Menu.class);
+                Bundle bundle;
+                switch ((pos)){
+                    case 0:
+                        intent = new Intent(getApplicationContext(),VocabularyPlay.class);
+                        break;
+                    case 1:
+                        intent = new Intent(getApplicationContext(),VocabularyLectionSelection.class);
+                        bundle = new Bundle();
+                        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READING);
+                        intent.putExtras(bundle);
+                        break;
+                    case 2:
+                        final Intent menuIntent = new Intent(getApplicationContext(),VocabularyLectionList.class);
+                        break;
+                    case 3:
+                        intent = new Intent(getApplicationContext(),VocabularyLectionSelection.class);
+                        bundle = new Bundle();
+                        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READALOUD);
+                        intent.putExtras(bundle);
+                        break;
+                    case 4:
+                        intent = new Intent(getApplicationContext(),VocabularyTestSelection.class);
+                        break;
+                    case 5:
+                        intent = new Intent(getApplicationContext(), com.example.sco.imuvo.Activities.Menu.class);
+                        break;
+
+                }
+                startActivity(intent);
+                drawerList.setItemChecked(pos, true);
+                drawerLayout.closeDrawer(drawerList);
             }
         });
+
     }
 
     @Override

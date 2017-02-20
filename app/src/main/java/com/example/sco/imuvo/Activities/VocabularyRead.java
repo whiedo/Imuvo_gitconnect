@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ import java.util.Collections;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-public class VocabularyRead extends AppCompatActivity {
+public class VocabularyRead extends BaseActivity {
 
     VocabDatabaseHelper vocabDatabaseHelper;
     LectionDatabaseHelper lectionDatabaseHelper;
@@ -51,7 +52,8 @@ public class VocabularyRead extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vocabulary_read);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_vocabulary_read, frameLayout);
         getInitialValuesFromIntent();
         findElements();
         getCurrentLection();

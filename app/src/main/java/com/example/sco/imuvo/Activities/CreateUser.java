@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.DatabaseHelper.UserDatabaseHelper;
@@ -12,7 +13,7 @@ import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.R;
 
-public class CreateUser extends AppCompatActivity {
+public class CreateUser extends BaseActivity {
 
     EditText nameEditText, passwordEditText;
     TextView bubbleText;
@@ -20,7 +21,8 @@ public class CreateUser extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_user);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
+        getLayoutInflater().inflate(R.layout.activity_create_user, frameLayout);
 
         nameEditText = (EditText) findViewById(R.id.name);
         passwordEditText = (EditText) findViewById(R.id.password);
