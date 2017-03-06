@@ -280,13 +280,6 @@ public class VocabularyQuery extends BaseActivity {
         }
     }
 
-    public void onClickBurgerMenu(View v){
-        final Intent menuIntent = new Intent(this,Menu.class);
-        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(menuIntent);
-        finish();
-    }
-
     public void onClickButtonSkip(View v){
         skipVocab();
     }

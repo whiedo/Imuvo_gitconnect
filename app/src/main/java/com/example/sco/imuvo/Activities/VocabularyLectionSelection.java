@@ -190,13 +190,8 @@ public class VocabularyLectionSelection extends BaseActivity {
     }
 
     private boolean checkEverythingSelected() {
+        //TODO
         return true;
     }
 
-    public void onClickBurgerMenu(View v){
-        final Intent menuIntent = new Intent(this,Menu.class);
-        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(menuIntent);
-        finish();
-    }
 }

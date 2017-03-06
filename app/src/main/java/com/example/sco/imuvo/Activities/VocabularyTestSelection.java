@@ -13,7 +13,6 @@ import com.example.sco.imuvo.R;
 
 public class VocabularyTestSelection extends BaseActivity {
     TextView speechbubble, headlineTextView;
-    String nextIntentType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +44,8 @@ public class VocabularyTestSelection extends BaseActivity {
     public void onClickStartAsking(View v){
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type", VocabularyLectionSelection.ASKING);
+        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.ASKING);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
-    }
-
-    public void onClickBurgerMenu(View v){
-        final Intent menuIntent = new Intent(this,Menu.class);
-        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(menuIntent);
-        finish();
     }
 }
