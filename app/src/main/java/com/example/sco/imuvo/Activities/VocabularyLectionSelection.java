@@ -91,7 +91,7 @@ public class VocabularyLectionSelection extends BaseActivity {
 
     private void getInitialValuesFromIntent(){
         Bundle bundle = getIntent().getExtras();
-        nextIntentType = bundle.getString("type");
+        nextIntentType = bundle.getString(TYPE);
     }
 
     private void getElements() {
@@ -115,9 +115,9 @@ public class VocabularyLectionSelection extends BaseActivity {
 
         List<String> lables = LectionDatabaseHelper.getAllLabels();
         for(int i = 0; i < lables.size(); i++) {
-            lables.set(i, "Lektion " + lables.get(i));
+            lables.set(i, R.string.lection + " " + lables.get(i));
         }
-
+        //TODO
         //Test-->
 //        String query = "SELECT * FROM " + LectionDatabaseHelper.TABLE_NAME;
 //        Cursor cursor2 = GeneralDatabaseHelper.getSQLDatabase().rawQuery(query, null);

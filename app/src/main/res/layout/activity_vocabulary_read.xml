@@ -116,16 +116,6 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/burgermenuselector"
-        android:id="@+id/BurgerMenu"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onClickBurgerMenu"/>
-
     <com.example.sco.imuvo.CustomViews.ButtonJokerman
         android:layout_width="110dp"
         android:id="@+id/previous"

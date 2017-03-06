@@ -11,15 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.sco.imuvo.Activities.VocabularyLectionSelection">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/burgermenuselector"
-        android:id="@+id/imageView7"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
         android:text="@string/readVocab"
         android:layout_width="wrap_content"
@@ -125,13 +116,4 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/burgermenuselector"
-        android:id="@+id/BurgerMenu"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onClickBurgerMenu"/>
 </RelativeLayout>

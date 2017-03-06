@@ -4,7 +4,7 @@ package com.example.sco.imuvo.Activities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -29,24 +29,23 @@ public class BaseActivity extends AppCompatActivity
     {
         setContentView(R.layout.activity_basic);
         super.onCreate(savedInstanceState);
-        String[] items = new String[]{"Spielen","Lesen","Vokabeln","Vorlesen","Abfrage","Aufgaben"};
+        String[] items = getResources().getStringArray(R.array.main_menu_array);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.drawable.animal, 0, 0)
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.app_name, R.string.check)
         {
             public void onDrawerClosed(View view)
             {
-                //getActionBar().setTitle(R.string.app_name);
+                getSupportActionBar().setTitle(R.string.app_name);
             }
 
             public void onDrawerOpened(View drawerView)
             {
-                //getActionBar().setTitle(R.string.app_name);
+                getSupportActionBar().setTitle(R.string.app_name);
             }
         };
-        drawerLayout.setDrawerListener(drawerToggle);
-        //TODO
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
-        //getActionBar().setHomeButtonEnabled(true);
+        drawerLayout.addDrawerListener(drawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         drawerList = (ListView) findViewById(R.id.left_drawer);
         drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.embedded_customspinner,
@@ -68,7 +67,7 @@ public class BaseActivity extends AppCompatActivity
                         intent.putExtras(bundle);
                         break;
                     case 2:
-                        final Intent menuIntent = new Intent(getApplicationContext(),VocabularyLectionList.class);
+                        intent = new Intent(getApplicationContext(),VocabularyLectionList.class);
                         break;
                     case 3:
                         intent = new Intent(getApplicationContext(),VocabularyLectionSelection.class);
