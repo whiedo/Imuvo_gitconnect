@@ -51,7 +51,10 @@
         <activity
             android:name=".Activities.VocabularyResult"
             android:screenOrientation="nosensor" />
-        <activity android:name=".Activities.VocabularyPlay"></activity>
+        <activity
+            android:name=".Activities.Dictionary"
+            android:screenOrientation="nosensor" />
+
     </application>
 
 </manifest>

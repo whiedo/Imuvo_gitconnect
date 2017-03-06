@@ -21,7 +21,7 @@ import com.example.sco.imuvo.R;
 
 public class Menu extends BaseActivity {
 
-    ButtonJokerman playButton, readButton, vocabsButton, readAloudButton, testButton, taskButton;
+    ButtonJokerman dictionaryButton, readButton, vocabsButton, readAloudButton, testButton, taskButton;
     User user;
     ImageView bubbleImageView;
     TextViewITCKRIST bubbleTextView;
@@ -77,7 +77,7 @@ public class Menu extends BaseActivity {
     }
 
     private void getElements() {
-        playButton = (ButtonJokerman) findViewById(R.id.play);
+        dictionaryButton = (ButtonJokerman) findViewById(R.id.dictionary);
         readButton = (ButtonJokerman) findViewById(R.id.read);
         vocabsButton = (ButtonJokerman) findViewById(R.id.vocabs);
         readAloudButton = (ButtonJokerman) findViewById(R.id.readAloud);
@@ -91,8 +91,8 @@ public class Menu extends BaseActivity {
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
     }
 
-    public void onClickPlay(View v){
-        final Intent menuIntent = new Intent(this,VocabularyPlay.class);
+    public void onClickDictionary(View v){
+        final Intent menuIntent = new Intent(this,Dictionary.class);
         startActivity(menuIntent);
     }
 

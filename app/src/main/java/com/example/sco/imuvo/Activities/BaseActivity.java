@@ -4,18 +4,15 @@ package com.example.sco.imuvo.Activities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.sco.imuvo.R;
 
@@ -43,13 +40,13 @@ public class BaseActivity extends AppCompatActivity
                 getSupportActionBar().setTitle(R.string.app_name);
             }
         };
+
         drawerLayout.addDrawerListener(drawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
         drawerList = (ListView) findViewById(R.id.left_drawer);
-        drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.embedded_customspinner,
-                items));
+        drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.embedded_customspinner, items));
 
         drawerList.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -58,7 +55,7 @@ public class BaseActivity extends AppCompatActivity
                 Bundle bundle;
                 switch ((pos)){
                     case 0:
-                        intent = new Intent(getApplicationContext(),VocabularyPlay.class);
+                        intent = new Intent(getApplicationContext(),Dictionary.class);
                         break;
                     case 1:
                         intent = new Intent(getApplicationContext(),VocabularyLectionSelection.class);

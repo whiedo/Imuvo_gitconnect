@@ -42,7 +42,6 @@
     <string name="name">Name</string>
     <string name="password">Passwort</string>
     <string name="start">Los Geht\'s!</string>
-    <string name="play">Spielen</string>
     <string name="read">Lesen</string>
     <string name="vocabs">Vokabeln</string>
     <string name="readAloud">Vorlesen</string>
@@ -60,4 +59,7 @@
     <string name="shareMessageResultPart1">"Schau mal! Ich habe mit dem Imuvo Vokabeltrainer "</string>
     <string name="shareMessageResultPart2">" richtige Vokabeln erreicht. Probiers doch auch einmal!"</string>
     <string name="shareWith">Teilen mit</string>
+    <string name="dictionary">Wörterbuch</string>
+    <string name="pageLoading">Seite wird geladen &#8230;</string>
+    <string name="dictionaryURL">https://pocket.dict.cc/</string>
 </resources>

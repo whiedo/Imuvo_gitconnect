@@ -4,8 +4,8 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
-    <item android:id="@+id/play"
-        android:title="@string/play" />
+    <item android:id="@+id/dictionary"
+        android:title="@string/dictionary" />
     <item android:id="@+id/read"
         android:title="@string/read" />
     <item android:id="@+id/vocabs"
