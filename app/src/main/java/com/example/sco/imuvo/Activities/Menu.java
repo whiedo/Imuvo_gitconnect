@@ -87,12 +87,8 @@ public class Menu extends BaseActivity {
     }
 
     public void getBubble(){
-        bubbleTextView.setText(getString(R.string.Hello) + user.getUserName() + getString(R.string.menuWelcomeText));
+        bubbleTextView.setText(getString(R.string.hello) + getString(R.string.menuWelcomeText));
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
-    }
-
-    public void refreshBubble() {
-        bubbleTextView.setText(getString(R.string.Hello) + user.getUserName() + getString(R.string.menuWelcomeText));
     }
 
     public void onClickPlay(View v){

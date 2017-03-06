@@ -13,7 +13,7 @@
     <string name="learningWithImuvo">Lernen mit Imuvo</string>
     <string name="logOutQuestion">Willst du dich ausloggen?</string>
     <string name="no">Nein</string>
-    <string name="Hello">"Hallo "</string>
+    <string name="hello">"Hallo"</string>
     <string name="menuWelcomeText">, mein Name ist Imuvo, ich freue mich heute mit Dir zu lernen!\nLass uns loslegen. Bitte wähle ein Symbol unter meinen Füßen!</string>
     <string name="readVocabSelection">Super! Du möchtest Vokabeln lesen. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Lesen beginnst.</string>
     <string name="queryVocabSelection">Du möchtest Vokabeln mit einer Abfrage üben. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Üben beginnst.</string>
@@ -53,6 +53,11 @@
     <string name="result">Ergebnis</string>
     <string name="askWrongVocabsAgain">Falsche Vokabeln erneut abfragen</string>
     <string name="overview">Übersicht</string>
+    <string name="share">Ergebnis teilen</string>
     <string name="furtherQuery">Weitere Abfrage</string>
     <string name="test">Test</string>
+    <string name="shareResultSubject">Mein Ergebnis mit dem Vokabeltrainer Imuvo!</string>
+    <string name="shareMessageResultPart1">"Schau mal! Ich habe mit dem Imuvo Vokabeltrainer "</string>
+    <string name="shareMessageResultPart2">" richtige Vokabeln erreicht. Probiers doch auch einmal!"</string>
+    <string name="shareWith">Teilen mit</string>
 </resources>

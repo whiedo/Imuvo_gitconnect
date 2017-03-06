@@ -2,7 +2,6 @@ package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -32,7 +31,6 @@ public class VocabularyResult extends BaseActivity {
 
     private void setValuesToTextView() {
         rightTextView.setText("Richtig: " + Integer.toString(rightVocabList.size()));
-        //skippedTextView.setText("Übersprungen: " + Integer.toString(skippedVocabList.size()));
         wrongTextView.setText("Falsch: " + Integer.toString(wrongVocabList.size()));
         AskingSingleton.endingDate = (Date) Calendar.getInstance().getTime();
 
@@ -44,14 +42,7 @@ public class VocabularyResult extends BaseActivity {
         rightVocabList = AskingSingleton.rightVocabs;
         wrongVocabList = AskingSingleton.wrongVocabs;
         skippedVocabList = AskingSingleton.skippedVocabs;
-
-
     }
-
-    private void setSpeechbubble() {
-        //speechbubble.setText("Sehr gut! Du möchtest Vokabeln üben. Bitte entscheide dich zwischen einer Abfrage oder einem Vokabeltest");
-    }
-
 
     private void getElements() {
         rightTextView = (TextView) findViewById(R.id.rightVocabs);
@@ -80,11 +71,15 @@ public class VocabularyResult extends BaseActivity {
         finish();
     }
 
-    public void onClickButtonOverview(View v){
-        final Intent menuIntent = new Intent(this,Menu.class);
-        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(menuIntent);
-        finish();
+    public void onClickButtonShare(View v){
+        Intent shareIntent =  new Intent(android.content.Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.shareResultSubject));
+        String shareMessage = getString(R.string.shareMessageResultPart1) + AskingSingleton.rightVocabs.size() +
+                getString(R.string.shareMessageResultPart2);
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,shareMessage);
+
+        startActivity(Intent.createChooser(shareIntent,getString(R.string.shareWith)));
     }
 
     public void onClickShowWrongVocabs(View v){
