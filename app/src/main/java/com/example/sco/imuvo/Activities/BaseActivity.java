@@ -60,7 +60,7 @@ public class BaseActivity extends AppCompatActivity
                     case 1:
                         intent = new Intent(getApplicationContext(),VocabularyLectionSelection.class);
                         bundle = new Bundle();
-                        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READING);
+                        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READ);
                         intent.putExtras(bundle);
                         break;
                     case 2:

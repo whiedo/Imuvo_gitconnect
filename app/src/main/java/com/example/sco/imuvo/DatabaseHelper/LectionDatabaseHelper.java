@@ -26,6 +26,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
             COLUMNS[2] + " TEXT" +
             ")";
     public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+    public static final String SELECT_ALL = "SELECT  * FROM ";
 
     private LectionDatabaseHelper(Context context) {
         super(context, GeneralDatabaseHelper.DB_NAME, null, GeneralDatabaseHelper.DB_VERSION);
@@ -94,16 +95,13 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public int delete(long id) {
-        return GeneralDatabaseHelper.getSQLDatabase().delete(TABLE_NAME, "_id = ?", new String[]{String.valueOf(id)});
-    }
-
-    public void Create() {
-        onCreate(GeneralDatabaseHelper.getSQLDatabase());
+        return GeneralDatabaseHelper.getSQLDatabase().delete(
+                TABLE_NAME, COLUMNS[ID_COLUMN_INDEX] + "=?", new String[]{ String.valueOf(id) });
     }
 
     public static List<String> getAllLabels(){
         List<String> labels = new ArrayList<String>();
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+        String selectQuery = SELECT_ALL + TABLE_NAME;
 
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().rawQuery(selectQuery, null);
 

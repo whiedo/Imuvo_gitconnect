@@ -1,12 +1,10 @@
 package com.example.sco.imuvo.Activities;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -121,7 +119,7 @@ public class VocabularyRead extends BaseActivity {
         }
         vocabIterator = vocabList.listIterator(0);
         currentDirection = bundle.getLong(VocabularyLectionSelection.SELECTED_DIRECTION);
-        if(nextIntentType.contentEquals(VocabularyLectionSelection.READING)){
+        if(nextIntentType.contentEquals(VocabularyLectionSelection.READ)){
             headlineText.setText(FormatHelper.colorsString(this,getString(R.string.readVocab), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else{

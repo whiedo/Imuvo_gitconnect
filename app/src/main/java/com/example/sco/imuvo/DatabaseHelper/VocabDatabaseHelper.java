@@ -127,10 +127,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)});
     }
 
-    public void Create() {
-        onCreate(GeneralDatabaseHelper.getSQLDatabase());
-    }
-
     public static ArrayList<Vocab> getFromMultipleLection(List<Integer> indices) {
         ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
         Vocab vocab = null;
@@ -139,7 +135,6 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
         Integer counter = 0;
 
         for (Integer i : indices) {
-
             args[counter] = String.valueOf(i + 1);
             counter++;
         }

@@ -99,7 +99,7 @@ public class Menu extends BaseActivity {
     public void onClickRead(View v){
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READING);
+        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READ);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
     }
