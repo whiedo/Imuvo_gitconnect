@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -97,7 +96,6 @@ public class Login extends BaseActivity {
         facebookSignInButton.setReadPermissions("email");
         facebookSignInButton.registerCallback(mFacebookCallbackManager,
                 new FacebookCallback<LoginResult>() {
-
                     @Override
                     public void onSuccess(final LoginResult loginResult) {
                         GraphRequest request = GraphRequest.newMeRequest(
@@ -106,15 +104,16 @@ public class Login extends BaseActivity {
                                     @Override
                                     public void onCompleted(JSONObject object, GraphResponse response) {
                                         try {
+                                            String name = object.getString("first_name");
                                             String email = object.getString("email");
                                             if (UserDatabaseHelper.get(email) == null) {
                                                 User user = new User(0, email, passwordEditText.getText().toString());
                                                 UserDatabaseHelper.insert(user);
                                             }
 
-                                            SingletonUser.data = email;
+                                            SingletonUser.data = name;
 
-                                            nameEditText.setText(email);
+                                            nameEditText.setText(name);
                                             passwordEditText.setText("");
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -122,8 +121,9 @@ public class Login extends BaseActivity {
                                     }
                                 });
 
+                        //New request to facebook for user name
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id,name,email,gender,birthday");
+                        parameters.putString("fields", "id,first_name,name,email,gender,birthday");
                         request.setParameters(parameters);
                         request.executeAsync();
 
@@ -153,20 +153,18 @@ public class Login extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+        if(FacebookSdk.isFacebookRequestCode(requestCode)) {
+            mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void handleSignInResult(Callable<Void> logout) {
         if(logout == null) {
-            /* Login error */
             Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT).show();
         } else {
-            /* Login success */
-            //Application.getInstance().setLogoutCallable(logout);
             startActivity(new Intent(this, Menu.class));
         }
     }
-
 
     private void initSQLData(final Context context) {
         new Thread(new Runnable() {

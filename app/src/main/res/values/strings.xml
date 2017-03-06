@@ -2,7 +2,7 @@
     <string name="app_name">Imuvo</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">1065468250226511</string>
-    <string name="login_error">Fehler bei Login</string>
+    <string name="login_error">Fehler bei Login. Besteht eine Internetverbindung?</string>
     <string name="title_activity_read_vocabs">ReadVocabs</string>
     <string name="title_activity_lection_list">LectionList</string>
     <string name="title_activity_test">test</string>
