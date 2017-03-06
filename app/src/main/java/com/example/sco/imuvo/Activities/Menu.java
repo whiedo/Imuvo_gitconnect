@@ -39,7 +39,7 @@ public class Menu extends BaseActivity {
     @Override
     public  void onBackPressed(){
         final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         dialog.setContentView(R.layout.activity_custom_dialog);
         TextView textView = (TextView) dialog.findViewById(R.id.textView);
