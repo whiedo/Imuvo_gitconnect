@@ -62,4 +62,7 @@
     <string name="pageLoading">Seite wird geladen &#8230;</string>
     <string name="dictionaryURL">https://pocket.dict.cc/</string>
     <string name="lection">Lektion </string>
+    <string name="notificationTicker">Heute schon Vokabeln gelernt?!</string>
+    <string name="notificationTitle">Schon gelernt?</string>
+    <string name="notificationContent">Klicke hier um direkt zu deinem Vokabeltrainer zu gelangen und jetzt deine Vokabeln abzufragen!</string>
 </resources>
