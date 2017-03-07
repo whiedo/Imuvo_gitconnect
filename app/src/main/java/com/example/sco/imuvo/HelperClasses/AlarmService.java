@@ -20,7 +20,6 @@ import com.example.sco.imuvo.R;
 public class AlarmService extends IntentService {
 
     private static final int NOTIFICATION_ID = 1;
-    private static final String TAG = "BANANEALARM";
     private NotificationManager notificationManager;
     private PendingIntent pendingIntent;
 
@@ -45,9 +44,9 @@ public class AlarmService extends IntentService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
         builder.setContentIntent(pendingIntent)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setDefaults(Notification.DEFAULT_SOUND)
-                .setLargeIcon(BitmapFactory.decodeResource(res, R.drawable.ic_launcher))
+                .setLargeIcon(BitmapFactory.decodeResource(res, R.mipmap.ic_launcher))
                 .setTicker(getString(R.string.notificationTicker))
                 .setAutoCancel(true)
                 .setContentTitle(getString(R.string.notificationTitle))

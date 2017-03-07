@@ -56,6 +56,15 @@
             android:name=".Activities.Dictionary"
             android:screenOrientation="nosensor" />
         <receiver android:name=".HelperClasses.AlarmReceiver"  android:enabled="true"/>
+        <receiver
+            android:name=".HelperClasses.BootReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         <service android:name=".HelperClasses.AlarmService" />
     </application>
 </manifest>
