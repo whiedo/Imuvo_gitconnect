@@ -4,9 +4,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.view.View;
 import android.view.Window;
@@ -18,9 +17,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
 import com.example.sco.imuvo.DatabaseHelper.VocabDatabaseHelper;
+import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.Model.AskingSingleton;
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.Vocab;
@@ -37,7 +36,6 @@ public class VocabularyQuery extends BaseActivity {
 
     public static final String ASKWRONGVOCABSAGAIN = "askWrongVocabsAgain" ;
     VocabDatabaseHelper vocabDatabaseHelper;
-    LectionDatabaseHelper lectionDatabaseHelper;
     ArrayList<Vocab> vocabList;
     Lection currentLection;
     ListIterator<?> vocabIterator;
@@ -73,7 +71,7 @@ public class VocabularyQuery extends BaseActivity {
 
             Button repeatButton = (Button) dialog.findViewById(R.id.repeat);
             TextView tv = (TextView) dialog.findViewById(R.id.textView);
-            tv.setText(getString(R.string.vocabWrong) + getString(R.string.solution) + ": " + getAnswer());
+            tv.setText(getString(R.string.vocabWrong) + " " + getString(R.string.solution)+ " " + getAnswer());
             repeatButton.setVisibility(View.GONE);
             Button showSolutionButton = (Button) dialog.findViewById(R.id.solution);
             showSolutionButton.setText(R.string.ok);
@@ -144,7 +142,7 @@ public class VocabularyQuery extends BaseActivity {
             answerEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
 
-        subHeadlineText.setText(R.string.lection + " " + Integer.toString(vocab.getLection()));
+        subHeadlineText.setText(R.string.lection + " " + vocab.getLection());
         if(currVocab.getPicture() != null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(currVocab.getPicture(), 0, currVocab.getPicture().length);
             vocabPictureImageView.setImageBitmap(bitmap);
@@ -170,7 +168,6 @@ public class VocabularyQuery extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
 
         currentLection = LectionDatabaseHelper.get(bundle.getLong(VocabularyLectionSelection.SELECTED_LECTION) + 1l);
-        //vocabDatabaseHelper = VocabDatabaseHelper.getInstance(this);
         if(bundle.getBoolean(ASKWRONGVOCABSAGAIN)){
             vocabList = AskingSingleton.wrongVocabs;
         } else {

@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,9 +22,9 @@ import com.example.sco.imuvo.R;
 import java.util.List;
 
 public class VocabularyLectionSelection extends BaseActivity {
-    public static final String ASKING = "asking";
+    public static final String ASK = "asking";
     public static final String TEST = "test";
-    public static final String READING = "read";
+    public static final String READ = "read";
     public static final String READALOUD = "readAloud";
 
 
@@ -34,6 +33,7 @@ public class VocabularyLectionSelection extends BaseActivity {
     public static final String SELECTED_LECTION = "selectedLection";
     public static final String SELECTED_DIRECTION = "selectedDirection";
     public static final String RANDOM = "isRandom";
+
     Button startButton;
     Spinner lectionSpinner, directionSpinner;
     CustomSpinnerMultiSelection multipleLectionSpinner;
@@ -41,8 +41,6 @@ public class VocabularyLectionSelection extends BaseActivity {
     String nextIntentType;
     CheckBox randomCheckBox;
     List<Integer> selectedLections = null;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +69,11 @@ public class VocabularyLectionSelection extends BaseActivity {
     }
 
     private void setSpeechbubble() {
-        if(nextIntentType.contentEquals(READING)){
+        if(nextIntentType.contentEquals(READ)){
             speechbubble.setText(R.string.readVocabSelection);
             headline.setText(FormatHelper.colorsString(this,getString(R.string.readVocab), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
-        else if(nextIntentType.contentEquals(ASKING)){
+        else if(nextIntentType.contentEquals(ASK)){
             speechbubble.setText(R.string.queryVocabSelection);
             headline.setText(FormatHelper.colorsString(this,getString(R.string.askVocabs), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
@@ -107,34 +105,17 @@ public class VocabularyLectionSelection extends BaseActivity {
     private void loadLectionSpinnerData() {
         Cursor cursor = LectionDatabaseHelper.getAll();
 
-        String[] from = {LectionDatabaseHelper.COLUMNS[LectionDatabaseHelper.NUMBER_COLUMN_INDEX]};
+        String[] from = {"number"};
         int[] to = {R.id.lectionSpinner};
-        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(
-                this, R.layout.support_simple_spinner_dropdown_item, cursor, from, to, 0);
+        SimpleCursorAdapter cursorAdapter =
+                new SimpleCursorAdapter(this,R.layout.support_simple_spinner_dropdown_item,cursor,from,to,0);
         lectionSpinner.setAdapter(cursorAdapter);
 
         List<String> lables = LectionDatabaseHelper.getAllLabels();
         for(int i = 0; i < lables.size(); i++) {
-            lables.set(i, R.string.lection + " " + lables.get(i));
+            lables.set(i, getString(R.string.lection) + " " + lables.get(i));
         }
-        //TODO
-        //Test-->
-//        String query = "SELECT * FROM " + LectionDatabaseHelper.TABLE_NAME;
-//        Cursor cursor2 = GeneralDatabaseHelper.getSQLDatabase().rawQuery(query, null);
-//
-//        LectionCursorAdapter adapter2 = new LectionCursorAdapter(
-//                this, R.layout.embedded_customspinner, cursor2, 0 );
-//        //adapter2.setDropDownViewResource(R.layout.embedded_customspinner);
-//        lectionSpinner.setAdapter(adapter2);
 
-//        Spinner dropdown = lectionSpinner;
-//        List<String> items = LectionDatabaseHelper.getAllLabels();
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-//        dropdown.setAdapter(adapter);
-        //Test<--
-
-        //TODO DELETE NEXT BLOCK AND FIX EMPTY CONTENT
-        //MULTIPLE SELECTION
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.embedded_customspinner, lables);
         dataAdapter.setDropDownViewResource(R.layout.embedded_customspinner);
         lectionSpinner.setAdapter(dataAdapter);
@@ -147,7 +128,6 @@ public class VocabularyLectionSelection extends BaseActivity {
 
             @Override
             public void selectedStrings(List<String> strings) {
-
             }
         });
 
@@ -165,7 +145,7 @@ public class VocabularyLectionSelection extends BaseActivity {
     public void onClickStartReading(View v){
         if(checkEverythingSelected() == true){
             final Intent nextIntent;
-            if(nextIntentType.contentEquals(READING)){
+            if(nextIntentType.contentEquals(READ)){
                 nextIntent = new Intent(this,VocabularyRead.class);
             }
             else if(nextIntentType.contentEquals(READALOUD)){

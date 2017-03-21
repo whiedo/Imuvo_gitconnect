@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -51,7 +52,19 @@
         <activity
             android:name=".Activities.VocabularyResult"
             android:screenOrientation="nosensor" />
-        <activity android:name=".Activities.VocabularyPlay"></activity>
+        <activity
+            android:name=".Activities.Dictionary"
+            android:screenOrientation="nosensor" />
+        <receiver android:name=".HelperClasses.AlarmReceiver"  android:enabled="true"/>
+        <receiver
+            android:name=".HelperClasses.BootReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".HelperClasses.AlarmService" />
     </application>
-
 </manifest>

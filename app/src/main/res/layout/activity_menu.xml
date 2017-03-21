@@ -39,16 +39,16 @@
         android:layout_marginBottom="5dp">
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="@string/play"
+            android:text="@string/dictionary"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/play"
-            android:onClick="onClickPlay"
+            android:id="@+id/dictionary"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             style="@style/menu_button."
             android:textColor="@color/colorMenuTextLeft"
-            android:layout_marginRight="2dp"/>
+            android:layout_marginRight="2dp"
+            android:onClick="onClickDictionary" />
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:text="@string/read"

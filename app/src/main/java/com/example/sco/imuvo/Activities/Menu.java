@@ -21,7 +21,7 @@ import com.example.sco.imuvo.R;
 
 public class Menu extends BaseActivity {
 
-    ButtonJokerman playButton, readButton, vocabsButton, readAloudButton, testButton, taskButton;
+    ButtonJokerman dictionaryButton, readButton, vocabsButton, readAloudButton, testButton, taskButton;
     User user;
     ImageView bubbleImageView;
     TextViewITCKRIST bubbleTextView;
@@ -39,7 +39,7 @@ public class Menu extends BaseActivity {
     @Override
     public  void onBackPressed(){
         final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         dialog.setContentView(R.layout.activity_custom_dialog);
         TextView textView = (TextView) dialog.findViewById(R.id.textView);
@@ -77,7 +77,7 @@ public class Menu extends BaseActivity {
     }
 
     private void getElements() {
-        playButton = (ButtonJokerman) findViewById(R.id.play);
+        dictionaryButton = (ButtonJokerman) findViewById(R.id.dictionary);
         readButton = (ButtonJokerman) findViewById(R.id.read);
         vocabsButton = (ButtonJokerman) findViewById(R.id.vocabs);
         readAloudButton = (ButtonJokerman) findViewById(R.id.readAloud);
@@ -91,15 +91,15 @@ public class Menu extends BaseActivity {
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
     }
 
-    public void onClickPlay(View v){
-        final Intent menuIntent = new Intent(this,VocabularyPlay.class);
+    public void onClickDictionary(View v){
+        final Intent menuIntent = new Intent(this,Dictionary.class);
         startActivity(menuIntent);
     }
 
     public void onClickRead(View v){
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READING);
+        bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READ);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
     }

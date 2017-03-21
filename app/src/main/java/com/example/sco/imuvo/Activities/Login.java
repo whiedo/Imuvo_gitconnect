@@ -1,6 +1,8 @@
 package com.example.sco.imuvo.Activities;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,7 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sco.imuvo.DatabaseHelper.UserDatabaseHelper;
+import com.example.sco.imuvo.HelperClasses.AlarmReceiver;
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.InitData;
 import com.example.sco.imuvo.HelperClasses.SocialMediaHelper;
@@ -44,7 +46,7 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URI;
+import java.util.Calendar;
 import java.util.concurrent.Callable;
 
 public class Login extends BaseActivity {
@@ -60,9 +62,51 @@ public class Login extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_login, frameLayout);
         disableDrawerLayout();
+
+        checkPermissions();
+
+        TypefaceUtil.overrideFont(this);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        mFacebookCallbackManager = CallbackManager.Factory.create();
+        SocialMediaHelper.logOutFromSocialMedia();
+
+        getElements();
+
+        registerSocialMediaCallbacks();
+
+        //TODO test fct.
+        testFunction();
+        setInitData();
+        initSQLData(this);
+
+        setNotificationAlarm();
+    }
+
+    public void setNotificationAlarm(){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        Intent alarmIntent = new Intent(Login.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(Login.this, 0, alarmIntent, 0);
+
+        Calendar alarmStartTime = Calendar.getInstance();
+        //TODO change starttime and interval of notifications
+        alarmStartTime.add(Calendar.MINUTE, 1);
+        alarmManager.setRepeating(AlarmManager.RTC, alarmStartTime.getTimeInMillis(), getInterval(), pendingIntent);
+    }
+
+    private int getInterval(){
+        int seconds = 30;
+        int milliseconds = 1000;
+        int repeatMS = seconds * milliseconds;
+        return repeatMS;
+    }
+
+    private void checkPermissions() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
@@ -74,20 +118,6 @@ public class Login extends BaseActivity {
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             }
         }
-
-        TypefaceUtil.overrideFont(this);
-
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        mFacebookCallbackManager = CallbackManager.Factory.create();
-        SocialMediaHelper.logOutFromSocialMedia();
-
-        //setContentView(R.layout.activity_login);
-        getElements();
-        registerSocialMediaCallbacks();
-        //TODO test fct.
-        testFunction();
-        setInitData();
-        initSQLData(this);
     }
 
     private void disableDrawerLayout() {
@@ -150,7 +180,6 @@ public class Login extends BaseActivity {
 
                     @Override
                     public void onError(FacebookException error) {
-                        Log.d(Login.class.getCanonicalName(), error.getMessage());
                         handleSignInResult(null);
                     }
                 }
@@ -169,11 +198,8 @@ public class Login extends BaseActivity {
 
     private void handleSignInResult(Callable<Void> logout) {
         if(logout == null) {
-            /* Login error */
             Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT).show();
         } else {
-            /* Login success */
-            //Application.getInstance().setLogoutCallable(logout);
             startActivity(new Intent(this, Menu.class));
         }
     }

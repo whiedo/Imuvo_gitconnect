@@ -94,8 +94,4 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         return GeneralDatabaseHelper.getSQLDatabase().delete(TABLE_NAME, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[]{String.valueOf(id)});
     }
-
-    public void Create() {
-        onCreate(GeneralDatabaseHelper.getSQLDatabase());
-    }
 }

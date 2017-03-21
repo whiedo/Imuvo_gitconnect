@@ -24,7 +24,6 @@
     <string name="testVocabs">Vokabeln testen</string>
     <string name="readAloudVocabs">Vokabeln vorlesen</string>
     <string name="noVocabsForLection">Es gibt keine Vokabeln für diese Lektion.</string>
-    <string name="lection">Lektion</string>
     <string name="reachedLastVocab">Letzte Vokabel erreicht!</string>
     <string name="noPreviousVocab">Es gibt keine vorherige Vokabel.</string>
     <string name="vocabWrong">Leider noch nicht ganz richtig.</string>
@@ -42,7 +41,6 @@
     <string name="name">Name</string>
     <string name="password">Passwort</string>
     <string name="start">Los Geht\'s!</string>
-    <string name="play">Spielen</string>
     <string name="read">Lesen</string>
     <string name="vocabs">Vokabeln</string>
     <string name="readAloud">Vorlesen</string>
@@ -63,4 +61,11 @@
     <string name="shareMessageResultPart1">"Schau mal! Ich habe mit dem Imuvo Vokabeltrainer "</string>
     <string name="shareMessageResultPart2">" richtige Vokabeln erreicht. Probiers doch auch einmal!"</string>
     <string name="shareWith">Teilen mit</string>
+    <string name="dictionary">Wörterbuch</string>
+    <string name="pageLoading">Seite wird geladen &#8230;</string>
+    <string name="dictionaryURL">https://pocket.dict.cc/</string>
+    <string name="lection">Lektion </string>
+    <string name="notificationTicker">Heute schon Vokabeln gelernt?!</string>
+    <string name="notificationTitle">Schon gelernt?</string>
+    <string name="notificationContent">Klicke hier um direkt zu deinem Vokabeltrainer zu gelangen und jetzt deine Vokabeln abzufragen!</string>
 </resources>
