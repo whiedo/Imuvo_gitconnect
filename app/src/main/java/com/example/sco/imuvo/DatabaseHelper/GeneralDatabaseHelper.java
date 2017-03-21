@@ -71,7 +71,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
             checkDB.close();
         }
 
-        return checkDB != null ? true : false;
+        return checkDB != null;
     }
 
     public void dropDatabase(Context context) {

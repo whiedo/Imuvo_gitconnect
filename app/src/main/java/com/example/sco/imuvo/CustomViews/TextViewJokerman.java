@@ -1,17 +1,9 @@
 package com.example.sco.imuvo.CustomViews;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Typeface;
-import android.support.v7.content.res.AppCompatResources;
 import android.util.AttributeSet;
 import android.widget.TextView;
-
-import com.example.sco.imuvo.R;
-
-/**
- * Created by sco on 13.12.2016.
- */
 
 public class TextViewJokerman extends TextView {
     public TextViewJokerman(Context context) {

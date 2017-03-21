@@ -5,9 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by sco on 22.12.2016.
- */
 public class AskingSingleton {
     private static AskingSingleton ourInstance = new AskingSingleton();
     public static Date startingDate;

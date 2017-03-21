@@ -13,10 +13,6 @@ import android.support.v4.app.NotificationCompat;
 import com.example.sco.imuvo.Activities.Login;
 import com.example.sco.imuvo.R;
 
-/**
- * Created by fte on 07.03.2017.
- */
-
 public class AlarmService extends IntentService {
 
     private static final int NOTIFICATION_ID = 1;

@@ -6,10 +6,6 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.Spinner;
 
-/**
- * Created by sco on 14.12.2016.
- */
-
 public class SpinnerITCKRIST extends Spinner {
     public SpinnerITCKRIST(Context context) {
         super(context);

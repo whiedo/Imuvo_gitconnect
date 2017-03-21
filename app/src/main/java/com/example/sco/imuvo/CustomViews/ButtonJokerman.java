@@ -1,19 +1,9 @@
 package com.example.sco.imuvo.CustomViews;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.Button;
-
-import com.example.sco.imuvo.R;
-
-/**
- * Created by sco on 14.12.2016.
- */
 
 public class ButtonJokerman extends Button {
     public ButtonJokerman(Context context) {

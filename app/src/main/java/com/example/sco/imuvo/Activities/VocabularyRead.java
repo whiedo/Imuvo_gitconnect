@@ -100,11 +100,9 @@ public class VocabularyRead extends BaseActivity {
         nextButton = (Button) findViewById(R.id.next);
         previousButton = (Button) findViewById(R.id.previous);
         earButton = (ImageButton) findViewById(R.id.earButton);
-        if(nextIntentType.contentEquals("read")){
+        if(nextIntentType.contentEquals(VocabularyLectionSelection.READ)){
             earButton.setVisibility(View.INVISIBLE);
-        }
-        else
-        {
+        } else {
             earButton.setVisibility(View.VISIBLE);
         }
         vocabPictureImageView = (ImageView) findViewById(R.id.vocabImage);

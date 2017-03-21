@@ -10,10 +10,6 @@ import java.util.Calendar;
 
 import static android.content.Context.ALARM_SERVICE;
 
-/**
- * Created by fte on 07.03.2017.
- */
-
 public class BootReceiver extends BroadcastReceiver {
 
     @Override

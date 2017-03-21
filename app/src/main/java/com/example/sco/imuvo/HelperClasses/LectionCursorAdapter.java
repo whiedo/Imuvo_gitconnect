@@ -13,10 +13,6 @@ import android.widget.TextView;
 import com.example.sco.imuvo.Activities.VocabularyList;
 import com.example.sco.imuvo.R;
 
-/**
- * Created by sco on 17.12.2016.
- */
-
 public class LectionCursorAdapter extends CursorAdapter {
     public LectionCursorAdapter(Context context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);

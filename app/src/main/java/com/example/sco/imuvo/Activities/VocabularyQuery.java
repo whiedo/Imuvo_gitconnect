@@ -59,7 +59,7 @@ public class VocabularyQuery extends BaseActivity {
         getCurrentLection();
         nextVocab();
         askingSingleton = AskingSingleton.getInstance();
-        askingSingleton.resetData();
+        AskingSingleton.resetData();
     }
 
     private void vocabIsFalse() {
@@ -179,7 +179,7 @@ public class VocabularyQuery extends BaseActivity {
                 skipButton.setVisibility(View.INVISIBLE);
 
             } else {
-                vocabList = vocabDatabaseHelper.getFromLection(currentLection.getNumber());
+                vocabList = VocabDatabaseHelper.getFromLection(currentLection.getNumber());
                 headlineText.setText(FormatHelper.colorsString(this,getString(R.string.askVocabs), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
             }
         }
@@ -229,11 +229,7 @@ public class VocabularyQuery extends BaseActivity {
 
     private boolean checkVocabCorrect() {
         String answer = answerEditText.getText().toString();
-        if (answer.contentEquals(getAnswer())) {
-            return true;
-        } else {
-            return false;
-        }
+        return answer.contentEquals(getAnswer());
 
     }
 
@@ -289,11 +285,6 @@ public class VocabularyQuery extends BaseActivity {
     private boolean positiveFeedbackRelevant() {
         Random rand = new Random();
         int val = rand.nextInt(4) + 1;
-        if (val == 1)
-        {
-            return true;
-        } else {
-            return false;
-        }
+        return val == 1;
     }
 }

@@ -2,10 +2,8 @@ package com.example.sco.imuvo.Activities;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-
 import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.LectionCursorAdapter;
 import com.example.sco.imuvo.R;

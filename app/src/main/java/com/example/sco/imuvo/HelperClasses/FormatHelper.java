@@ -1,23 +1,11 @@
 package com.example.sco.imuvo.HelperClasses;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Path;
-import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.widget.Toast;
-
-import com.example.sco.imuvo.R;
-
-/**
- * Created by sco on 28.11.2016.
- */
 
 public class FormatHelper {
 

@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import com.example.sco.imuvo.R;
 
-/**
- * Created by sco on 17.12.2016.
- */
-
 public class VocabCursorAdapter extends CursorAdapter {
     public VocabCursorAdapter(Context context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);

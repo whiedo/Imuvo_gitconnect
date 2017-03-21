@@ -7,14 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -276,11 +274,7 @@ public class Login extends BaseActivity {
         User user = null;
         user = UserDatabaseHelper.get(nameEditText.getText().toString());
         try{
-            if (user.getPassword().contentEquals(passwordEditText.getText())){
-                return true;
-            }
-            else
-                return false;
+            return user.getPassword().contentEquals(passwordEditText.getText());
         }
         catch (NullPointerException e){
             return false;

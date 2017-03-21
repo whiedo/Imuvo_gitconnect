@@ -11,10 +11,6 @@ import android.widget.Toast;
 
 import com.example.sco.imuvo.R;
 
-/**
- * Created by fte on 06.03.2017.
- */
-
 public class Dictionary extends BaseActivity {
     private WebView webView;
 

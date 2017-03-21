@@ -1,8 +1,5 @@
 package com.example.sco.imuvo.HelperClasses;
 
-/**
- * Created by sco on 19.12.2016.
- */
 import com.example.sco.imuvo.Model.Vocab;
 import com.voicerss.tts.AudioCodec;
 import com.voicerss.tts.AudioFormat;
@@ -58,7 +55,7 @@ public class WebServiceHelper {
                 public void handleSpeechDataEvent(SpeechDataEvent<?> e) {
                     try {
                         webServiceHelperListener.onWebServiceReturnResult((byte[]) e.getData());
-                    } catch (Exception ex) {;
+                    } catch (Exception ex) {
                     }
                 }
             });

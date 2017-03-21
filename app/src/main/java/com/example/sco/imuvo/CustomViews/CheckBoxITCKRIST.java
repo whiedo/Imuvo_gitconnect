@@ -5,10 +5,6 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.CheckBox;
 
-/**
- * Created by sco on 19.12.2016.
- */
-
 public class CheckBoxITCKRIST extends CheckBox {
     public CheckBoxITCKRIST(Context context) {
         super(context);

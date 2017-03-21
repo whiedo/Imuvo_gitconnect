@@ -1,9 +1,5 @@
 package com.example.sco.imuvo.HelperClasses;
 
-/**
- * Created by fte on 21.03.2017.
- */
-
 public class AlarmIntervalHelper {
 
     public static int getAlarmInterval(){

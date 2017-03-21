@@ -1,14 +1,9 @@
 package com.example.sco.imuvo.CustomViews;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.EditText;
-
-/**
- * Created by sco on 14.12.2016.
- */
 
 public class EditTextITCKRIST extends EditText {
     public EditTextITCKRIST(Context context) {
