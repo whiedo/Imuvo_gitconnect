@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -53,6 +55,8 @@ public class Login extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     private static final int XML_REQUEST_CODE = 2;
+    private static final String NUMBER_OF_IMPORTED_LECTIONS = "NUMBEROFLECTIONS";
+    private static final String NUMBER_OF_IMPORTED_VOCABS = "NUMBEROFVOCABS";
     TextView welcomeTextView, bubbleTextView;
     Button startButton;
     EditText nameEditText, passwordEditText;
@@ -192,7 +196,7 @@ public class Login extends BaseActivity {
         if(FacebookSdk.isFacebookRequestCode(requestCode)) {
             mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
         } else{
-            handleXMLRequestCode(requestCode, resultCode, data);
+            handleXMLRequestCode(data);
         }
     }
 
@@ -203,14 +207,43 @@ public class Login extends BaseActivity {
             startActivity(new Intent(this, Menu.class));
         }
     }
-        private void handleXMLRequestCode(int requestCode, int resultCode, Intent data) {
+        private void handleXMLRequestCode(final Intent data) {
         if (data != null) {
-            Uri uri = data.getData();
-            XMLLectionImport.importLection(this, uri);
-            Log.i("XML",Integer.toString(XMLLectionImport.lections.size()));
-            Log.i("XML",Integer.toString(XMLLectionImport.vocabs.size()));
+            new Thread(new Runnable() {
+                public void run() {
+                    XMLLectionImport.importLection(getApplicationContext(), data.getData());
+                    returnImportedData(Integer.toString(XMLLectionImport.getNumberImportedLections()), Integer.toString(XMLLectionImport.getNumberImportedVocabs()));
+                }
+
+                public void returnImportedData(String numberLections, String numberVocabs) {
+                    Message msgObj = handler.obtainMessage();
+                    Bundle b = new Bundle();
+                    b.putString(NUMBER_OF_IMPORTED_LECTIONS, numberLections);
+                    b.putString(NUMBER_OF_IMPORTED_VOCABS, numberVocabs);
+                    msgObj.setData(b);
+                    handler.sendMessage(msgObj);
+                }
+
+                private final Handler handler = new Handler() {
+
+                    public void handleMessage(Message msg) {
+                        String numberLections = msg.getData().getString(NUMBER_OF_IMPORTED_LECTIONS);
+                        String numberVocabs = msg.getData().getString(NUMBER_OF_IMPORTED_VOCABS);
+
+                        if(numberLections != "0" || numberVocabs != "0"){
+                            String output = getString(R.string.importResult).replace("$lections",numberLections).replace("$vocabs",numberVocabs);
+                            Toast.makeText(getApplicationContext(),output,Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.NoVocabsImported,Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                };
+            }).start();
         }
     }
+
+
     private void initSQLData(final Context context) {
         new Thread(new Runnable() {
             public void run() {
