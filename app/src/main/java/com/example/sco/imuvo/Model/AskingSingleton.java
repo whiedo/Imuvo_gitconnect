@@ -25,7 +25,7 @@ public class AskingSingleton {
     }
 
     public static void resetData(){
-        startingDate = (Date) Calendar.getInstance().getTime();
+        startingDate = Calendar.getInstance().getTime();
         endingDate = null;
         wrongVocabs = new ArrayList<>();
         rightVocabs = new ArrayList<>();

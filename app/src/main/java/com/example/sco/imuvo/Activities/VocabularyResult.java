@@ -32,9 +32,9 @@ public class VocabularyResult extends BaseActivity {
     private void setValuesToTextView() {
         rightTextView.setText("Richtig: " + Integer.toString(rightVocabList.size()));
         wrongTextView.setText("Falsch: " + Integer.toString(wrongVocabList.size()));
-        AskingSingleton.endingDate = (Date) Calendar.getInstance().getTime();
+        AskingSingleton.endingDate = Calendar.getInstance().getTime();
 
-        long duration = ((long) (AskingSingleton.endingDate.getTime() - AskingSingleton.startingDate.getTime()));
+        long duration = (AskingSingleton.endingDate.getTime() - AskingSingleton.startingDate.getTime());
         durationTextView.setText("Dauer: " + Long.toString(duration / 1000 / 60) + " min");
     }
 
