@@ -20,13 +20,13 @@ import com.example.sco.imuvo.R;
  */
 
 public class FormatHelper {
+
     public static void makeLongToast(Context context, CharSequence value){
         Toast.makeText(context,value,Toast.LENGTH_LONG).show();
-
     }
+
     public static void makeShortToast(Context context, CharSequence value){
         Toast.makeText(context,value,Toast.LENGTH_SHORT).show();
-
     }
 
     public static Spannable colorsString(Context context, String s, int color1, int color2){

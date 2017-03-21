@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,10 +26,12 @@ import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.InitData;
 import com.example.sco.imuvo.HelperClasses.SocialMediaHelper;
 import com.example.sco.imuvo.HelperClasses.TypefaceUtil;
+import com.example.sco.imuvo.HelperClasses.XMLLectionImport;
 import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.R;
 import com.facebook.CallbackManager;
+import com.facebook.FacebookActivity;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
@@ -40,11 +44,13 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URI;
 import java.util.concurrent.Callable;
 
 public class Login extends BaseActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+    private static final int XML_REQUEST_CODE = 2;
     TextView welcomeTextView, bubbleTextView;
     Button startButton;
     EditText nameEditText, passwordEditText;
@@ -96,6 +102,7 @@ public class Login extends BaseActivity {
         facebookSignInButton.setReadPermissions("email");
         facebookSignInButton.registerCallback(mFacebookCallbackManager,
                 new FacebookCallback<LoginResult>() {
+
                     @Override
                     public void onSuccess(final LoginResult loginResult) {
                         GraphRequest request = GraphRequest.newMeRequest(
@@ -155,17 +162,29 @@ public class Login extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(FacebookSdk.isFacebookRequestCode(requestCode)) {
             mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+        } else{
+            handleXMLRequestCode(requestCode, resultCode, data);
         }
     }
 
     private void handleSignInResult(Callable<Void> logout) {
         if(logout == null) {
+            /* Login error */
             Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT).show();
         } else {
+            /* Login success */
+            //Application.getInstance().setLogoutCallable(logout);
             startActivity(new Intent(this, Menu.class));
         }
     }
-
+        private void handleXMLRequestCode(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            Uri uri = data.getData();
+            XMLLectionImport.importLection(this, uri);
+            Log.i("XML",Integer.toString(XMLLectionImport.lections.size()));
+            Log.i("XML",Integer.toString(XMLLectionImport.vocabs.size()));
+        }
+    }
     private void initSQLData(final Context context) {
         new Thread(new Runnable() {
             public void run() {
@@ -236,10 +255,20 @@ public class Login extends BaseActivity {
             case R.id.showVocabs:
                 showVocabs();
                 return true;
+            case R.id.importXML:
+                importLection();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void importLection() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("text/xml");
+        startActivityForResult(intent,XML_REQUEST_CODE);
+    }
+
 
     private void showVocabs() {
         final Intent menuIntent = new Intent(this,VocabularyLectionList.class);

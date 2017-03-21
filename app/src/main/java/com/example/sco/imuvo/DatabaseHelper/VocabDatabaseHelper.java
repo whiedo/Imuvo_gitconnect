@@ -47,7 +47,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public Vocab get(long id) {
+    public static Vocab get(long id) {
         Vocab vocab = null;
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[] { String.valueOf(id) }, null, null, null);
@@ -79,6 +79,20 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         return vocabs;
+    }
+
+    public static Vocab getByBaseLanguage(String baseLanguage) {
+        Vocab vocab = null;
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[BASELANGUAGE_COLUMN_INDEX] + "=?",
+                new String[] { baseLanguage }, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getBlob(3),
+                    cursor.getInt(4),cursor.getBlob(5));
+        }
+
+        cursor.close();
+        return vocab;
     }
 
     public static Cursor getAll() {

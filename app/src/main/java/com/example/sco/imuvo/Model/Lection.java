@@ -25,6 +25,10 @@ public class Lection {
         this.language = language;
     }
 
+    public Lection() {
+
+    }
+
     public long getSqlID() {
         return sqlID;
     }

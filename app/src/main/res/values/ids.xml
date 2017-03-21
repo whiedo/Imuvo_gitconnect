@@ -3,4 +3,5 @@
     <item name="repeat" type="id" />
     <item name="Lösung" type="id" />
     <item name="solution" type="id" />
+    <item name="importXML" type="id">importXML</item>
 </resources>

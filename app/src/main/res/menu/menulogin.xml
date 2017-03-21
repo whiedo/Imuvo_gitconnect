@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/create_new"
-        android:title="Nutzer registrieren" />
+        android:title="@string/register_user" />
     <item android:id="@+id/showVocabs"
-        android:title="Lektionen verwalten" />
-
+        android:title="@string/manage_lections" />
+    <item android:id="@id/importXML"
+        android:title="@string/import_lection"
+        />
 </menu>

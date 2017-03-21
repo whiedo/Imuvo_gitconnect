@@ -28,6 +28,10 @@ public class Vocab {
         this.lection = lection;
     }
 
+    public Vocab() {
+
+    }
+
     public int getLection() {
         return lection;
     }
