@@ -13,7 +13,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
 import com.example.sco.imuvo.R;
 
 public class BaseActivity extends AppCompatActivity
@@ -58,6 +60,8 @@ public class BaseActivity extends AppCompatActivity
                         intent = new Intent(getApplicationContext(),Dictionary.class);
                         break;
                     case 1:
+                        if (!checkLectionAvailable()) return;
+
                         intent = new Intent(getApplicationContext(),VocabularyLectionSelection.class);
                         bundle = new Bundle();
                         bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READ);
@@ -67,12 +71,16 @@ public class BaseActivity extends AppCompatActivity
                         intent = new Intent(getApplicationContext(),VocabularyLectionList.class);
                         break;
                     case 3:
+                        if (!checkLectionAvailable()) return;
+
                         intent = new Intent(getApplicationContext(),VocabularyLectionSelection.class);
                         bundle = new Bundle();
                         bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READALOUD);
                         intent.putExtras(bundle);
                         break;
                     case 4:
+                        if (!checkLectionAvailable()) return;
+
                         intent = new Intent(getApplicationContext(),VocabularyTestSelection.class);
                         break;
                     case 5:
@@ -108,5 +116,14 @@ public class BaseActivity extends AppCompatActivity
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    public boolean checkLectionAvailable() {
+        if (!LectionDatabaseHelper.lectionExists()) {
+            Toast.makeText(this, R.string.noLectionsAvailable,Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
     }
 }

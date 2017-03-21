@@ -224,7 +224,7 @@ public class Login extends BaseActivity {
                             String output = getString(R.string.importResult).replace("$lections",numberLections).replace("$vocabs",numberVocabs);
                             Toast.makeText(getApplicationContext(),output,Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), R.string.NoVocabsImported,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.noVocabsImported,Toast.LENGTH_SHORT).show();
                         }
 
                     }
