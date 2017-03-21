@@ -17,23 +17,6 @@ public class WebServiceHelper {
     private WebServiceHelperListener webServiceHelperListener;
 
     public WebServiceHelper(){
-
-    }
-    public static byte[] getSpeechSync(String text) {
-        VoiceProvider tts = new VoiceProvider(APIKEY);
-        VoiceParameters params = new VoiceParameters(text, Languages.English_UnitedStates);
-        params.setCodec(AudioCodec.WAV);
-        params.setFormat(AudioFormat.Format_44KHZ.AF_44khz_16bit_stereo);
-        params.setBase64(false);
-        params.setSSML(false);
-        params.setRate(0);
-        byte[] result = null;
-        try {
-            result = tts.speech(params);
-        } catch (Exception e) {
-        }
-        return result;
-
     }
 
     public void getSpeechAsync(final Vocab vocab){

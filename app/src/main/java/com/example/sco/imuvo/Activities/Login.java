@@ -197,7 +197,8 @@ public class Login extends BaseActivity {
             startActivity(new Intent(this, Menu.class));
         }
     }
-        private void handleXMLRequestCode(final Intent data) {
+
+    private void handleXMLRequestCode(final Intent data) {
         if (data != null) {
             new Thread(new Runnable() {
                 public void run() {
@@ -220,7 +221,7 @@ public class Login extends BaseActivity {
                         String numberLections = msg.getData().getString(NUMBER_OF_IMPORTED_LECTIONS);
                         String numberVocabs = msg.getData().getString(NUMBER_OF_IMPORTED_VOCABS);
 
-                        if(numberLections != "0" || numberVocabs != "0"){
+                        if(!numberLections.equals("0") || !numberVocabs.equals("0")){
                             String output = getString(R.string.importResult).replace("$lections",numberLections).replace("$vocabs",numberVocabs);
                             Toast.makeText(getApplicationContext(),output,Toast.LENGTH_SHORT).show();
                         } else {
@@ -259,10 +260,11 @@ public class Login extends BaseActivity {
     public void onClickStart(View v){
         if(checkUserCorrect()){
             final Intent menuIntent = new Intent(this,Menu.class);
-            String username = nameEditText.getText().toString();
-            SingletonUser.data = username;
+
+            SingletonUser.data = nameEditText.getText().toString();
             nameEditText.setText("");
             passwordEditText.setText("");
+
             startActivity(menuIntent);
         }
         else{
@@ -317,8 +319,8 @@ public class Login extends BaseActivity {
 
     private void newUser() {
         final Intent menuIntent = new Intent(this,CreateUser.class);
-        String username = nameEditText.getText().toString();
-        SingletonUser.data = username;
+        SingletonUser.data = nameEditText.getText().toString();
+
         startActivity(menuIntent);
     }
 }

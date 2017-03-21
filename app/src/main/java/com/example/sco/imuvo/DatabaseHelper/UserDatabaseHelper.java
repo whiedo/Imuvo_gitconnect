@@ -76,8 +76,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMNS[USERNAME_COLUMN_INDEX], user.getUserName());
         values.put(COLUMNS[PASSWORD_COLUMN_INDEX], user.getPassword());
 
-        long id = GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
-        return id;
+        return GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
     }
 
     public int update(User user) {
@@ -86,9 +85,8 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMNS[USERNAME_COLUMN_INDEX], user.getUserName());
         values.put(COLUMNS[PASSWORD_COLUMN_INDEX], user.getPassword());
 
-        int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
+        return GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[] { String.valueOf(user.getId()) });
-        return rows;
     }
 
     public int delete(long id) {

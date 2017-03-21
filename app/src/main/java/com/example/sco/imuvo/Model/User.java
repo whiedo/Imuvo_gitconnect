@@ -37,6 +37,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        password = password;
+        this.password = password;
     }
 }

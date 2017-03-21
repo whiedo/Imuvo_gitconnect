@@ -26,7 +26,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
             COLUMNS[1] + " INTEGER, " +
             COLUMNS[2] + " TEXT" +
             ")";
-    public static final String DROPT_ABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+    public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
     public static final String SELECT_ALL = "SELECT  * FROM ";
 
     private LectionDatabaseHelper(Context context) {
@@ -80,8 +80,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMNS[NUMBER_COLUMN_INDEX], Lection.getNumber());
         values.put(COLUMNS[LANGUAGE_COLUMN_INDEX], Lection.getLanguage());
 
-        long id = GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
-        return id;
+        return GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
     }
 
     public int update(Lection Lection) {
@@ -90,9 +89,8 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMNS[NUMBER_COLUMN_INDEX], Lection.getNumber());
         values.put(COLUMNS[LANGUAGE_COLUMN_INDEX], Lection.getLanguage());
 
-        int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
+        return GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[]{String.valueOf(Lection.getSqlID())});
-        return rows;
     }
 
     public int delete(long id) {
@@ -122,8 +120,10 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
+            cursor.close();
             return true;
         } else {
+            cursor.close();
             return false;
         }
     }

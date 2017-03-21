@@ -73,7 +73,7 @@ public class VocabularyRead extends BaseActivity {
 
     private void setCurrVocab(Vocab vocab) {
         currVocab = vocab;
-        if(currentDirection == 0l) {
+        if(currentDirection == 0L) {
             text1Text.setText(vocab.getForeign());
             text2Text.setText(vocab.getGerman());
         }
@@ -110,7 +110,7 @@ public class VocabularyRead extends BaseActivity {
 
     private void getCurrentLection() {
         Bundle bundle = getIntent().getExtras();
-        currentLection = LectionDatabaseHelper.get(bundle.getLong(VocabularyLectionSelection.SELECTED_LECTION) + 1l);
+        currentLection = LectionDatabaseHelper.get(bundle.getLong(VocabularyLectionSelection.SELECTED_LECTION) + 1L);
         vocabList = VocabDatabaseHelper.getFromLection(currentLection.getNumber());
         if(bundle.getBoolean(VocabularyLectionSelection.RANDOM)){
             Collections.shuffle(vocabList);

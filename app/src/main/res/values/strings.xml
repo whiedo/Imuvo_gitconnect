@@ -1,11 +1,7 @@
 <resources>
     <string name="app_name">Imuvo</string>
-    <string name="action_settings">Settings</string>
     <string name="facebook_app_id">1065468250226511</string>
     <string name="login_error">Fehler bei Login. Besteht eine Internetverbindung?</string>
-    <string name="title_activity_read_vocabs">ReadVocabs</string>
-    <string name="title_activity_lection_list">LectionList</string>
-    <string name="title_activity_test">test</string>
     <string name="createUserText">Hier kannst du einen neuen Benutzer anlegen. Bitte lege einen Benutzernamen und ein Passwort fest.</string>
     <string name="userCreated">Nutzer wurde angelegt.</string>
     <string name="passwordWrong">Benutzerkonto existiert bereits oder Name oder Passwort sind falsch. Bitte versuche es erneut.</string>
@@ -33,7 +29,7 @@
     <string name="vocabTest">Vokabeltest</string>
     <string name="next">Nächste</string>
     <string name="selectTestType">Sehr gut! Du möchtest Vokabeln üben. Bitte entscheide dich zwischen einer Abfrage oder einem Vokabeltest</string>
-    <string name="createNewUserExplenation">Hier kannst du einen neuen Benutzer anlegen. Bitte lege einen Benutzernamen und ein Passwort fest.</string>
+    <string name="createNewUserExplanation">Hier kannst du einen neuen Benutzer anlegen. Bitte lege einen Benutzernamen und ein Passwort fest.</string>
     <string name="register">Registrieren</string>
     <string name="createUser">Nutzer anlegen</string>
     <string name="showSolution">Lösung anzeigen</string>
@@ -45,12 +41,10 @@
     <string name="vocabs">Vokabeln</string>
     <string name="readAloud">Vorlesen</string>
     <string name="query">Abfrage</string>
-    <string name="task">Aufgaben</string>
     <string name="randomOrder">Zufällige Reihenfolge</string>
     <string name="previous">Vorherig</string>
     <string name="result">Ergebnis</string>
     <string name="askWrongVocabsAgain">Falsche Vokabeln erneut abfragen</string>
-    <string name="overview">Übersicht</string>
     <string name="share">Ergebnis teilen</string>
     <string name="furtherQuery">Weitere Abfrage</string>
     <string name="test">Test</string>
@@ -71,4 +65,14 @@
     <string name="noVocabsImported">Es konnten keine Vokabeln oder Lektionen importiert werden oder diese sind bereits vorhanden.</string>
     <string name="importResult">Es wurden $lections Lektionen und $vocabs Vokabeln importiert.</string>
     <string name="noLectionsAvailable">Keine Lektionen vorhanden. Bitte den Datenimport nutzen.</string>
+    <string name="skip">Überspringen</string>
+    <string name="english">Englisch</string>
+    <string name="minus">-</string>
+    <string name="german">Deutsch</string>
+    <string name="selectLection">Lektionen auswählen</string>
+    <string name="yes">Ja</string>
+    <string name="correctColon">"Richtig: "</string>
+    <string name="wrongColon">"Falsch: "</string>
+    <string name="duration">"Dauer: "</string>
+    <string name="spaceMinutes">" min"</string>
 </resources>

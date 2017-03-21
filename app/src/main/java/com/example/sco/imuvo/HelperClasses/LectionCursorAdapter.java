@@ -35,7 +35,7 @@ public class LectionCursorAdapter extends CursorAdapter {
 
         final int lectionNo = cursor.getInt(1);
 
-        german.setText("Lektion");
+        german.setText(R.string.lection);
         foreign.setText(Integer.toString(lectionNo));
         lection.setText(cursor.getString(2));
 

@@ -17,10 +17,10 @@ public class VocabularyLectionList extends BaseActivity {
         super.onCreate(savedInstanceState);
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_vocabulary_lection_list, frameLayout);
-        popoulateListView();
+        populateListView();
     }
 
-    private void popoulateListView() {
+    private void populateListView() {
         lectionListView = (ListView) findViewById(R.id.listView);
         Cursor cursor = LectionDatabaseHelper.getAll();
         LectionCursorAdapter lectionCursorAdapter = new LectionCursorAdapter(this, cursor, 0);

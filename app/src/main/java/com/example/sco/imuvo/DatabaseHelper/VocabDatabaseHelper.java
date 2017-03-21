@@ -97,15 +97,13 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public static Cursor getAll() {
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, null,
-               null, null, null, null);
-        return cursor;
+        return GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, null,
+                null, null, null, null);
     }
 
     public static Cursor getAll(int lectionNo) {
-        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[LECTION_COLUMN_INDEX] + "=?",
+        return GeneralDatabaseHelper.getSQLDatabase().query(TABLE_NAME, COLUMNS, COLUMNS[LECTION_COLUMN_INDEX] + "=?",
                 new String[] { Integer.toString(lectionNo)}, null, null, null);
-        return cursor;
     }
 
     public static long insert(Vocab vocab) {
@@ -118,9 +116,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMNS[LECTION_COLUMN_INDEX],vocab.getLection());
         values.put(COLUMNS[PICTURE_COLUMN_INDEX],vocab.getPicture());
 
-        long id = GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
-
-        return id;
+        return GeneralDatabaseHelper.getSQLDatabase().insert(TABLE_NAME, null, values);
     }
 
     public static int update(Vocab vocab) {
@@ -132,9 +128,8 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMNS[LECTION_COLUMN_INDEX],vocab.getLection());
         values.put(COLUMNS[PICTURE_COLUMN_INDEX],vocab.getPicture());
 
-        int rows = GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
+        return GeneralDatabaseHelper.getSQLDatabase().update(TABLE_NAME, values, COLUMNS[ID_COLUMN_INDEX] + "=?",
                 new String[] { String.valueOf(vocab.getSqlID()) });
-        return rows;
     }
 
     public int delete(long id) {

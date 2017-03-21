@@ -128,7 +128,7 @@ public class VocabularyQuery extends BaseActivity {
     private void setCurrVocab(Vocab vocab) {
         currVocab = vocab;
 
-        if (currentDirection == 1l){
+        if (currentDirection == 1L){
             questionTextView.setText(vocab.getForeign());
         } else{
             questionTextView.setText(vocab.getGerman());
@@ -167,7 +167,7 @@ public class VocabularyQuery extends BaseActivity {
     private void getCurrentLection() {
         Bundle bundle = getIntent().getExtras();
 
-        currentLection = LectionDatabaseHelper.get(bundle.getLong(VocabularyLectionSelection.SELECTED_LECTION) + 1l);
+        currentLection = LectionDatabaseHelper.get(bundle.getLong(VocabularyLectionSelection.SELECTED_LECTION) + 1L);
         if(bundle.getBoolean(ASKWRONGVOCABSAGAIN)){
             vocabList = AskingSingleton.wrongVocabs;
         } else {
@@ -265,7 +265,7 @@ public class VocabularyQuery extends BaseActivity {
     }
 
     private String getAnswer() {
-        if(currentDirection == 1l){
+        if(currentDirection == 1L){
             return(currVocab.getGerman().trim());
         } else {
             return(currVocab.getForeign().trim());

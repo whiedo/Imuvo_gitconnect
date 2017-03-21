@@ -6,7 +6,6 @@ public class AlarmIntervalHelper {
         int minutes = 3;
         int seconds = 60;
         int milliseconds = 1000;
-        int repeatMS = minutes * seconds * milliseconds;
-        return repeatMS;
+        return minutes * seconds * milliseconds;
     }
 }

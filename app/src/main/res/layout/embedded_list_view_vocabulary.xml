@@ -7,20 +7,20 @@
         android:id="@+id/foreign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Englisch"
+        android:text="@string/english"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     <TextView
         android:id="@+id/line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-"
+        android:text="@string/minus"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     <TextView
         android:id="@+id/german"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Deutsch"
+        android:text="@string/german"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     <TextView
@@ -28,6 +28,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="1"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 </LinearLayout>

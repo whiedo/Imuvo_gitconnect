@@ -22,7 +22,7 @@
         />
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Vokabeln abfragen"
+        android:text="@string/askVocabs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -33,7 +33,6 @@
         android:textColor="@color/colorMenuTextLeft" />
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Lektion X"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/headline"
@@ -89,7 +88,6 @@
             <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
             android:layout_width="240dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
             android:id="@+id/text2"
             android:background="@drawable/rectangleroundedvocabs"
             android:gravity="center"
@@ -108,10 +106,7 @@
             android:textAlignment="center"
             android:gravity="center"
             android:background="@drawable/rectangleroundedvocabs"
-            android:layout_alignBottom="@+id/imageView5"
             android:layout_gravity="center_horizontal"
-            android:layout_alignLeft="@+id/text2"
-            android:layout_alignStart="@+id/text2"
             android:textSize="20sp"
             android:imeOptions="actionDone"
             android:maxLines="1"
@@ -119,7 +114,7 @@
     </LinearLayout>
 
     <com.example.sco.imuvo.CustomViews.ButtonJokerman
-        android:text="Prüfen"
+        android:text="@string/check"
         android:id="@+id/next"
         android:onClick="onClickButtonNext"
         android:background="@drawable/arrowrightselector"
@@ -133,7 +128,6 @@
         android:layout_alignParentEnd="true" />
 
     <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
-        android:text="bubbleTextVie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bubbleTextAsk"
@@ -153,7 +147,7 @@
         android:textAlignment="center"
 
         android:paddingLeft="10dp"
-        android:text="Überspringen"
+        android:text="@string/skip"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

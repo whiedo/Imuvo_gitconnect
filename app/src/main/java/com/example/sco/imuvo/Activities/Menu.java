@@ -46,7 +46,7 @@ public class Menu extends BaseActivity {
         TextView textView = (TextView) dialog.findViewById(R.id.textView);
         textView.setText(R.string.logOutQuestion);
         Button repeatButton = (Button) dialog.findViewById(R.id.solution);
-        repeatButton.setText("Ja");
+        repeatButton.setText(R.string.yes);
         repeatButton.setTextColor(Color.GREEN);
         repeatButton.setOnClickListener(new View.OnClickListener() {
             @Override

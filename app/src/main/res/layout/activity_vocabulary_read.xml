@@ -74,7 +74,6 @@
             <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
                 android:layout_width="240dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
                 android:id="@+id/text2"
                 android:background="@drawable/rectangleroundedvocabs"
                 android:gravity="center"
@@ -107,10 +106,7 @@
             android:background="@drawable/rectangleroundedvocabs"
             android:gravity="center"
             android:textSize="20sp"
-            android:layout_alignTop="@+id/imageView5"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_above="@+id/text2" />
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
@@ -135,7 +131,7 @@
         android:textAlignment="center"
         android:paddingRight="10dp"
         android:layout_width="100dp"
-        android:text="Nächste"
+        android:text="@string/next"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -147,7 +143,6 @@
         android:layout_centerInParent="true"
         android:layout_height="60dp"
         android:id="@+id/earButton"
-        android:layout_weight="1"
         android:onClick="speakAloud"
         android:background="@drawable/ear_selector"
         android:layout_alignParentBottom="true"
