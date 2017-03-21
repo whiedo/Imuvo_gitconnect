@@ -2,6 +2,7 @@ package com.example.sco.imuvo.HelperClasses;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Base64;
 
 import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
 import com.example.sco.imuvo.DatabaseHelper.VocabDatabaseHelper;
@@ -27,6 +28,17 @@ public class XMLLectionImport {
 
     public static ArrayList<Lection> lections;
     public static ArrayList<Vocab> vocabs;
+    private static int numberImportedLections;
+    private static int numberImportedVocabs;
+
+    public static int getNumberImportedLections() {
+        return numberImportedLections;
+    }
+
+    public static int getNumberImportedVocabs() {
+        return numberImportedVocabs;
+    }
+
     public static void importLection(Context context, Uri uri){
         XmlPullParserFactory factory = null;
         lections = new ArrayList<>();
@@ -37,7 +49,7 @@ public class XMLLectionImport {
             XmlPullParser xpp = factory.newPullParser();
             InputStream fis = context.getContentResolver().openInputStream(uri);
             xpp.setInput(fis, null);
-            parse(xpp,context);
+            parse(xpp);
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -47,7 +59,7 @@ public class XMLLectionImport {
         }
     }
 
-    private static void parse(XmlPullParser xpp,Context context) throws XmlPullParserException, IOException {
+    private static void parse(XmlPullParser xpp) throws XmlPullParserException, IOException {
         Vocab vocab = null;
         Lection lection = null;
         String text = null;
@@ -79,6 +91,8 @@ public class XMLLectionImport {
                         vocab.setForeign(text);
                     } else if (tagname.equalsIgnoreCase("number")) {
                         lection.setNumber(Integer.parseInt(text));
+                    } else if (tagname.equalsIgnoreCase("picture")){
+                        vocab.setPicture(Base64.decode(text, Base64.DEFAULT));
                     }
                     break;
 
@@ -87,35 +101,28 @@ public class XMLLectionImport {
             }
             eventType = xpp.next();
         }
-        insertLections(lections, context);
-        insertVocabs(vocabs, context);
+        insertLections(lections);
+        insertVocabs(vocabs);
     }
 
-    public static void insertVocabs(ArrayList<Vocab> vocabs, Context context){
+    public static void insertVocabs(ArrayList<Vocab> vocabs){
+        numberImportedVocabs = 0;
         for (Vocab vocab:
              vocabs) {
             if(VocabDatabaseHelper.getByBaseLanguage(vocab.getGerman()) == null){
-                vocab.setSqlID(VocabDatabaseHelper.insert(vocab));
-                try {
-                    InputStream is2 = context.getAssets().open("picture/" + vocab.getForeign() + ".png");
-                    int size2 = is2.available();
-                    byte[] buffer2 = new byte[size2];
-                    is2.read(buffer2);
-                    is2.close();
-                    vocab.setPicture(buffer2);
-                    VocabDatabaseHelper.update(vocab);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                VocabDatabaseHelper.insert(vocab);
+                numberImportedVocabs += 1;
             }
 
         }
     }
-    public static void insertLections(ArrayList<Lection> lections, Context context){
+    public static void insertLections(ArrayList<Lection> lections){
+        numberImportedLections = 0;
         for (Lection lection:
              lections) {
             if(LectionDatabaseHelper.get(lection.getNumber()) == null){
                 LectionDatabaseHelper.insert(lection);
+                numberImportedLections += 1;
             }
         }
     }
