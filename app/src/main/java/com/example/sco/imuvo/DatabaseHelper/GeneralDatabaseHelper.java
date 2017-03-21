@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
 public class GeneralDatabaseHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "vocabulary_trainer";
@@ -15,7 +16,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
     private GeneralDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
+        DB_PATH = Environment.getExternalStorageDirectory() + context.getPackageName() + "/" + "databases/";
     }
 
     public static GeneralDatabaseHelper getInstance(Context context) {
@@ -35,10 +36,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //TODO delete content of this fct. after development
-        db.execSQL(UserDatabaseHelper.DROP_TABLE);
-        db.execSQL(VocabDatabaseHelper.DROP_TABLE);
-        db.execSQL(LectionDatabaseHelper.DROP_TABLE);
+
         onCreate(db);
     }
 

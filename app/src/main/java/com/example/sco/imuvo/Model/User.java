@@ -10,6 +10,7 @@ public class User {
         UserName = userName;
         this.password = password;
     }
+
     public User(String userName, String password){
         UserName = userName;
         this.password = password;
@@ -36,6 +37,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        password = password;
     }
 }

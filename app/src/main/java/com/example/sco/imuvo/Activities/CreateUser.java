@@ -1,7 +1,6 @@
 package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -31,7 +30,7 @@ public class CreateUser extends BaseActivity {
     }
 
     public void onClickCreateUser(View v){
-        if(checkUserCorrect() && UserDatabaseHelper.get(nameEditText.getText().toString()) == null){
+        if(UserDatabaseHelper.get(nameEditText.getText().toString()) == null){
             User user = new User(0,nameEditText.getText().toString(),passwordEditText.getText().toString());
             UserDatabaseHelper.insert(user);
 
@@ -44,11 +43,4 @@ public class CreateUser extends BaseActivity {
             FormatHelper.makeLongToast(this,getString(R.string.passwordWrong));
         }
     }
-
-    public boolean checkUserCorrect(){
-        //TODO
-        return true;
-    }
-
-
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
 import com.example.sco.imuvo.Model.Vocab;
 
@@ -35,7 +36,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper {
 
     private VocabDatabaseHelper(Context context) {
         super(context, GeneralDatabaseHelper.DB_NAME, null, GeneralDatabaseHelper.DB_VERSION);
-        String DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
+        String DB_PATH = Environment.getExternalStorageDirectory() + context.getPackageName() + "/" + "databases/";
     }
 
     @Override

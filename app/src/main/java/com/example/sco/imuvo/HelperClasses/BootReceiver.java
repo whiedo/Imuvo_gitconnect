@@ -25,19 +25,13 @@ public class BootReceiver extends BroadcastReceiver {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
 
             Calendar alarmStartTime = Calendar.getInstance();
-            //TODO change starttime and interval of notifications
+
             alarmStartTime.add(Calendar.MINUTE, 1);
-            alarmManager.setRepeating(AlarmManager.RTC, alarmStartTime.getTimeInMillis(), getInterval(), pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC, alarmStartTime.getTimeInMillis(),
+                    AlarmIntervalHelper.getAlarmInterval(), pendingIntent);
 
             Intent service1 = new Intent(context, AlarmService.class);
             context.startService(service1);
         }
-    }
-
-    private int getInterval(){
-        int seconds = 30;
-        int milliseconds = 1000;
-        int repeatMS = seconds * milliseconds;
-        return repeatMS;
     }
 }

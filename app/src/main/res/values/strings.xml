@@ -28,7 +28,7 @@
     <string name="noPreviousVocab">Es gibt keine vorherige Vokabel.</string>
     <string name="vocabWrong">Leider noch nicht ganz richtig.</string>
     <string name="solution">Lösung:</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="check">Prüfen</string>
     <string name="vocabTest">Vokabeltest</string>
     <string name="next">Nächste</string>
@@ -61,7 +61,7 @@
     <string name="shareMessageResultPart1">"Schau mal! Ich habe mit dem Imuvo Vokabeltrainer "</string>
     <string name="shareMessageResultPart2">" richtige Vokabeln erreicht. Probiers doch auch einmal!"</string>
     <string name="shareWith">Teilen mit</string>
-    <string name="dictionary">Wörterbuch</string>
+    <string name="dictionary">Lexikon</string>
     <string name="pageLoading">Seite wird geladen &#8230;</string>
     <string name="dictionaryURL">https://pocket.dict.cc/</string>
     <string name="lection">Lektion </string>

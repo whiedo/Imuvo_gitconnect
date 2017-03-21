@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="appreciation_array">
+        <item>Gut gemacht!</item>
+        <item>Sehr gut!</item>
+        <item>Weiter so!</item>
+        <item>Du wirst immer besser!</item>
+    </string-array>
+</resources>

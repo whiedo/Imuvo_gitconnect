@@ -264,8 +264,7 @@ public class VocabularyQuery extends BaseActivity {
     }
 
     private String getPositiveFeedbackText() {
-        //TODO auslagern in Ressourcen Datei
-        String[] appreciation = new String[]{"Gut gemacht!", "Sehr gut!", "Weiter so!", "Du wirst immer besser!"};
+        String[] appreciation = getResources().getStringArray(R.array.appreciation_array);
         return(appreciation[new Random().nextInt(appreciation.length)]);
     }
 

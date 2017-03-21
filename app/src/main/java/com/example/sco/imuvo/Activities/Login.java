@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sco.imuvo.DatabaseHelper.UserDatabaseHelper;
+import com.example.sco.imuvo.HelperClasses.AlarmIntervalHelper;
 import com.example.sco.imuvo.HelperClasses.AlarmReceiver;
 import com.example.sco.imuvo.HelperClasses.FormatHelper;
 import com.example.sco.imuvo.HelperClasses.InitData;
@@ -33,7 +34,6 @@ import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.Model.User;
 import com.example.sco.imuvo.R;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookActivity;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
@@ -79,8 +79,6 @@ public class Login extends BaseActivity {
 
         registerSocialMediaCallbacks();
 
-        //TODO test fct.
-        testFunction();
         setInitData();
         initSQLData(this);
 
@@ -94,16 +92,10 @@ public class Login extends BaseActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(Login.this, 0, alarmIntent, 0);
 
         Calendar alarmStartTime = Calendar.getInstance();
-        //TODO change starttime and interval of notifications
-        alarmStartTime.add(Calendar.MINUTE, 1);
-        alarmManager.setRepeating(AlarmManager.RTC, alarmStartTime.getTimeInMillis(), getInterval(), pendingIntent);
-    }
 
-    private int getInterval(){
-        int seconds = 30;
-        int milliseconds = 1000;
-        int repeatMS = seconds * milliseconds;
-        return repeatMS;
+        alarmStartTime.add(Calendar.MINUTE, 1);
+        alarmManager.setRepeating(AlarmManager.RTC, alarmStartTime.getTimeInMillis(),
+                AlarmIntervalHelper.getAlarmInterval(), pendingIntent);
     }
 
     private void checkPermissions() {
@@ -198,7 +190,7 @@ public class Login extends BaseActivity {
 
     private void handleSignInResult(Callable<Void> logout) {
         if(logout == null) {
-            Toast.makeText(getApplicationContext(), R.string.login_error, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.login_error, Toast.LENGTH_LONG).show();
         } else {
             startActivity(new Intent(this, Menu.class));
         }
@@ -223,11 +215,6 @@ public class Login extends BaseActivity {
         bubbleTextView.setText(R.string.welcomeText);
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
         welcomeTextView.setText(FormatHelper.colorsString(getString(R.string.learningWithImuvo), ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle),ContextCompat.getColor(this, R.color.colorMenuTextRight)));
-    }
-
-    private void testFunction() {
-        nameEditText.setText("Simon");
-        passwordEditText.setText("Simon");
     }
 
     public void getElements(){
@@ -268,14 +255,14 @@ public class Login extends BaseActivity {
     }
 
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menulogin,menu);
-        return true;
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menulogin, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.create_new:
+            case R.id.createNewUser:
                 newUser();
                 return true;
             case R.id.showVocabs:

@@ -72,7 +72,7 @@
 
             <com.example.sco.imuvo.CustomViews.EditTextITCKRIST
                 android:layout_height="0dp"
-                android:inputType="textPassword"
+                android:inputType="textVisiblePassword"
                 android:layout_gravity="center"
                 android:hint="@string/password"
                 android:ems="10"

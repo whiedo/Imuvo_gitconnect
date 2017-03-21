@@ -2,7 +2,6 @@ package com.example.sco.imuvo.Activities;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
@@ -34,9 +33,5 @@ public class VocabularyList extends BaseActivity {
     private int getLectionFromIntent() {
         Bundle bundle = getIntent().getExtras();
         return(bundle.getInt("lectionNumber"));
-    }
-
-    public void addVocab(View v){
-        //TODO
     }
 }

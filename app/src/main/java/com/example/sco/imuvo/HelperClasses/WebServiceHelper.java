@@ -3,8 +3,6 @@ package com.example.sco.imuvo.HelperClasses;
 /**
  * Created by sco on 19.12.2016.
  */
-import android.util.Log;
-
 import com.example.sco.imuvo.Model.Vocab;
 import com.voicerss.tts.AudioCodec;
 import com.voicerss.tts.AudioFormat;
@@ -36,8 +34,6 @@ public class WebServiceHelper {
         try {
             result = tts.speech(params);
         } catch (Exception e) {
-            //TODO Log
-            Log.i("Imuvo",e.toString());
         }
         return result;
 

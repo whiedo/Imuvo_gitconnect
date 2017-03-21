@@ -143,35 +143,27 @@ public class VocabularyLectionSelection extends BaseActivity {
 
     }
     public void onClickStartReading(View v){
-        if(checkEverythingSelected() == true){
-            final Intent nextIntent;
-            if(nextIntentType.contentEquals(READ)){
-                nextIntent = new Intent(this,VocabularyRead.class);
-            }
-            else if(nextIntentType.contentEquals(READALOUD)){
-                nextIntent = new Intent(this,VocabularyRead.class);
-            }
-            else{
-                nextIntent = new Intent(this,VocabularyQuery.class);
-            }
-
-            Bundle bundle = new Bundle();
-            if(nextIntentType.contentEquals(TEST)){
-                bundle.putBoolean(MULTIPLE_SELECTION,true);
-            }
-
-            bundle.putString(TYPE,nextIntentType);
-            bundle.putLong(SELECTED_LECTION,lectionSpinner.getSelectedItemId());
-            bundle.putLong(SELECTED_DIRECTION,directionSpinner.getSelectedItemId());
-            bundle.putBoolean(RANDOM,randomCheckBox.isChecked());
-            nextIntent.putExtras(bundle);
-            startActivity(nextIntent);
+        final Intent nextIntent;
+        if(nextIntentType.contentEquals(READ)){
+            nextIntent = new Intent(this,VocabularyRead.class);
         }
-    }
+        else if(nextIntentType.contentEquals(READALOUD)){
+            nextIntent = new Intent(this,VocabularyRead.class);
+        }
+        else{
+            nextIntent = new Intent(this,VocabularyQuery.class);
+        }
 
-    private boolean checkEverythingSelected() {
-        //TODO
-        return true;
-    }
+        Bundle bundle = new Bundle();
+        if(nextIntentType.contentEquals(TEST)){
+            bundle.putBoolean(MULTIPLE_SELECTION,true);
+        }
 
+        bundle.putString(TYPE,nextIntentType);
+        bundle.putLong(SELECTED_LECTION,lectionSpinner.getSelectedItemId());
+        bundle.putLong(SELECTED_DIRECTION,directionSpinner.getSelectedItemId());
+        bundle.putBoolean(RANDOM,randomCheckBox.isChecked());
+        nextIntent.putExtras(bundle);
+        startActivity(nextIntent);
+    }
 }
