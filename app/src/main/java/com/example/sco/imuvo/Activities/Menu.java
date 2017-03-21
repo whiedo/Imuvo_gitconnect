@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.sco.imuvo.CustomViews.ButtonJokerman;
 import com.example.sco.imuvo.CustomViews.TextViewITCKRIST;
+import com.example.sco.imuvo.DatabaseHelper.LectionDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.SocialMediaHelper;
 import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.Model.User;
@@ -82,7 +83,6 @@ public class Menu extends BaseActivity {
         vocabsButton = (ButtonJokerman) findViewById(R.id.vocabs);
         readAloudButton = (ButtonJokerman) findViewById(R.id.readAloud);
         testButton = (ButtonJokerman) findViewById(R.id.test);
-        taskButton = (ButtonJokerman) findViewById(R.id.task);
         bubbleTextView = (TextViewITCKRIST) findViewById(R.id.bubbleText);
     }
 
@@ -97,11 +97,22 @@ public class Menu extends BaseActivity {
     }
 
     public void onClickRead(View v){
+        if (!checkLectionAvailable()) return;
+
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
         bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READ);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
+    }
+
+    public boolean checkLectionAvailable() {
+        if (!LectionDatabaseHelper.lectionExists()) {
+            Toast.makeText(this, R.string.noLectionsAvailable,Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
     }
 
     public void onClickVocabs(View v){
@@ -110,6 +121,8 @@ public class Menu extends BaseActivity {
     }
 
     public void onClickReadAloud(View v){
+        if (!checkLectionAvailable()) return;
+
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
         bundle.putString(VocabularyLectionSelection.TYPE, VocabularyLectionSelection.READALOUD);
@@ -119,13 +132,9 @@ public class Menu extends BaseActivity {
     }
 
     public void onClickTest(View v){
+        if (!checkLectionAvailable()) return;
+
         final Intent menuIntent = new Intent(this,VocabularyTestSelection.class);
         startActivity(menuIntent);
-
-    }
-
-    public void onClickTask(View v){
-        Button t = (Button) v;
-        Toast.makeText(this,t.getText(),Toast.LENGTH_LONG).show();
     }
 }

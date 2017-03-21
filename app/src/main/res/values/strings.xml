@@ -68,6 +68,7 @@
     <string name="notificationTicker">Heute schon Vokabeln gelernt?!</string>
     <string name="notificationTitle">Schon gelernt?</string>
     <string name="notificationContent">Klicke hier um direkt zu deinem Vokabeltrainer zu gelangen und jetzt deine Vokabeln abzufragen!</string>
-    <string name="NoVocabsImported">Es konnten keine Vokabeln oder Lektionen importiert werden oder diese sind bereits vorhanden.</string>
+    <string name="noVocabsImported">Es konnten keine Vokabeln oder Lektionen importiert werden oder diese sind bereits vorhanden.</string>
     <string name="importResult">Es wurden $lections Lektionen und $vocabs Vokabeln importiert.</string>
+    <string name="noLectionsAvailable">Keine Lektionen vorhanden. Bitte den Datenimport nutzen.</string>
 </resources>

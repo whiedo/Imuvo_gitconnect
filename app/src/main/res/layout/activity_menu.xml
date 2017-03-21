@@ -106,16 +106,5 @@
             android:textColor="@color/colorMenuTextMiddle"
             android:layout_marginRight="2dp"/>
 
-        <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="@string/task"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:id="@+id/task"
-            android:onClick="onClickTask"
-            android:gravity="center_horizontal"
-            style="@style/menu_button."
-            android:textColor="@color/colorMenuTextRight" />
-
     </LinearLayout>
 </LinearLayout>

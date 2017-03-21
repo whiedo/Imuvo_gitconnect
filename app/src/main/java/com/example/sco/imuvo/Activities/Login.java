@@ -7,14 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -226,7 +224,7 @@ public class Login extends BaseActivity {
                             String output = getString(R.string.importResult).replace("$lections",numberLections).replace("$vocabs",numberVocabs);
                             Toast.makeText(getApplicationContext(),output,Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), R.string.NoVocabsImported,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.noVocabsImported,Toast.LENGTH_SHORT).show();
                         }
 
                     }

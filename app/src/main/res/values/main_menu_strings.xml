@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="main_menu_array">
-        <item>Wörterbuch</item>
+        <item>Lexikon</item>
         <item>Lesen</item>
         <item>Vokabeln</item>
         <item>Vorlesen</item>
         <item>Abfrage</item>
-        <item>Aufgaben</item>
     </string-array>
 </resources>

@@ -26,7 +26,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
             COLUMNS[1] + " INTEGER, " +
             COLUMNS[2] + " TEXT" +
             ")";
-    public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+    public static final String DROPT_ABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
     public static final String SELECT_ALL = "SELECT  * FROM ";
 
     private LectionDatabaseHelper(Context context) {
@@ -114,5 +114,17 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return labels;
+    }
+
+    public static boolean lectionExists() {
+        String selectQuery = SELECT_ALL + TABLE_NAME;
+
+        Cursor cursor = GeneralDatabaseHelper.getSQLDatabase().rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
