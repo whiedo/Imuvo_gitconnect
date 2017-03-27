@@ -78,7 +78,7 @@ public class VocabularyRead extends BaseActivity {
             text2Text.setText(vocab.getForeign());
             text1Text.setText(vocab.getGerman());
         }
-        subHeadlineText.setText(getString(R.string.lection)+ " " + Integer.toString(vocab.getLection()));
+        subHeadlineText.setText(getString(R.string.lection)  + " " + vocab.getLection());
         if(currVocab.getPicture() != null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(currVocab.getPicture(), 0, currVocab.getPicture().length);
             vocabPictureImageView.setImageBitmap(bitmap);

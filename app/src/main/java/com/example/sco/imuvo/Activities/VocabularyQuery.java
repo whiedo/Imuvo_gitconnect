@@ -141,7 +141,7 @@ public class VocabularyQuery extends BaseActivity {
             answerEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
 
-        subHeadlineText.setText(R.string.lection + vocab.getLection());
+        subHeadlineText.setText(getString(R.string.lection)+ " " + vocab.getLection());
         if(currVocab.getPicture() != null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(currVocab.getPicture(), 0, currVocab.getPicture().length);
             vocabPictureImageView.setImageBitmap(bitmap);
