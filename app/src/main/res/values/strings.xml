@@ -50,7 +50,7 @@
     <string name="test">Test</string>
     <string name="manage_lections">Lektionen verwalten</string>
     <string name="register_user">Nutzer registrieren</string>
-    <string name="import_lection">Lektion importieren</string>
+    <string name="import_lection">Lektionen importieren</string>
     <string name="shareResultSubject">Mein Ergebnis mit dem Vokabeltrainer Imuvo!</string>
     <string name="shareMessageResultPart1">"Schau mal! Ich habe mit dem Imuvo Vokabeltrainer "</string>
     <string name="shareMessageResultPart2">" richtige Vokabeln erreicht. Probiers doch auch einmal!"</string>
