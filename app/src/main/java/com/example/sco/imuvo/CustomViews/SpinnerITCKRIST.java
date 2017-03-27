@@ -27,14 +27,6 @@ public class SpinnerITCKRIST extends Spinner {
         super(context, attrs, defStyleAttr, mode);
     }
 
-    public SpinnerITCKRIST(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, int mode) {
-        super(context, attrs, defStyleAttr, defStyleRes, mode);
-    }
-
-    public SpinnerITCKRIST(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, int mode, Resources.Theme popupTheme) {
-        super(context, attrs, defStyleAttr, defStyleRes, mode, popupTheme);
-    }
-
     private void applyCustomFont(Context context) {
         Typeface customFont = Typeface.createFromAsset(context.getAssets(),"fonts/ITCKRIST.TTF");
     }

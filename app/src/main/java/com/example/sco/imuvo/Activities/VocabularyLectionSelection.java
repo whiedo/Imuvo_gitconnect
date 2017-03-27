@@ -40,7 +40,6 @@ public class VocabularyLectionSelection extends BaseActivity {
     TextView speechbubble, headline;
     String nextIntentType;
     CheckBox randomCheckBox;
-    List<Integer> selectedLections = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

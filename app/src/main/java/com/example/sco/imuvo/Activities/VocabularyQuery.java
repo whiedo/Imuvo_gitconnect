@@ -35,7 +35,6 @@ import java.util.Random;
 public class VocabularyQuery extends BaseActivity {
 
     public static final String ASKWRONGVOCABSAGAIN = "askWrongVocabsAgain" ;
-    VocabDatabaseHelper vocabDatabaseHelper;
     ArrayList<Vocab> vocabList;
     Lection currentLection;
     ListIterator<?> vocabIterator;
@@ -142,7 +141,7 @@ public class VocabularyQuery extends BaseActivity {
             answerEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
 
-        subHeadlineText.setText(R.string.lection + " " + vocab.getLection());
+        subHeadlineText.setText(R.string.lection + vocab.getLection());
         if(currVocab.getPicture() != null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(currVocab.getPicture(), 0, currVocab.getPicture().length);
             vocabPictureImageView.setImageBitmap(bitmap);

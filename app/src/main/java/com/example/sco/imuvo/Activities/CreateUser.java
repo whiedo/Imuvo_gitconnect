@@ -2,6 +2,7 @@ package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -22,11 +23,18 @@ public class CreateUser extends BaseActivity {
         super.onCreate(savedInstanceState);
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_create_user, frameLayout);
+        disableDrawerLayout();
 
         nameEditText = (EditText) findViewById(R.id.name);
         passwordEditText = (EditText) findViewById(R.id.password);
         bubbleText = (TextView) findViewById(R.id.speechbubble);
         bubbleText.setText(R.string.createUserText);
+    }
+
+    private void disableDrawerLayout() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+        ((DrawerLayout) findViewById(R.id.drawer_layout)).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     public void onClickCreateUser(View v){

@@ -32,8 +32,6 @@ import java.util.NoSuchElementException;
 
 public class VocabularyRead extends BaseActivity {
 
-    VocabDatabaseHelper vocabDatabaseHelper;
-    LectionDatabaseHelper lectionDatabaseHelper;
     ArrayList<Vocab> vocabList;
     Lection currentLection;
     ListIterator<?> vocabIterator;
@@ -42,7 +40,6 @@ public class VocabularyRead extends BaseActivity {
     ImageButton earButton;
     TextView text1Text, text2Text, headlineText, subHeadlineText;
     private long currentDirection;
-    MediaPlayer mp = null;
     private String nextIntentType;
     private ImageView vocabPictureImageView;
 

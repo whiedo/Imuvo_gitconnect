@@ -107,23 +107,6 @@ public class CustomSpinnerMultiSelection extends Spinner implements DialogInterf
         mSelection[0] = true;
     }
 
-    public void setSelection(String[] selection) {
-        for (int i = 0; i < mSelection.length; i++) {
-            mSelection[i] = false;
-            mSelectionAtStart[i] = false;
-        }
-        for (String cell : selection) {
-            for (int j = 0; j < _items.length; ++j) {
-                if (_items[j].equals(cell)) {
-                    mSelection[j] = true;
-                    mSelectionAtStart[j] = true;
-                }
-            }
-        }
-        simple_adapter.clear();
-        simple_adapter.add(buildSelectedItemString());
-    }
-
     public void setSelection(int index) {
         for (int i = 0; i < mSelection.length; i++) {
             mSelection[i] = false;

@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 public class VocabularyResult extends BaseActivity {
 
-    TextView bubbleTextView, rightTextView, skippedTextView, wrongTextView, durationTextView;
+    TextView rightTextView, wrongTextView, durationTextView;
     ArrayList<Vocab> rightVocabList, skippedVocabList, wrongVocabList;
 
     @Override
@@ -50,13 +50,10 @@ public class VocabularyResult extends BaseActivity {
         durationTextView = (TextView) findViewById(R.id.duration);
     }
 
-    public void onClickStartTest(View v){
-    }
-
     public void onClickStartAsking(View v){
         final Intent menuIntent = new Intent(this,VocabularyLectionSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type","test");
+        bundle.putString(VocabularyLectionSelection.TYPE,VocabularyLectionSelection.TEST);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
     }
