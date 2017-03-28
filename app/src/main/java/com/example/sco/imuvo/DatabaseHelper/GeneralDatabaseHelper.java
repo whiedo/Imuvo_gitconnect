@@ -36,7 +36,6 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
         onCreate(db);
     }
 
@@ -44,6 +43,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
         if (db == null)
             db = getWritableDatabase();
     }
+
     public void close() {
         if (db != null) {
             db.close();

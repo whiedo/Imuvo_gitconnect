@@ -96,7 +96,7 @@ public class Login extends BaseActivity {
         Calendar alarmStartTime = Calendar.getInstance();
 
         alarmStartTime.add(Calendar.MINUTE, 1);
-        alarmManager.setRepeating(AlarmManager.RTC, alarmStartTime.getTimeInMillis(),
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, alarmStartTime.getTimeInMillis(),
                 AlarmIntervalHelper.getAlarmInterval(), pendingIntent);
     }
 
