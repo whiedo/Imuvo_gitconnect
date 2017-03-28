@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 public class TypefaceUtil {
     public static void overrideFont(Context context) {
         try {
-            final Typeface customFontTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/ITCKRIST.TTF");
+            final Typeface customFontTypeface = Typeface.createFromAsset(context.getAssets(), "Fonts/ITCKRIST.TTF");
             final Field defaultFontTypefaceField = Typeface.class.getDeclaredField("SERIF");
             defaultFontTypefaceField.setAccessible(true);
             defaultFontTypefaceField.set(null, customFontTypeface);

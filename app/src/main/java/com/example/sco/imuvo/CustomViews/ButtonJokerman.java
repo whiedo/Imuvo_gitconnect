@@ -22,7 +22,7 @@ public class ButtonJokerman extends Button {
     }
 
     private void applyCustomFont(Context context) {
-        Typeface customFont = Typeface.createFromAsset(context.getAssets(),"fonts/Jokerman-Regular.ttf");
+        Typeface customFont = Typeface.createFromAsset(context.getAssets(),"Fonts/Jokerman-Regular.ttf");
         setTypeface(customFont);
 
     }

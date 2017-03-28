@@ -14,12 +14,14 @@ import com.example.sco.imuvo.Activities.VocabularyList;
 import com.example.sco.imuvo.R;
 
 public class LectionCursorAdapter extends CursorAdapter {
+    boolean hideDrawerLayout;
     public LectionCursorAdapter(Context context, Cursor c, boolean autoRequery) {
         super(context, c, autoRequery);
     }
 
-    public LectionCursorAdapter(Context context, Cursor c, int flags) {
+    public LectionCursorAdapter(Context context, Cursor c, int flags, boolean hideDrawerLayout) {
         super(context, c, flags);
+        this.hideDrawerLayout = hideDrawerLayout;
     }
 
     @Override
@@ -45,6 +47,7 @@ public class LectionCursorAdapter extends CursorAdapter {
                 final Intent menuIntent = new Intent(context,VocabularyList.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("lectionNumber",lectionNo);
+                bundle.putBoolean(VocabularyList.HIDE_DRAWER_LAYOUT,hideDrawerLayout);
                 menuIntent.putExtras(bundle);
                 context.startActivity(menuIntent);
             }

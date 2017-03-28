@@ -314,6 +314,9 @@ public class Login extends BaseActivity {
 
     private void showVocabs() {
         final Intent menuIntent = new Intent(this,VocabularyLectionList.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(VocabularyLectionList.HIDE_DRAWER_LAYOUT,true);
+        menuIntent.putExtras(bundle);
         startActivity(menuIntent);
     }
 

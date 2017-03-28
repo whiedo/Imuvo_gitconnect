@@ -28,6 +28,6 @@ public class SpinnerITCKRIST extends Spinner {
     }
 
     private void applyCustomFont(Context context) {
-        Typeface customFont = Typeface.createFromAsset(context.getAssets(),"fonts/ITCKRIST.TTF");
+        Typeface customFont = Typeface.createFromAsset(context.getAssets(),"Fonts/ITCKRIST.TTF");
     }
 }

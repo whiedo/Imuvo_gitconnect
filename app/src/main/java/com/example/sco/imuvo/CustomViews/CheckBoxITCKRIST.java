@@ -22,7 +22,7 @@ public class CheckBoxITCKRIST extends CheckBox {
     }
 
     private void applyCustomFont(Context context) {
-        Typeface customFont = Typeface.createFromAsset(context.getAssets(),"fonts/ITCKRIST.TTF");
+        Typeface customFont = Typeface.createFromAsset(context.getAssets(),"Fonts/ITCKRIST.TTF");
         setTypeface(customFont);
 
     }
