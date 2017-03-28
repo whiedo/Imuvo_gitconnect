@@ -24,7 +24,6 @@ public class Menu extends BaseActivity {
 
     ButtonJokerman dictionaryButton, readButton, vocabsButton, readAloudButton, testButton, taskButton;
     User user;
-    ImageView bubbleImageView;
     TextViewITCKRIST bubbleTextView;
 
     @Override

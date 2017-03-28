@@ -5,15 +5,6 @@ public class Lection {
     private int number;
     private String language;
 
-    public Lection(int number,String language) {
-        this.number = number;
-        this.language = language;
-    }
-
-    public Lection(int number){
-        this.number = number;
-        this.language = "Englisch";
-    }
 
     public Lection(long sqlID, int number, String language) {
         this.sqlID = sqlID;

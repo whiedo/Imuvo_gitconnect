@@ -40,7 +40,6 @@ public class VocabularyLectionSelection extends BaseActivity {
     TextView speechbubble, headline;
     String nextIntentType;
     CheckBox randomCheckBox;
-    List<Integer> selectedLections = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +112,7 @@ public class VocabularyLectionSelection extends BaseActivity {
 
         List<String> lables = LectionDatabaseHelper.getAllLabels();
         for(int i = 0; i < lables.size(); i++) {
-            lables.set(i, getString(R.string.lection) + " " + lables.get(i));
+            lables.set(i, getString(R.string.lection)+ " " + lables.get(i));
         }
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.embedded_customspinner, lables);
