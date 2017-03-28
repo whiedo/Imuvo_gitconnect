@@ -23,7 +23,7 @@ public class BootReceiver extends BroadcastReceiver {
             Calendar alarmStartTime = Calendar.getInstance();
 
             alarmStartTime.add(Calendar.MINUTE, 1);
-            alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, alarmStartTime.getTimeInMillis(),
+            alarmManager.setInexactRepeating(AlarmManager.RTC, alarmStartTime.getTimeInMillis(),
                     AlarmIntervalHelper.getAlarmInterval(), pendingIntent);
 
             Intent service1 = new Intent(context, AlarmService.class);
